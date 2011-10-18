@@ -40,7 +40,6 @@ class NortelDevice(Device):
 
     _relations = Device._relations + (
         ('NortelTopology', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelTopology', 'NortelDevTopology')),
-        ('NortelChassis', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelChassis', 'NortelDevChassis')),
         )
 
     factory_type_information = deepcopy(Device.factory_type_information)
