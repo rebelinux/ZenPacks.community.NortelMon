@@ -86,9 +86,9 @@ class NortelTopology(DeviceComponent, ManagedEntity):
 
     def viewName(self):
         """Pretty version human readable version of this object"""
-	self.sysname = self.remoteswitch()
+        self.sysname = self.remoteswitch()
         return self.id
-	return self.sysname
+        return self.sysname
 
     titleOrId = name = viewName
 

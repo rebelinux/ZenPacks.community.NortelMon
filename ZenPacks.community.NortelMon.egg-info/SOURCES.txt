@@ -44,11 +44,8 @@ ZenPacks/community/NortelMon/info.pyc
 ZenPacks/community/NortelMon/interfaces.py
 ZenPacks/community/NortelMon/interfaces.pyc
 ZenPacks/community/NortelMon/datasources/__init__.py
-ZenPacks/community/NortelMon/datasources/__init__.pyc
 ZenPacks/community/NortelMon/lib/__init__.py
-ZenPacks/community/NortelMon/lib/__init__.pyc
 ZenPacks/community/NortelMon/migrate/__init__.py
-ZenPacks/community/NortelMon/migrate/__init__.pyc
 ZenPacks/community/NortelMon/modeler/__init__.py
 ZenPacks/community/NortelMon/modeler/__init__.pyc
 ZenPacks/community/NortelMon/modeler/plugins/__init__.py
@@ -92,4 +89,3 @@ ZenPacks/community/NortelMon/skins/ZenPacks.community.NortelMon/viewPassportTopo
 ZenPacks/community/NortelMon/skins/ZenPacks.community.NortelMon/viewPassportVlanPort.pt
 ZenPacks/community/NortelMon/skins/ZenPacks.community.NortelMon/viewPassportVlanTable.pt
 ZenPacks/community/NortelMon/tests/__init__.py
-ZenPacks/community/NortelMon/tests/__init__.pyc

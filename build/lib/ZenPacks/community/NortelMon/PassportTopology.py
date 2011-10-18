@@ -88,9 +88,9 @@ class PassportTopology(DeviceComponent, ManagedEntity):
 
     def viewName(self):
         """Pretty version human readable version of this object"""
-	self.sysname = self.remoteswitch()
+        self.sysname = self.remoteswitch()
         return self.id
-	return self.sysname
+        return self.sysname
 
     titleOrId = name = viewName
 
@@ -109,14 +109,14 @@ class PassportTopology(DeviceComponent, ManagedEntity):
 
     def remoteswitch(self):
         """Change the device IP to the device url"""
-	if self.ipaddr:
-	        device = self.dmd.Devices.findDeviceByIdOrIp(self.ipaddr)
-        	if device:
-           		if device.urlLink() is None:
-                		return self.ipaddr
-        	    	else:
-                		return device.urlLink()
-        	else:	
-            		return self.ipaddr
+        if self.ipaddr:
+            device = self.dmd.Devices.findDeviceByIdOrIp(self.ipaddr)
+            if device:
+                if device.urlLink() is None:
+                    return self.ipaddr
+                else:
+                    return device.urlLink()
+            else:	
+                return self.ipaddr
     
 InitializeClass(PassportTopology)

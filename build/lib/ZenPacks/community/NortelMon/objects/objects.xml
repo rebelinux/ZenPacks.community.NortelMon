@@ -12,6 +12,12 @@
 ZenPacks.community.NortelMon.NortelDevice
 </property>
 <object id='Passport' module='Products.ZenModel.DeviceClass' class='DeviceClass'>
+<property id='zendoc' type='string'>
+Nortel Passport Serie Class
+</property>
+<property type="string" id="description" mode="w" >
+Nortel Passport Serie Class
+</property>
 <property visible="True" type="lines" id="zDeviceTemplates" >
 ['Nortel Device ', 'Device']
 </property>
@@ -583,7 +589,7 @@ Mbytes
 False
 </property>
 <property type="boolean" id="base" mode="w" >
-True
+False
 </property>
 <property type="int" id="miny" mode="w" >
 0
@@ -691,7 +697,7 @@ Memory Utilization
 -1
 </property>
 <property type="string" id="rpn" mode="w" >
-1000024,*
+100,/,${here/totalmem},*,1000024,*
 </property>
 <property type="string" id="dpName" mode="w" >
 memoryUtilKBytes_memoryUtilKBytes
@@ -878,7 +884,7 @@ True
 1
 </property>
 <property type="string" id="eventClass" mode="w" >
-/Perf/Snmp
+/Status/HW
 </property>
 <property type="int" id="severity" mode="w" >
 4
@@ -982,7 +988,7 @@ True
 2
 </property>
 <property type="string" id="eventClass" mode="w" >
-/Change/Set/Status
+/Status/HW
 </property>
 <property type="int" id="severity" mode="w" >
 3
@@ -1103,7 +1109,7 @@ True
 3
 </property>
 <property type="string" id="eventClass" mode="w" >
-/Perf/Snmp
+/Status/HW
 </property>
 <property type="int" id="severity" mode="w" >
 3
@@ -2311,6 +2317,59 @@ AVERAGE
 </object>
 </tomanycont>
 </object>
+<object id='Baystack' module='Products.ZenModel.DeviceClass' class='DeviceClass'>
+<property id='zendoc' type='string'>
+Nortel Baystack &amp; BPS Class
+</property>
+<property type="string" id="description" mode="w" >
+Nortel Baystack &amp; BPS Class
+</property>
+</object>
+<object id='ERS' module='Products.ZenModel.DeviceClass' class='DeviceClass'>
+<property id='zendoc' type='string'>
+Nortel ERS Series
+</property>
+<property type="string" id="description" mode="w" >
+Nortel ERS Series
+</property>
+</object>
+</object>
+<!-- ('', 'zport', 'dmd', 'Events', 'Status', 'HW') -->
+<object id='/zport/dmd/Events/Status/HW' module='Products.ZenEvents.EventClass' class='EventClass'>
+<property type="text" id="transform" mode="w" >
+import re
+match = re.search('threshold of PassportCardTable status', evt.message)
+if match and device:
+    if evt.compStatus == 2.0:
+        evt.summary = "Card Modules Operational Status Down or Failed."
+        evt.severity = 4
+    elif evt.compStatus == 3.0:
+        evt.summary = "Card Modules Operational Status in Testing Mode"
+        evt.severity = 3
+    elif evt.compStatus == 4.0:
+        evt.summary = "Card Modules Operational Status Unknown"
+        evt.severity = 3
+    elif evt.compStatus == 5.0:
+        evt.summary = "Card Modules Operational Status in Dormant Mode"
+        evt.severity = 2
+</property>
+<property type="text" id="transform" mode="w" >
+import re
+match = re.search('threshold of PassportCardTable status', evt.message)
+if match and device:
+    if evt.compStatus == 2.0:
+        evt.summary = "Card Modules Operational Status Down or Failed."
+        evt.severity = 4
+    elif evt.compStatus == 3.0:
+        evt.summary = "Card Modules Operational Status in Testing Mode"
+        evt.severity = 3
+    elif evt.compStatus == 4.0:
+        evt.summary = "Card Modules Operational Status Unknown"
+        evt.severity = 3
+    elif evt.compStatus == 5.0:
+        evt.summary = "Card Modules Operational Status in Dormant Mode"
+        evt.severity = 2
+</property>
 </object>
 <!-- ('', 'zport', 'dmd', 'Events', 'Status', 'IpInterface') -->
 <object id='/zport/dmd/Events/Status/IpInterface' module='Products.ZenEvents.EventClass' class='EventClass'>
