@@ -1,0 +1,133 @@
+ (function(){
+
+var ZC = Ext.ns('Zenoss.component');
+
+
+function render_link(ob) {
+    if (ob && ob.uid) {
+        return Zenoss.render.link(ob.uid);
+    } else {
+        return ob;
+    }
+}
+
+ZC.PassportPowerPanel = Ext.extend(ZC.ComponentGridPanel, {
+    constructor: function(config) {
+        config = Ext.applyIf(config||{}, {
+            componentType: 'PassportPower',
+            fields: [
+                {name: 'uid'},
+                {name: 'severity'},
+		{name: 'name'},
+                {name: 'status'},
+                {name: 'hasMonitor'},
+                {name: 'monitor'},
+                {name: 'powersupplystatus'},
+                {name: 'powersupplystatusText'},
+                {name: 'locking'},
+            ],
+            columns: [{
+                id: 'severity',
+                dataIndex: 'severity',
+                header: _t('Events'),
+                renderer: Zenoss.render.severity,
+                width: 60
+            },{
+                id: 'powersupplystatus',
+                dataIndex: 'powersupplystatus',
+                header: _t('PowerSupply Status'),
+                sortable: true,
+                renderer: Zenoss.render.severity,
+                width: 120,
+            },{
+                id: 'name',
+                dataIndex: 'name',
+                header: _t('Name')
+            },{
+                id: 'monitor',
+                dataIndex: 'monitor',
+                header: _t('Monitored')
+            },{
+                id: 'powersupplystatusText',
+                dataIndex: 'powersupplystatusText',
+                header: _t('Status'),
+                sortable: true,
+            },{ 
+                id: 'locking',
+                dataIndex: 'locking',
+                header: _t('Locking'),
+                width: 72,
+                renderer: Zenoss.render.locking_icons
+            }]
+        });
+        ZC.PassportPowerPanel.superclass.constructor.call(this, config);
+    }
+});
+
+Ext.reg('PassportPowerPanel', ZC.PassportPowerPanel);
+ZC.registerName('PassportPower', _t('Power Supply'), _t('Power Supplies'));
+
+ZC.PassportFanPanel = Ext.extend(ZC.ComponentGridPanel, {
+    constructor: function(config) {
+        config = Ext.applyIf(config||{}, {
+            componentType: 'PassportFan',
+            fields: [
+                {name: 'uid'},
+                {name: 'severity'},
+		{name: 'name'},
+                {name: 'status'},
+                {name: 'hasMonitor'},
+                {name: 'monitor'},
+                {name: 'fanstatus'},
+                {name: 'fanstatusText'},
+                {name: 'fantemp'},
+                {name: 'locking'},
+            ],
+            columns: [{
+                id: 'severity',
+                dataIndex: 'severity',
+                header: _t('Events'),
+                renderer: Zenoss.render.severity,
+                width: 60
+            },{
+                id: 'fanstatus',
+                dataIndex: 'fanstatus',
+                header: _t('Fan Status'),
+                sortable: true,
+                renderer: Zenoss.render.severity,
+                width: 120,
+            },{
+                id: 'name',
+                dataIndex: 'name',
+                header: _t('Name')
+            },{
+                id: 'fantemp',
+                dataIndex: 'fantemp',
+                header: _t('Temperature'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'monitor',
+                dataIndex: 'monitor',
+                header: _t('Monitored')
+            },{
+                id: 'fanstatusText',
+                dataIndex: 'fanstatusText',
+                header: _t('Status'),
+                sortable: true,
+            },{ 
+                id: 'locking',
+                dataIndex: 'locking',
+                header: _t('Locking'),
+                width: 72,
+                renderer: Zenoss.render.locking_icons
+            }]
+        });
+        ZC.PassportFanPanel.superclass.constructor.call(this, config);
+    }
+});
+
+Ext.reg('PassportFanPanel', ZC.PassportFanPanel);
+ZC.registerName('PassportFan', _t('Fan'), _t('Fans'));
+
+})();

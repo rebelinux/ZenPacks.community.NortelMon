@@ -1,0 +1,3 @@
+[zenoss.zenpacks]
+ZenPacks.community.NortelMon = ZenPacks.community.NortelMon
+
