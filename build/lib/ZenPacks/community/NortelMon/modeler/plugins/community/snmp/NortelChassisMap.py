@@ -21,7 +21,7 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 # ==============================================================================
 
-__doc__="""NortelChassisMap maps RC-CHASSIS-MIB monitoring entries"""
+__doc__="""NortelChassisMap maps s5ChasComTable monitoring entries"""
 __author__ = "Jonathan Colon"
 __copyright__ = "(C) Copyright Jonathan Colon. 2011. All Rights Reserved."
 __license__ = "GPL"
@@ -30,7 +30,7 @@ __version__ = "1.0.0"
 from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetMap, GetTableMap
 
 class NortelChassisMap(SnmpPlugin):
-    """Map Nortel Topology Table to model."""
+    """Map Nortel Chassis Table to model."""
     maptype = "NortelChassisMap"
     modname = "ZenPacks.community.NortelMon.NortelChassis"
     relname = "NortelChassis"
