@@ -6,11 +6,81 @@
 &lt;a href='telnet://${here/manageIp}' target='_'&gt;Console:&lt;/a&gt; &lt;a href='http://${here/manageIp}' target='_'&gt;Web Console:&lt;/a&gt; &lt;a href='jdm://${here/manageIp}' target='_'&gt;Nortel Manager:&lt;/a&gt;
 </property>
 <property visible="True" type="lines" id="zCollectorPlugins" >
-['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'zenoss.snmp.InterfaceMap', 'community.snmp.NortelTopologyMap', 'zenoss.snmp.RouteMap']
+['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'zenoss.snmp.InterfaceMap', 'community.snmp.NortelTopologyMap', 'community.snmp.NortelChassisMap', 'zenoss.snmp.RouteMap']
 </property>
 <property visible="True" type="string" id="zPythonClass" >
 ZenPacks.community.NortelMon.NortelDevice
 </property>
+<tomanycont id='rrdTemplates'>
+<object id='NortelChassis' module='Products.ZenModel.RRDTemplate' class='RRDTemplate'>
+<property type="string" id="targetPythonClass" mode="w" >
+Products.ZenModel.Device
+</property>
+<tomanycont id='datasources'>
+<object id='status' module='Products.ZenModel.BasicDataSource' class='BasicDataSource'>
+<property select_variable="sourcetypes" type="selection" id="sourcetype" mode="w" >
+SNMP
+</property>
+<property type="boolean" id="enabled" mode="w" >
+True
+</property>
+<property type="string" id="eventClass" mode="w" >
+/Cmd/Fail
+</property>
+<property type="int" id="severity" mode="w" >
+3
+</property>
+<property type="int" id="cycletime" mode="w" >
+300
+</property>
+<property type="string" id="oid" mode="w" >
+1.3.6.1.4.1.45.1.6.3.3.1.1.10.8
+</property>
+<property type="boolean" id="usessh" mode="w" >
+False
+</property>
+<property type="string" id="parser" mode="w" >
+Auto
+</property>
+<tomanycont id='datapoints'>
+<object id='status' module='Products.ZenModel.RRDDataPoint' class='RRDDataPoint'>
+<property select_variable="rrdtypes" type="selection" id="rrdtype" mode="w" >
+GAUGE
+</property>
+<property type="boolean" id="isrow" mode="w" >
+True
+</property>
+</object>
+</tomanycont>
+</object>
+</tomanycont>
+<tomanycont id='thresholds'>
+<object id='NortelChassis status' module='Products.ZenModel.MinMaxThreshold' class='MinMaxThreshold'>
+<property label="DataPoints" type="lines" id="dsnames" mode="w" >
+['status_status']
+</property>
+<property label="Enabled" type="boolean" id="enabled" mode="w" >
+True
+</property>
+<property type="string" id="minval" mode="w" >
+5
+</property>
+<property type="string" id="maxval" mode="w" >
+5
+</property>
+<property type="string" id="eventClass" mode="w" >
+/Status/HW
+</property>
+<property type="int" id="severity" mode="w" >
+3
+</property>
+<property type="int" id="escalateCount" mode="w" >
+0
+</property>
+</object>
+</tomanycont>
+</object>
+</tomanycont>
 <object id='Passport' module='Products.ZenModel.DeviceClass' class='DeviceClass'>
 <property id='zendoc' type='string'>
 Nortel Passport Serie Class

@@ -84,6 +84,19 @@ class NortelTopologyInfo(ComponentInfo):
     curstate = ProxyProperty("curstate")
     sysname = ProxyProperty("sysname")
 
+class NortelChassisInfo(ComponentInfo):
+    implements(interfaces.INortelChassisInfo)
+
+    unitindex = ProxyProperty("unitindex")
+    unitnumber = ProxyProperty("unitnumber")
+    totalport = ProxyProperty("totalport")
+    chasstype = ProxyProperty("chasstype")
+    desc = ProxyProperty("desc")
+    version = ProxyProperty("version")
+    sernum = ProxyProperty("sernum")
+    admstatus = ProxyProperty("admstatus")
+    operstatus = ProxyProperty("operstatus")
+
 class PassportVlanTableInfo(ComponentInfo):
     implements(interfaces.IPassportVlanTableInfo)
 

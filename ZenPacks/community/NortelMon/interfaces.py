@@ -67,6 +67,16 @@ class INortelTopologyInfo(IComponentInfo):
     localseg = schema.Text(title=u"Local Segment", readonly=True, group='Details')
     curstate = schema.Text(title=u"Current State", readonly=True, group='Details')
     sysname = schema.Text(title=u"System Name", readonly=True, group='Details')
+    
+class INortelChassisInfo(IComponentInfo):
+    unitnumber = schema.Text(title=u"Stack Members", readonly=True, group='Details')
+    totalport = schema.Text(title=u"Total Ports", readonly=True, group='Details')
+    chasstype = schema.Text(title=u"Chassis Type", readonly=True, group='Details')
+    desc = schema.Text(title=u"Description", readonly=True, group='Details')
+    version = schema.Text(title=u"HW Version", readonly=True, group='Details')
+    sernum = schema.Text(title=u"Serial Number", readonly=True, group='Details')
+    admstatus = schema.Text(title=u"Adm Status", readonly=True, group='Details')
+    operstatus = schema.Text(title=u"Oper Status", readonly=True, group='Details')
 
 class IPassportVlanTableInfo(IComponentInfo):
     vlanid = schema.Text(title=u"Vlan Id", readonly=True, group='Details')

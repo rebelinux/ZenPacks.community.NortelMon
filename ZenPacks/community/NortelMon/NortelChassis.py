@@ -1,5 +1,5 @@
 # ==============================================================================
-# PassportFan object class
+# NortelChassis object class
 #
 # Zenoss community Zenpack for Avaya (Nortel) Passport Devices
 # version: 1.0
@@ -21,7 +21,7 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 # ==============================================================================
 
-__doc__="""PassportFan object class"""
+__doc__="""NortelChassis object class"""
 __author__ = "Jonathan Colon"
 __copyright__ = "(C) Copyright Jonathan Colon. 2011. All Rights Reserved."
 __license__ = "GPL"
@@ -34,36 +34,45 @@ from Products.ZenModel.ZenossSecurity import ZEN_VIEW, ZEN_CHANGE_SETTINGS
 from Products.ZenModel.DeviceComponent import DeviceComponent
 from Products.ZenModel.ManagedEntity import ManagedEntity
 
-class PassportFan(DeviceComponent, ManagedEntity):
+class NortelChassis(DeviceComponent, ManagedEntity):
 
-    portal_type = meta_type = 'PassportFan'
+    portal_type = meta_type = 'NortelChassis'
     
-    fanindex = 0
-    fanstatus = 0
-    fanstatusText = ''
-    fantemp = ''
-
+    unitindex = 0
+    unitnumber = ''
+    totalport = 0
+    chasstype = '' 
+    desc = ''
+    version = ''
+    sernum = ''
+    admstatus = ''
+    operstatus  = ''
 
     _properties = (
-        {'id':'fanindex', 'type':'int', 'mode':''},
-        {'id':'fanstatus', 'type':'int', 'mode':''},
-        {'id':'fanstatusText', 'type':'string', 'mode':''},
-        {'id':'fantemp', 'type':'string', 'mode':''},
+        {'id':'unitindex', 'type':'int', 'mode':''},
+        {'id':'unitnumber', 'type':'string', 'mode':''},
+        {'id':'totalport', 'type':'int', 'mode':''},
+        {'id':'chasstype', 'type':'string', 'mode':''},
+        {'id':'desc', 'type':'string', 'mode':''},
+        {'id':'version', 'type':'string', 'mode':''},
+        {'id':'sernum', 'type':'string', 'mode':''},
+        {'id':'admstatus', 'type':'string', 'mode':''},
+        {'id':'operstatus', 'type':'string', 'mode':''},
         )
     
     _relations = (
-        ("PassportDevFan", ToOne(ToManyCont,
-            "ZenPacks.community.NortelMon.PassportDevice", "PassportFan")),
+        ("NortelDevChassis", ToOne(ToManyCont,
+            "ZenPacks.community.NortelMon.NortelDevice", "NortelChassis")),
         )
 
 
     factory_type_information = ( 
         { 
-            'id'             : 'PassportFan',
-            'meta_type'      : 'PassportFan',
-            'description'    : """PassportFan info""",
+            'id'             : 'NortelChassis',
+            'meta_type'      : 'NortelChassis',
+            'description'    : """NortelChassis info""",
             'product'        : 'NortelMon',
-            'immediate_view' : 'viewPassportFan',
+            'immediate_view' : 'viewNortelChassis',
             'actions'        :
             ( 
                 { 'id'            : 'viewHistory'
@@ -81,9 +90,8 @@ class PassportFan(DeviceComponent, ManagedEntity):
 
     titleOrId = name = viewName
 
-
     def device(self):
-        return self.PassportDevFan()
+        return self.NortelDevChassis()
 
     def getRRDTemplates(self):
         """
@@ -94,5 +102,5 @@ class PassportFan(DeviceComponent, ManagedEntity):
             templ = self.getRRDTemplateByName(tname)
             if templ: templates.append(templ)
         return templates
-    
-InitializeClass(PassportFan)
+        
+InitializeClass(NortelChassis)

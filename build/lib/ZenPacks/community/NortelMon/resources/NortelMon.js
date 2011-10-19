@@ -576,4 +576,89 @@ ZC.NortelTopologyPanel = Ext.extend(ZC.ComponentGridPanel, {
 Ext.reg('NortelTopologyPanel', ZC.NortelTopologyPanel);
 ZC.registerName('NortelTopology', _t('Topology Table'), _t('Topology Table'));
 
+ZC.NortelChassisPanel = Ext.extend(ZC.ComponentGridPanel, {
+    subComponentGridPanel: false,
+    constructor: function(config) {
+        config = Ext.applyIf(config||{}, {
+            componentType: 'NortelChassis',
+            autoExpandColumn: 'chasstype',
+            fields: [
+                {name: 'uid'},
+                {name: 'severity'},
+                {name: 'name'},
+                {name: 'status'},
+                {name: 'usesMonitorAttribute'},
+                {name: 'monitored'},
+                {name: 'monitor'},
+                {name: 'unitnumber'},
+                {name: 'totalport'},
+                {name: 'chasstype'},
+                {name: 'desc'},
+                {name: 'version'},
+                {name: 'sernum'},
+                {name: 'admstatus'},
+                {name: 'operstatus'},
+                {name: 'locking'},
+            ],
+            columns: [{
+                id: 'severity',
+                dataIndex: 'severity',
+                header: _t('Events'),
+                renderer: Zenoss.render.severity,
+                width: 60,
+            },{
+                id: 'name',
+                dataIndex: 'name',
+                header: _t('Stack Members'),
+            },{
+                id: 'chasstype',
+                dataIndex: 'chasstype',
+                header: _t('Chassis Type'),
+                sortable: true,
+            },{
+                id: 'desc',
+                dataIndex: 'desc',
+                header: _t('Description'),
+                sortable: true,
+                width: 225, 
+            },{
+                id: 'sernum',
+                dataIndex: 'sernum',
+                header: _t('Serial Number'),
+                sortable: true,
+                width: 120,            
+            },{
+                id: 'admstatus',
+                dataIndex: 'admstatus',
+                header: _t('Adm Status'),
+                sortable: true,
+            },{
+                id: 'operstatus',
+                dataIndex: 'operstatus',
+                header: _t('Oper Status'),
+                sortable: true,
+            },{
+                id: 'totalport',
+                dataIndex: 'totalport',
+                header: _t('Total Ports'),
+                sortable: true,
+            },{
+                id: 'monitored',
+                dataIndex: 'monitored',
+                header: _t('Monitored'),
+            },{ 
+                id: 'locking',
+                dataIndex: 'locking',
+                header: _t('Locking'),
+                width: 72,
+                renderer: Zenoss.render.locking_icons,
+            }]
+        });
+        ZC.NortelChassisPanel.superclass.constructor.call(this, config);
+    }
+});
+
+Ext.reg('NortelChassisPanel', ZC.NortelChassisPanel);
+ZC.registerName('NortelChassis', _t('Stack Status'), _t('Stack Status'));
+
 })();

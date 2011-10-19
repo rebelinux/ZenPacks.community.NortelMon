@@ -30,6 +30,11 @@
                  provides=".interfaces.INortelTopologyInfo"
                  />
 
+        <adapter factory=".info.NortelChassisInfo"
+                 for=".NortelChassis.NortelChassis"
+                 provides=".interfaces.INortelChassisInfo"
+                 />
+
         <adapter factory=".info.PassportVlanTableInfo"
                  for=".PassportVlanTable.PassportVlanTable"
                  provides=".interfaces.IPassportVlanTableInfo"

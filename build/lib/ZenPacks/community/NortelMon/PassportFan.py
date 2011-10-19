@@ -43,7 +43,6 @@ class PassportFan(DeviceComponent, ManagedEntity):
     fanstatusText = ''
     fantemp = ''
 
-    monitor = True
 
     _properties = (
         {'id':'fanindex', 'type':'int', 'mode':''},
