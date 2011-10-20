@@ -92,7 +92,6 @@ class NortelChassisInfo(ComponentInfo):
     totalport = ProxyProperty("totalport")
     chasstype = ProxyProperty("chasstype")
     desc = ProxyProperty("desc")
-    version = ProxyProperty("version")
     sernum = ProxyProperty("sernum")
     admstatus = ProxyProperty("admstatus")
     operstatus = ProxyProperty("operstatus")

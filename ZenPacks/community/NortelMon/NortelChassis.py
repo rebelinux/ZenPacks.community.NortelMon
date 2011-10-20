@@ -43,7 +43,6 @@ class NortelChassis(DeviceComponent, ManagedEntity):
     totalport = 0
     chasstype = '' 
     desc = ''
-    version = ''
     sernum = ''
     admstatus = ''
     operstatus  = ''
@@ -54,7 +53,6 @@ class NortelChassis(DeviceComponent, ManagedEntity):
         {'id':'totalport', 'type':'int', 'mode':''},
         {'id':'chasstype', 'type':'string', 'mode':''},
         {'id':'desc', 'type':'string', 'mode':''},
-        {'id':'version', 'type':'string', 'mode':''},
         {'id':'sernum', 'type':'string', 'mode':''},
         {'id':'admstatus', 'type':'string', 'mode':''},
         {'id':'operstatus', 'type':'string', 'mode':''},

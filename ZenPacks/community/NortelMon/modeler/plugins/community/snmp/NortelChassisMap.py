@@ -40,9 +40,8 @@ class NortelChassisMap(SnmpPlugin):
 		'1.3.6.1.4.1.45.1.6.3.3.1.1',
                     {
                         '.2.8': 'unitindex',
-                        '.4.8': 'chasstype',
                         '.5.8': 'desc',
-                        '.6.8': 'version',
+                        '.6.8': 'chasstype',
                         '.7.8': 'sernum',
                         '.9.8': 'admstatus',
                         '.10.8': 'operstatus',

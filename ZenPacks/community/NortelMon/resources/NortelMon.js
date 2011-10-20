@@ -581,7 +581,7 @@ ZC.NortelChassisPanel = Ext.extend(ZC.ComponentGridPanel, {
     constructor: function(config) {
         config = Ext.applyIf(config||{}, {
             componentType: 'NortelChassis',
-            autoExpandColumn: 'chasstype',
+            autoExpandColumn: 'desc',
             fields: [
                 {name: 'uid'},
                 {name: 'severity'},
@@ -590,11 +590,9 @@ ZC.NortelChassisPanel = Ext.extend(ZC.ComponentGridPanel, {
                 {name: 'usesMonitorAttribute'},
                 {name: 'monitored'},
                 {name: 'monitor'},
-                {name: 'unitnumber'},
                 {name: 'totalport'},
-                {name: 'chasstype'},
                 {name: 'desc'},
-                {name: 'version'},
+                {name: 'chasstype'},
                 {name: 'sernum'},
                 {name: 'admstatus'},
                 {name: 'operstatus'},
@@ -620,7 +618,6 @@ ZC.NortelChassisPanel = Ext.extend(ZC.ComponentGridPanel, {
                 dataIndex: 'desc',
                 header: _t('Description'),
                 sortable: true,
-                width: 225, 
             },{
                 id: 'sernum',
                 dataIndex: 'sernum',

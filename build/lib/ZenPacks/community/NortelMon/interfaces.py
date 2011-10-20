@@ -73,7 +73,6 @@ class INortelChassisInfo(IComponentInfo):
     totalport = schema.Text(title=u"Total Ports", readonly=True, group='Details')
     chasstype = schema.Text(title=u"Chassis Type", readonly=True, group='Details')
     desc = schema.Text(title=u"Description", readonly=True, group='Details')
-    version = schema.Text(title=u"HW Version", readonly=True, group='Details')
     sernum = schema.Text(title=u"Serial Number", readonly=True, group='Details')
     admstatus = schema.Text(title=u"Adm Status", readonly=True, group='Details')
     operstatus = schema.Text(title=u"Oper Status", readonly=True, group='Details')
