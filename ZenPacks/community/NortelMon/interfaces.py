@@ -95,7 +95,7 @@ class IPassportVlanPortInfo(IComponentInfo):
 class IPassportCardTableInfo(IComponentInfo):
     cardtype = schema.Text(title=u"Type", readonly=True, group='Details')
     description = schema.Text(title=u"Description", readonly=True, group='Details')
-    serialnum = schema.Text(title=u"Serial Number", readonly=True, group='Details')
+    serialnumber = schema.Text(title=u"Serial Number", readonly=True, group='Details')
     hwversion = schema.Text(title=u"HW Version", readonly=True, group='Details')
     partnumber = schema.Text(title=u"Part Number", readonly=True, group='Details')
     opstatus = schema.Text(title=u"Oper Status", readonly=True, group='Details')
