@@ -34,18 +34,30 @@
                  for=".NortelChassis.NortelChassis"
                  provides=".interfaces.INortelChassisInfo"
                  />
-
+                 
         <adapter factory=".info.PassportVlanTableInfo"
                  for=".PassportVlanTable.PassportVlanTable"
                  provides=".interfaces.IPassportVlanTableInfo"
                  />
+                 
         <adapter factory=".info.PassportVlanPortInfo"
                  for=".PassportVlanPort.PassportVlanPort"
                  provides=".interfaces.IPassportVlanPortInfo"
                  />
+                 
         <adapter factory=".info.PassportCardTableInfo"
                  for=".PassportCardTable.PassportCardTable"
                  provides=".interfaces.IPassportCardTableInfo"
+                 />
+                 
+        <adapter factory=".info.NortelVlanTableInfo"
+                 for=".NortelVlanTable.NortelVlanTable"
+                 provides=".interfaces.INortelVlanTableInfo"
+                 />
+                 
+        <adapter factory=".info.NortelVlanPortInfo"
+                 for=".NortelVlanPort.NortelVlanPort"
+                 provides=".interfaces.INortelVlanPortInfo"
                  />
                  
         <browser:resourceDirectory

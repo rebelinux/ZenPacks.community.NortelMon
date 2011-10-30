@@ -658,4 +658,136 @@ ZC.NortelChassisPanel = Ext.extend(ZC.ComponentGridPanel, {
 Ext.reg('NortelChassisPanel', ZC.NortelChassisPanel);
 ZC.registerName('NortelChassis', _t('Stack Status'), _t('Stack Status'));
 
+ZC.NortelVlanTablePanel = Ext.extend(ZC.ComponentGridPanel, {
+    subComponentGridPanel: false,
+    constructor: function(config) {
+        config = Ext.applyIf(config||{}, {
+            componentType: 'NortelVlanTable',
+            autoExpandColumn: 'vlanportmembers',
+            sortInfo: {
+                field: 'vlanid',
+                direction: 'ASC'
+            },
+            fields: [
+                {name: 'uid'},
+                {name: 'severity'},
+				{name: 'name'},
+                {name: 'status'},
+                {name: 'hasMonitor'},
+                {name: 'monitor'},
+                {name: 'vlanid'},
+                {name: 'vlanmac'},
+                {name: 'vlantype'},
+                {name: 'vlanname'},
+                {name: 'vlanstgid'},
+                {name: 'vlanportmembers'},		
+            ],
+            columns: [{
+                id: 'severity',
+                dataIndex: 'severity',
+                header: _t('Events'),
+                renderer: Zenoss.render.severity,
+                width: 60,
+            },{
+                id: 'name',
+                dataIndex: 'name',
+                header: _t('Name'),
+                width: 160,
+			},{
+                id: 'vlanid',
+                dataIndex: 'vlanid',
+                header: _t('Vlan ID'),
+                sortable: true,
+            },{
+                id: 'vlanportmembers',
+                dataIndex: 'vlanportmembers',
+                header: _t('Port Members'),
+                sortable: true,
+			},{
+                id: 'vlantype',
+                dataIndex: 'vlantype',
+                header: _t('Type'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'vlanmac',
+                dataIndex: 'vlanmac',
+                header: _t('Mac Address'),
+                sortable: true,
+                width: 160,
+			},{
+                id: 'vlanstgid',
+                dataIndex: 'vlanstgid',
+                header: _t('STG Id'),
+                sortable: true,
+                width: 120,
+            }]
+        });
+        ZC.NortelVlanTablePanel.superclass.constructor.call(this, config);
+    }
+});
+
+Ext.reg('NortelVlanTablePanel', ZC.NortelVlanTablePanel);
+ZC.registerName('NortelVlanTable', _t('Vlan Table'), _t('Vlan Tables'));
+
+ZC.NortelVlanPortPanel = Ext.extend(ZC.ComponentGridPanel, {
+    subComponentGridPanel: false,
+    constructor: function(config) {
+        config = Ext.applyIf(config||{}, {
+            componentType: 'NortelVlanPort',
+            autoExpandColumn: 'vlanportids',
+            fields: [
+                {name: 'uid'},
+                {name: 'severity'},
+				{name: 'name'},
+                {name: 'status'},
+                {name: 'hasMonitor'},
+                {name: 'monitor'},
+                {name: 'vlanportids'},
+                {name: 'vlanporttype'},
+                {name: 'vlanpvid'},
+                {name: 'vlantag'},		
+            ],
+            columns: [{
+                id: 'severity',
+                dataIndex: 'severity',
+                header: _t('Events'),
+                renderer: Zenoss.render.severity,
+                width: 60,
+            },{
+                id: 'name',
+                dataIndex: 'name',
+                header: _t('Name'),
+                width: 120,
+			},{
+                id: 'vlanportids',
+                dataIndex: 'vlanportids',
+                header: _t('Vlan Members'),
+                sortable: true,
+			},{
+                id: 'vlanporttype',
+                dataIndex: 'vlanporttype',
+                header: _t('Port Type'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'vlanpvid',
+                dataIndex: 'vlanpvid',
+                header: _t('PvId'),
+                sortable: true,
+                width: 160,
+			},{
+                id: 'vlantag',
+                dataIndex: 'vlantag',
+                header: _t('Vlan Tag'),
+                sortable: true,
+            }]
+        });
+        ZC.NortelVlanPortPanel.superclass.constructor.call(this, config);
+    }
+});
+
+Ext.reg('NortelPortPanel', ZC.NortelVlanPortPanel);
+ZC.registerName('NortelVlanPort', _t('Ports Table'), _t('Ports Tables'));
+
 })();

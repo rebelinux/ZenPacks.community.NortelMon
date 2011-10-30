@@ -127,3 +127,23 @@ class PassportCardTableInfo(ComponentInfo):
     partnumber = ProxyProperty("partnumber")
     opstatus = ProxyProperty("opstatus")
     admstatus = ProxyProperty("admstatus")
+    
+class NortelVlanTableInfo(ComponentInfo):
+    implements(interfaces.INortelVlanTableInfo)
+
+    vlanid = ProxyProperty("vlanid")
+    vlanname = ProxyProperty("vlanname")
+    vlanstgid = ProxyProperty("vlanstgid")
+    vlantype = ProxyProperty("vlantype")
+    vlanportmembers = ProxyProperty("vlanportmembers")
+    vlanmac = ProxyProperty("vlanmac")
+
+class NortelVlanPortInfo(ComponentInfo):
+    implements(interfaces.INortelVlanPortInfo)
+
+    intname = ProxyProperty("intname")
+    vlanportindex = ProxyProperty("vlanportindex")
+    vlanportids = ProxyProperty("vlanportids")
+    vlanporttype = ProxyProperty("vlanporttype")
+    vlanpvid = ProxyProperty("vlanpvid")
+    vlantag = ProxyProperty("vlantag")

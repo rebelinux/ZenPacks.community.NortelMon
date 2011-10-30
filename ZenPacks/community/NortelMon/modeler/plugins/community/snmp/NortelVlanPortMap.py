@@ -1,7 +1,7 @@
 # ==============================================================================
-# PassportVlanPortMap modeler plugin
+# NortelVlanPortMap modeler plugin
 #
-# Zenoss community Zenpack for Avaya (Nortel) Passport Devices
+# Zenoss community Zenpack for Avaya (Nortel) Devices
 # version: 1.0
 #
 # (C) Copyright Jonathan Colon. All Rights Reserved.
@@ -21,7 +21,7 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 # ==============================================================================
 
-__doc__="""PassportVlanPortMap maps rcVlanPortTable monitoring entries"""
+__doc__="""NortelVlanPortMap maps rcVlanPortTable monitoring entries"""
 __author__ = "Jonathan Colon"
 __copyright__ = "(C) Copyright Jonathan Colon. 2011. All Rights Reserved."
 __license__ = "GPL"
@@ -29,26 +29,26 @@ __version__ = "1.0.0"
 
 from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetMap, GetTableMap
 import binascii
-class PassportVlanPortMap(SnmpPlugin):
-    """Map Nortel Passport Vlan Port to model."""
-    maptype = "PassportVlanPortMap"
-    modname = "ZenPacks.community.NortelMon.PassportVlanPort"
-    relname = "PassportVlanPort"
+class NortelVlanPortMap(SnmpPlugin):
+    """Map Nortel Vlan Port to model."""
+    maptype = "NortelVlanPortMap"
+    modname = "ZenPacks.community.NortelMon.NortelVlanPort"
+    relname = "NortelVlanPort"
     
 
     snmpGetTableMaps = (
         GetTableMap('vport',
-		'.1.3.6.1',
+        '.1.3.6.1',
                     {
                         '.4.1.2272.1.3.3.1.1': 'vlanportindex',
                         '.4.1.2272.1.3.3.1.3': 'vlanportids',
                         '.4.1.2272.1.3.3.1.4': 'vlanporttype',
                         '.4.1.2272.1.3.3.1.7': 'vlanpvid',
                         '.4.1.2272.1.3.3.1.8': 'vlantag',
-                        '.2.1.31.1.1.1.1' : 'intname',
+                        '.2.1.2.2.1.2' : 'intname',
                         }
                     ),
-	)
+    )
     def process(self, device, results, log):
         """collect snmp information from this device"""
         log.info('processing %s for device %s', self.name(), device.id)

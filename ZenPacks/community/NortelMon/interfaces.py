@@ -100,3 +100,18 @@ class IPassportCardTableInfo(IComponentInfo):
     partnumber = schema.Text(title=u"Part Number", readonly=True, group='Details')
     opstatus = schema.Text(title=u"Oper Status", readonly=True, group='Details')
     admstatus = schema.Text(title=u"Admin Status", readonly=True, group='Details')
+    
+class INortelVlanTableInfo(IComponentInfo):
+    vlanid = schema.Text(title=u"Vlan Id", readonly=True, group='Details')
+    vlanname = schema.Text(title=u"Name", readonly=True, group='Details')
+    vlanstgid = schema.Text(title=u"STG Id", readonly=True, group='Details')
+    vlantype = schema.Text(title=u"Type", readonly=True, group='Details')
+    vlanportmembers = schema.Text(title=u"Port Members", readonly=True, group='Details')
+    vlanmac = schema.Text(title=u"Mac Address", readonly=True, group='Details')
+
+class INortelVlanPortInfo(IComponentInfo):
+    vlanportindex = schema.Text(title=u"Port Id", readonly=True, group='Details')
+    vlanportids = schema.Text(title=u"Vlan Members", readonly=True, group='Details')
+    vlanporttype = schema.Text(title=u"Port Type", readonly=True, group='Details')
+    vlanpvid = schema.Text(title=u"PvId", readonly=True, group='Details')
+    vlantag = schema.Text(title=u"Vlan Tag", readonly=True, group='Details')
