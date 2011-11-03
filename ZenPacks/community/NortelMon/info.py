@@ -142,7 +142,6 @@ class NortelVlanPortInfo(ComponentInfo):
     implements(interfaces.INortelVlanPortInfo)
 
     intname = ProxyProperty("intname")
-    vlanportindex = ProxyProperty("vlanportindex")
     vlanportids = ProxyProperty("vlanportids")
     vlanporttype = ProxyProperty("vlanporttype")
     vlanpvid = ProxyProperty("vlanpvid")

@@ -69,7 +69,7 @@ class NortelVlanTableMap(SnmpPlugin):
                 om.id = self.prepId(om.vlanname)
                 om.snmpindex = om.vlanid
                 if om.vlantype not in self.vtype.keys():
-                    om.vlantype = 0
+                    om.vlantype = 0 
                 om.vlantype = self.vtype[om.vlantype]
                 om.vlanmac = self.asmac(om.vlanmac)
                 om.vlanportmembers = binascii.hexlify(om.vlanportmembers)

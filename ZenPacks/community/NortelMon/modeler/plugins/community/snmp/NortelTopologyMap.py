@@ -70,10 +70,10 @@ class NortelTopologyMap(SnmpPlugin):
 
         # If no data retrieved return nothing.        
         if not topos:
-            log.warn( 'No data collected from %s for the %s plugin', device.id, self.name() )
+            log.warn( 'No data collected for the %s plugin', self.name() )
             return
         if not device:
-            log.warn( 'No data collected from %s for the %s plugin', device.id, self.name() )
+            log.warn( 'No data collected for the %s plugin', self.name() )
             return
         rm = self.relMap()
         for oid, data in topos.iteritems():

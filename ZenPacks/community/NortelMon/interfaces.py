@@ -110,7 +110,7 @@ class INortelVlanTableInfo(IComponentInfo):
     vlanmac = schema.Text(title=u"Mac Address", readonly=True, group='Details')
 
 class INortelVlanPortInfo(IComponentInfo):
-    vlanportindex = schema.Text(title=u"Port Id", readonly=True, group='Details')
+    intname = schema.Text(title=u"Port Id", readonly=True, group='Details')
     vlanportids = schema.Text(title=u"Vlan Members", readonly=True, group='Details')
     vlanporttype = schema.Text(title=u"Port Type", readonly=True, group='Details')
     vlanpvid = schema.Text(title=u"PvId", readonly=True, group='Details')

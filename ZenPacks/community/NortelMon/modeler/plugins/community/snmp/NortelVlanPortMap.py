@@ -70,9 +70,12 @@ class NortelVlanPortMap(SnmpPlugin):
                 om = self.objectMap(data)
                 om.id = self.prepId(om.intname)
                 om.snmpindex = om.vlanportindex
+                if om.vlanporttype not in self.vlanporttype.keys():
+                    om.vlanporttype = 3
+                if om.vlantag not in self.vlantag.keys():
+                    om.vlantag = 3
                 om.vlanporttype = self.porttype[om.vlanporttype]
                 om.vlantag = self.tagtype[om.vlantag]
-                om.vlanportindex = om.id
                 om.vlanportids = binascii.hexlify(om.vlanportids)
                 vlanid = spt(om.vlanportids, 4)
                 list = []
@@ -87,7 +90,9 @@ class NortelVlanPortMap(SnmpPlugin):
 
     porttype = { 1: 'Access',
                        2: 'Trunk',
+                       3: 'Not Suported'
                      }
     tagtype = { 1: 'Yes',
                        2: 'No',
+                       3: 'Not Suported'
                      }

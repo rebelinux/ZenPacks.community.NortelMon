@@ -735,7 +735,7 @@ ZC.NortelVlanPortPanel = Ext.extend(ZC.ComponentGridPanel, {
     constructor: function(config) {
         config = Ext.applyIf(config||{}, {
             componentType: 'NortelVlanPort',
-            autoExpandColumn: 'vlanportids',
+            autoExpandColumn: 'name',
             fields: [
                 {name: 'uid'},
                 {name: 'severity'},
@@ -764,6 +764,7 @@ ZC.NortelVlanPortPanel = Ext.extend(ZC.ComponentGridPanel, {
                 dataIndex: 'vlanportids',
                 header: _t('Vlan Members'),
                 sortable: true,
+                width: 180,
 			},{
                 id: 'vlanporttype',
                 dataIndex: 'vlanporttype',
@@ -775,7 +776,6 @@ ZC.NortelVlanPortPanel = Ext.extend(ZC.ComponentGridPanel, {
                 dataIndex: 'vlanpvid',
                 header: _t('PvId'),
                 sortable: true,
-                width: 160,
 			},{
                 id: 'vlantag',
                 dataIndex: 'vlantag',
@@ -787,7 +787,7 @@ ZC.NortelVlanPortPanel = Ext.extend(ZC.ComponentGridPanel, {
     }
 });
 
-Ext.reg('NortelPortPanel', ZC.NortelVlanPortPanel);
+Ext.reg('NortelVlanPortPanel', ZC.NortelVlanPortPanel);
 ZC.registerName('NortelVlanPort', _t('Ports Table'), _t('Ports Tables'));
 
 })();
