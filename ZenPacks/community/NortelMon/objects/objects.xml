@@ -6,7 +6,7 @@
 &lt;a href='telnet://${here/manageIp}' target='_'&gt;Console:&lt;/a&gt; &lt;a href='http://${here/manageIp}' target='_'&gt;Web Console:&lt;/a&gt; &lt;a href='jdm://${here/manageIp}' target='_'&gt;Nortel Manager:&lt;/a&gt;
 </property>
 <property visible="True" type="lines" id="zCollectorPlugins" >
-['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'zenoss.snmp.InterfaceMap', 'community.snmp.NortelTopologyMap', 'community.snmp.NortelChassisMap', 'zenoss.snmp.RouteMap']
+['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'zenoss.snmp.InterfaceMap', 'community.snmp.NortelVlanTableMap', 'community.snmp.NortelVlanPortMap', 'community.snmp.NortelTopologyMap', 'community.snmp.NortelChassisMap', 'zenoss.snmp.RouteMap']
 </property>
 <property visible="True" type="string" id="zPythonClass" >
 ZenPacks.community.NortelMon.NortelDevice
@@ -99,7 +99,7 @@ Template for 64-bit interface counters.  Must use SNMP v2c for it to work.
 SNMP
 </property>
 <property type="boolean" id="enabled" mode="w" >
-False
+True
 </property>
 <property type="string" id="eventClass" mode="w" >
 /Cmd/Fail
@@ -144,7 +144,7 @@ Template for 64-bit interface counters.  Must use SNMP v2c for it to work.
 SNMP
 </property>
 <property type="boolean" id="enabled" mode="w" >
-False
+True
 </property>
 <property type="string" id="eventClass" mode="w" >
 /Cmd/Fail
@@ -189,7 +189,7 @@ Template for 64-bit interface counters.  Must use SNMP v2c for it to work.
 SNMP
 </property>
 <property type="boolean" id="enabled" mode="w" >
-False
+True
 </property>
 <property type="string" id="eventClass" mode="w" >
 /Cmd/Fail
@@ -237,7 +237,7 @@ Template for 64-bit interface counters.  Must use SNMP v2c for it to work.
 SNMP
 </property>
 <property type="boolean" id="enabled" mode="w" >
-False
+True
 </property>
 <property type="string" id="eventClass" mode="w" >
 /Cmd/Fail
@@ -285,7 +285,7 @@ Template for 64-bit interface counters.  Must use SNMP v2c for it to work.
 SNMP
 </property>
 <property type="boolean" id="enabled" mode="w" >
-False
+True
 </property>
 <property type="string" id="eventClass" mode="w" >
 /Cmd/Fail
@@ -330,7 +330,7 @@ Template for 64-bit interface counters.  Must use SNMP v2c for it to work.
 SNMP
 </property>
 <property type="boolean" id="enabled" mode="w" >
-False
+True
 </property>
 <property type="string" id="eventClass" mode="w" >
 /Cmd/Fail
@@ -375,7 +375,7 @@ Template for 64-bit interface counters.  Must use SNMP v2c for it to work.
 SNMP
 </property>
 <property type="boolean" id="enabled" mode="w" >
-False
+True
 </property>
 <property type="string" id="eventClass" mode="w" >
 /Cmd/Fail
@@ -423,7 +423,7 @@ Template for 64-bit interface counters.  Must use SNMP v2c for it to work.
 SNMP
 </property>
 <property type="boolean" id="enabled" mode="w" >
-False
+True
 </property>
 <property type="string" id="eventClass" mode="w" >
 /Cmd/Fail
@@ -471,7 +471,7 @@ Template for 64-bit interface counters.  Must use SNMP v2c for it to work.
 SNMP
 </property>
 <property type="boolean" id="enabled" mode="w" >
-False
+True
 </property>
 <property type="string" id="eventClass" mode="w" >
 /Cmd/Fail
@@ -519,7 +519,7 @@ Template for 64-bit interface counters.  Must use SNMP v2c for it to work.
 SNMP
 </property>
 <property type="boolean" id="enabled" mode="w" >
-False
+True
 </property>
 <property type="string" id="eventClass" mode="w" >
 /Cmd/Fail
@@ -564,7 +564,7 @@ Template for 64-bit interface counters.  Must use SNMP v2c for it to work.
 SNMP
 </property>
 <property type="boolean" id="enabled" mode="w" >
-False
+True
 </property>
 <property type="string" id="eventClass" mode="w" >
 /Cmd/Fail
@@ -3033,7 +3033,7 @@ True
 ['ifLastChange_ifLastChange']
 </property>
 <property label="Enabled" type="boolean" id="enabled" mode="w" >
-True
+False
 </property>
 <property type="string" id="maxval" mode="w" >
 1
