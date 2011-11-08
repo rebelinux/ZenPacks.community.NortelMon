@@ -45,7 +45,7 @@ class NortelVlanPortMap(SnmpPlugin):
                         '.4.1.2272.1.3.3.1.4': 'vlanporttype',
                         '.4.1.2272.1.3.3.1.7': 'vlanpvid',
                         '.4.1.2272.1.3.3.1.8': 'vlantag',
-                        '.2.1.2.2.1.2' : 'intname',
+                        '.2.1.31.1.1.1.1' : 'intname',
                         }
                     ),
     )
@@ -68,11 +68,20 @@ class NortelVlanPortMap(SnmpPlugin):
         for oid, data in vports.iteritems():
             try:
                 om = self.objectMap(data)
+                def ifix(int):         
+                    s = int.find('(') 
+                    n = int.find(')')
+                    if n < 0 or s < 0:
+                        return int    
+                    else:
+                        fint = int[s+1:n] 
+                        return fint
+                om.intname = ifix(om.intname)
                 om.id = self.prepId(om.intname)
                 om.snmpindex = om.vlanportindex
-                if om.vlanporttype not in self.vlanporttype.keys():
+                if om.vlanporttype not in self.porttype.keys():
                     om.vlanporttype = 3
-                if om.vlantag not in self.vlantag.keys():
+                if om.vlantag not in self.tagtype.keys():
                     om.vlantag = 3
                 om.vlanporttype = self.porttype[om.vlanporttype]
                 om.vlantag = self.tagtype[om.vlantag]

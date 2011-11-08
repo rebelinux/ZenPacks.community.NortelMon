@@ -1,7 +1,7 @@
 # ==============================================================================
-# PassportInterfaceMap modeler plugin
+# NortelInterfaceMap modeler plugin
 #
-# Zenoss community Zenpack for Avaya (Nortel) Passport Devices
+# Zenoss community Zenpack for Avaya (Nortel) Devices
 # version: 1.0
 #
 # (C) Copyright Jonathan Colon. All Rights Reserved.
@@ -21,7 +21,7 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 # ==============================================================================
 
-__doc__ = """PassportInterfaceMap
+__doc__ = """NortelInterfaceMap
 
     Extends the standard InterfaceMap to use the ifAlias as the interface's
     name instead of the ifDescr. This can be useful when many interfaces on
@@ -35,7 +35,7 @@ from Products.DataCollector.plugins.zenoss.snmp.InterfaceMap \
     import InterfaceMap
 from Products.DataCollector.plugins.CollectorPlugin import GetTableMap
 
-class PassportInterfaceMap(InterfaceMap):
+class NortelInterfaceMap(InterfaceMap):
     
     snmpGetTableMaps = InterfaceMap.baseSnmpGetTableMaps + (
         # Extended interface information.
@@ -45,13 +45,9 @@ class PassportInterfaceMap(InterfaceMap):
                  '.7' : 'ifHCInUcastPkts',
                  '.15': 'highSpeed'}
         ),
-        GetTableMap('ifdesc', '.1.3.6.1.4.1.2272.1.4.10.1.1',
-                {'.1' : 'ifindex',
-                 '.35'  : 'description'}
-        ),
         GetTableMap('duplex', '.1.3.6.1.4.1.2272.1.4.10.1.1',
                 {'.1' : 'ifindex',
-                 '.13': 'duplex'
+                 '.13' : 'duplex'
                  }
         ),
     )
@@ -60,7 +56,7 @@ class PassportInterfaceMap(InterfaceMap):
         # save proxy to self as superclass, to guard against future
         # reload of plugin module changing imported classes (making
         # future super calls fail due to class mismatch)
-        self.as_super = super(PassportInterfaceMap,self)
+        self.as_super = super(NortelInterfaceMap,self)
         self.as_super.__init__(*args, **kwargs)
 
     def process(self, device, results, log):
@@ -71,14 +67,17 @@ class PassportInterfaceMap(InterfaceMap):
         if 'ifalias' in results[1] and 'iftable' in results[1]:
             for a_idx, alias in results[1]['ifalias'].items():
                 for i_idx, iface in results[1]['iftable'].items():
+                    def ifix(int):         
+                        s = int.find('(') 
+                        n = int.find(')')
+                        if n < 0 or s < 0:
+                            return int    
+                        else:
+                            fint = int[s+1:n] 
+                            return fint
                     if a_idx == i_idx:
+                        alias['ifName'] = ifix(alias['ifName'])
                         results[1]['iftable'][i_idx]['id'] = alias['ifName']
-                        
-        if 'ifdesc' in results[1] and 'iftable' in results[1]:
-            for a_idx, desc in results[1]['ifdesc'].items():
-                for i_idx, iface in results[1]['iftable'].items():
-                    if desc['ifindex'] == iface['ifindex']:
-                        results[1]['ifalias'][i_idx]['description'] = desc['description']
                         
         if 'duplex' in results[1] and 'iftable' in results[1]:
             for a_idx, dup in results[1]['duplex'].items():
@@ -89,5 +88,5 @@ class PassportInterfaceMap(InterfaceMap):
                         elif dup['duplex'] == 2:
                             dup['duplex'] = 3
                         results[1]['duplex'][i_idx]['duplex'] = dup['duplex']
-                                
+                
         return self.as_super.process(device, results, log)

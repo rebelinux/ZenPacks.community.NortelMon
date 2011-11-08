@@ -740,6 +740,7 @@ ZC.NortelVlanPortPanel = Ext.extend(ZC.ComponentGridPanel, {
                 {name: 'uid'},
                 {name: 'severity'},
 				{name: 'name'},
+				{name: 'intname'},
                 {name: 'status'},
                 {name: 'hasMonitor'},
                 {name: 'monitor'},
@@ -756,7 +757,7 @@ ZC.NortelVlanPortPanel = Ext.extend(ZC.ComponentGridPanel, {
                 width: 60,
             },{
                 id: 'name',
-                dataIndex: 'name',
+                dataIndex: 'intname',
                 header: _t('Name'),
                 width: 120,
 			},{
