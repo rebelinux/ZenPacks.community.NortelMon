@@ -28,7 +28,7 @@ __license__ = "GPL"
 __version__ = "1.0.0"
 
 from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetMap, GetTableMap
-import binascii
+import binascii, re
 class NortelVlanPortMap(SnmpPlugin):
     """Map Nortel Vlan Port to model."""
     maptype = "NortelVlanPortMap"
@@ -68,14 +68,17 @@ class NortelVlanPortMap(SnmpPlugin):
         for oid, data in vports.iteritems():
             try:
                 om = self.objectMap(data)
-                def ifix(int):         
+                def ifix(int): 
+                    search = re.search('VLAN #', int)        
                     s = int.find('(') 
                     n = int.find(')')
-                    if n < 0 or s < 0:
-                        return int    
+                    if search:
+                        return int.clear() 
+                    elif n < 0 or s < 0:
+                        return int 
                     else:
                         fint = int[s+1:n] 
-                        return fint
+                        return fint.replace('Slot', 'Unit')
                 om.intname = ifix(om.intname)
                 om.id = self.prepId(om.intname)
                 om.snmpindex = om.vlanportindex
