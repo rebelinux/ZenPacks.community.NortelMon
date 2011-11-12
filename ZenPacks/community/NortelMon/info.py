@@ -103,7 +103,6 @@ class PassportVlanTableInfo(ComponentInfo):
     vlanname = ProxyProperty("vlanname")
     vlanstgid = ProxyProperty("vlanstgid")
     vlantype = ProxyProperty("vlantype")
-    vlanportmembers = ProxyProperty("vlanportmembers")
     vlanmac = ProxyProperty("vlanmac")
 
 class PassportVlanPortInfo(ComponentInfo):
@@ -135,7 +134,6 @@ class NortelVlanTableInfo(ComponentInfo):
     vlanname = ProxyProperty("vlanname")
     vlanstgid = ProxyProperty("vlanstgid")
     vlantype = ProxyProperty("vlantype")
-    vlanportmembers = ProxyProperty("vlanportmembers")
     vlanmac = ProxyProperty("vlanmac")
 
 class NortelVlanPortInfo(ComponentInfo):

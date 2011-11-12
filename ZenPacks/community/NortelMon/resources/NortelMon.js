@@ -283,7 +283,7 @@ ZC.PassportVlanTablePanel = Ext.extend(ZC.ComponentGridPanel, {
     constructor: function(config) {
         config = Ext.applyIf(config||{}, {
             componentType: 'PassportVlanTable',
-            autoExpandColumn: 'vlanportmembers',
+            autoExpandColumn: 'name',
             sortInfo: {
                 field: 'vlanid',
                 direction: 'ASC'
@@ -299,8 +299,7 @@ ZC.PassportVlanTablePanel = Ext.extend(ZC.ComponentGridPanel, {
                 {name: 'vlanmac'},
                 {name: 'vlantype'},
                 {name: 'vlanname'},
-                {name: 'vlanstgid'},
-                {name: 'vlanportmembers'},		
+                {name: 'vlanstgid'},		
             ],
             columns: [{
                 id: 'severity',
@@ -319,11 +318,6 @@ ZC.PassportVlanTablePanel = Ext.extend(ZC.ComponentGridPanel, {
                 header: _t('Vlan ID'),
                 sortable: true,
             },{
-                id: 'vlanportmembers',
-                dataIndex: 'vlanportmembers',
-                header: _t('Port Members'),
-                sortable: true,
-			},{
                 id: 'vlantype',
                 dataIndex: 'vlantype',
                 header: _t('Type'),
@@ -663,7 +657,7 @@ ZC.NortelVlanTablePanel = Ext.extend(ZC.ComponentGridPanel, {
     constructor: function(config) {
         config = Ext.applyIf(config||{}, {
             componentType: 'NortelVlanTable',
-            autoExpandColumn: 'vlanportmembers',
+            autoExpandColumn: 'name',
             sortInfo: {
                 field: 'vlanid',
                 direction: 'ASC'
@@ -679,8 +673,7 @@ ZC.NortelVlanTablePanel = Ext.extend(ZC.ComponentGridPanel, {
                 {name: 'vlanmac'},
                 {name: 'vlantype'},
                 {name: 'vlanname'},
-                {name: 'vlanstgid'},
-                {name: 'vlanportmembers'},		
+                {name: 'vlanstgid'},	
             ],
             columns: [{
                 id: 'severity',
@@ -699,11 +692,6 @@ ZC.NortelVlanTablePanel = Ext.extend(ZC.ComponentGridPanel, {
                 header: _t('Vlan ID'),
                 sortable: true,
             },{
-                id: 'vlanportmembers',
-                dataIndex: 'vlanportmembers',
-                header: _t('Port Members'),
-                sortable: true,
-			},{
                 id: 'vlantype',
                 dataIndex: 'vlantype',
                 header: _t('Type'),

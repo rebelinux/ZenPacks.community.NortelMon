@@ -43,7 +43,6 @@ class PassportVlanTable(DeviceComponent, ManagedEntity):
     vlanname = ''
     vlanstgid = 0
     vlantype = ''
-    vlanportmembers = ''
     vlanmac = ''
 
     monitor = True
@@ -53,7 +52,6 @@ class PassportVlanTable(DeviceComponent, ManagedEntity):
         {'id':'vlanname', 'type':'string', 'mode':''},
         {'id':'vlanstgid', 'type':'int', 'mode':''},
         {'id':'vlantype', 'type':'string', 'mode':''},
-        {'id':'vlanportmembers', 'type':'string', 'mode':''},
         {'id':'vlanmac', 'type':'string', 'mode':''},
         )
     

@@ -28,7 +28,6 @@ __license__ = "GPL"
 __version__ = "1.0.0"
 
 from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetMap, GetTableMap
-import binascii
 class PassportVlanTableMap(SnmpPlugin):
     """Map Nortel Passport Vlan table to model."""
     maptype = "PassportVlanTableMap"
@@ -44,7 +43,6 @@ class PassportVlanTableMap(SnmpPlugin):
                         '.2': 'vlanname',
                         '.9': 'vlanstgid',
                         '.10': 'vlantype',
-                        '.11': 'vlanportmembers',
                         '.19': 'vlanmac',
                     }
                     ),
@@ -72,7 +70,6 @@ class PassportVlanTableMap(SnmpPlugin):
                     om.vlantype = 0
                 om.vlantype = self.vtype[om.vlantype]
                 om.vlanmac = self.asmac(om.vlanmac)
-                om.vlanportmembers = binascii.hexlify(om.vlanportmembers)
             except AttributeError:
                 continue
             rm.append(om)

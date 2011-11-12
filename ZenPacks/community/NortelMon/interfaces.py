@@ -82,7 +82,6 @@ class IPassportVlanTableInfo(IComponentInfo):
     vlanname = schema.Text(title=u"Name", readonly=True, group='Details')
     vlanstgid = schema.Text(title=u"STG Id", readonly=True, group='Details')
     vlantype = schema.Text(title=u"Type", readonly=True, group='Details')
-    vlanportmembers = schema.Text(title=u"Port Members", readonly=True, group='Details')
     vlanmac = schema.Text(title=u"Mac Address", readonly=True, group='Details')
 
 class IPassportVlanPortInfo(IComponentInfo):
@@ -106,7 +105,6 @@ class INortelVlanTableInfo(IComponentInfo):
     vlanname = schema.Text(title=u"Name", readonly=True, group='Details')
     vlanstgid = schema.Text(title=u"STG Id", readonly=True, group='Details')
     vlantype = schema.Text(title=u"Type", readonly=True, group='Details')
-    vlanportmembers = schema.Text(title=u"Port Members", readonly=True, group='Details')
     vlanmac = schema.Text(title=u"Mac Address", readonly=True, group='Details')
 
 class INortelVlanPortInfo(IComponentInfo):
