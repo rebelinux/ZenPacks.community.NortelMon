@@ -650,7 +650,7 @@ ZC.NortelChassisPanel = Ext.extend(ZC.ComponentGridPanel, {
 });
 
 Ext.reg('NortelChassisPanel', ZC.NortelChassisPanel);
-ZC.registerName('NortelChassis', _t('Stack Status'), _t('Stack Status'));
+ZC.registerName('NortelChassis', _t('Stack Member'), _t('Stack Members'));
 
 ZC.NortelVlanTablePanel = Ext.extend(ZC.ComponentGridPanel, {
     subComponentGridPanel: false,
