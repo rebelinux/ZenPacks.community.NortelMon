@@ -44,7 +44,6 @@ class NortelDeviceMapLegacy(SnmpPlugin):
         '.1.3.6.1.4.1.45.1.6.3.1.6.0' : 'setHWSerialNumber',
         '.1.3.6.1.4.1.45.1.6.3.1.2.0' : 'setHWProductKey',
         '.1.3.6.1.4.1.45.1.6.3.1.5.0' : 'setOSProductKey',
-        '.1.3.6.1.4.1.45.1.6.3.2.1.1.5.8' : 'rackSlot',
         })
 
 
@@ -55,9 +54,7 @@ class NortelDeviceMapLegacy(SnmpPlugin):
         getdata, tabledata = results
         if getdata['setHWProductKey'] is None: return None
         if getdata['setOSProductKey'] is None: return None
-        if getdata['rackSlot'] is None: return None
         om = self.objectMap(getdata)
-        om.rackSlot = 'Stack Members: ' + str(om.rackSlot)
         om.setOSProductKey = 'Software Version ' + om.setOSProductKey.strip('v')
         om.setHWProductKey = om.setHWProductKey[0:om.setHWProductKey.find('HW') - 1]
         om.setHWProductKey = MultiArgs(om.setHWProductKey, "Nortel")
