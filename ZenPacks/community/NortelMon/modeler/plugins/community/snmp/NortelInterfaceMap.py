@@ -112,19 +112,15 @@ class NortelInterfaceMap(SnmpPlugin):
         # Process Avaya (Nortel) Interface Alias
         for key, iface in iftable.items():
             if key in ifalias:
-                def ifix(int): 
-                    search = re.search('VLAN #', int)        
+                def ifix(int):     
                     s = int.find('(') 
                     n = int.find(')')
-                    if search:
-                        return int.clear() 
-                    elif n < 0 or s < 0:
-                        return int 
+                    if n < 0 or s < 0:
+                        return int
                     else:
                         fint = int[s+1:n] 
                         return fint.replace('Slot', 'Unit')
-                iftable[key]['id'] = ifix(ifalias[key].get('ifName', ''))        
-    
+                iftable[key]['id'] = ifix(ifalias[key].get('ifName', ''))          
         duplex = tabledata.get("duplex", {})
         # Process Avaya (Nortel) Interface Duplex
         for key, iface in iftable.items():
@@ -272,7 +268,7 @@ class NortelInterfaceMap(SnmpPlugin):
                       om.interfaceName, om.type,
                       getattr(device, 'zInterfaceMapIgnoreTypes')))
             return None
-
+        
         # Append _64 to interface type if high-capacity counters are supported
         if hasattr(om, 'hcCounters'):
             om.type += "_64"
