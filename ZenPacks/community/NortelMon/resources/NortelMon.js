@@ -354,6 +354,7 @@ ZC.PassportVlanPortPanel = Ext.extend(ZC.ComponentGridPanel, {
                 {name: 'uid'},
                 {name: 'severity'},
 				{name: 'name'},
+				{name: 'description'},
                 {name: 'status'},
                 {name: 'hasMonitor'},
                 {name: 'monitor'},
@@ -372,7 +373,12 @@ ZC.PassportVlanPortPanel = Ext.extend(ZC.ComponentGridPanel, {
                 id: 'name',
                 dataIndex: 'name',
                 header: _t('Name'),
-                width: 120,
+                width: 160,
+            },{
+                id: 'description',
+                dataIndex: 'description',
+                header: _t('Description'),
+                width: 180,
 			},{
                 id: 'vlanportids',
                 dataIndex: 'vlanportids',
@@ -723,12 +729,13 @@ ZC.NortelVlanPortPanel = Ext.extend(ZC.ComponentGridPanel, {
     constructor: function(config) {
         config = Ext.applyIf(config||{}, {
             componentType: 'NortelVlanPort',
-            autoExpandColumn: 'name',
+            autoExpandColumn: 'vlanportids',
             fields: [
                 {name: 'uid'},
                 {name: 'severity'},
 				{name: 'name'},
 				{name: 'intname'},
+				{name: 'description'},
                 {name: 'status'},
                 {name: 'hasMonitor'},
                 {name: 'monitor'},
@@ -747,13 +754,17 @@ ZC.NortelVlanPortPanel = Ext.extend(ZC.ComponentGridPanel, {
                 id: 'name',
                 dataIndex: 'intname',
                 header: _t('Name'),
-                width: 120,
+                width: 160,
+            },{
+                id: 'description',
+                dataIndex: 'description',
+                header: _t('Description'),
+                width: 180,
 			},{
                 id: 'vlanportids',
                 dataIndex: 'vlanportids',
                 header: _t('Vlan Members'),
                 sortable: true,
-                width: 180,
 			},{
                 id: 'vlanporttype',
                 dataIndex: 'vlanporttype',
@@ -778,5 +789,63 @@ ZC.NortelVlanPortPanel = Ext.extend(ZC.ComponentGridPanel, {
 
 Ext.reg('NortelVlanPortPanel', ZC.NortelVlanPortPanel);
 ZC.registerName('NortelVlanPort', _t('Ports Table'), _t('Ports Tables'));
+
+ZC.NortelFanPanel = Ext.extend(ZC.ComponentGridPanel, {
+    subComponentGridPanel: false,
+    constructor: function(config) {
+        config = Ext.applyIf(config||{}, {
+            componentType: 'NortelFan',
+            fields: [
+                {name: 'uid'},
+                {name: 'severity'},
+				{name: 'name'},
+                {name: 'status'},
+                {name: 'usesMonitorAttribute'},
+                {name: 'monitored'},
+                {name: 'monitor'},
+                {name: 'fanstatus'},
+                {name: 'fandesc'},
+                {name: 'locking'},
+            ],
+            columns: [{
+                id: 'severity',
+                dataIndex: 'severity',
+                header: _t('Events'),
+                renderer: Zenoss.render.severity,
+                width: 60,
+            },{
+                id: 'name',
+                dataIndex: 'name',
+                header: _t('Name'),
+            },{
+                id: 'fandesc',
+                dataIndex: 'fandesc',
+                header: _t('Description'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'fanstatus',
+                dataIndex: 'fanstatus',
+                header: _t('Status'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'monitored',
+                dataIndex: 'monitored',
+                header: _t('Monitored'),
+            },{ 
+                id: 'locking',
+                dataIndex: 'locking',
+                header: _t('Locking'),
+                width: 72,
+                renderer: Zenoss.render.locking_icons,
+            }]
+        });
+        ZC.NortelFanPanel.superclass.constructor.call(this, config);
+    }
+});
+
+Ext.reg('NortelFanPanel', ZC.NortelFanPanel);
+ZC.registerName('NortelFan', _t('Fan'), _t('Fans'));
 
 })();

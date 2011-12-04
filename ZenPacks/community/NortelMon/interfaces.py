@@ -86,6 +86,7 @@ class IPassportVlanTableInfo(IComponentInfo):
 
 class IPassportVlanPortInfo(IComponentInfo):
     vlanportindex = schema.Text(title=u"Port Id", readonly=True, group='Details')
+    description = schema.Text(title=u"Description", readonly=True, group='Details')
     vlanportids = schema.Text(title=u"Vlan Members", readonly=True, group='Details')
     vlanporttype = schema.Text(title=u"Port Type", readonly=True, group='Details')
     vlanpvid = schema.Text(title=u"PvId", readonly=True, group='Details')
@@ -109,7 +110,13 @@ class INortelVlanTableInfo(IComponentInfo):
 
 class INortelVlanPortInfo(IComponentInfo):
     intname = schema.Text(title=u"Port Id", readonly=True, group='Details')
+    description = schema.Text(title=u"Description", readonly=True, group='Details')
     vlanportids = schema.Text(title=u"Vlan Members", readonly=True, group='Details')
     vlanporttype = schema.Text(title=u"Port Type", readonly=True, group='Details')
     vlanpvid = schema.Text(title=u"PvId", readonly=True, group='Details')
     vlantag = schema.Text(title=u"Vlan Tag", readonly=True, group='Details')
+
+class INortelFanInfo(IComponentInfo):
+    fanstatus = schema.Text(title=u"Status", readonly=True, group='Details')
+    fanindex = schema.Text(title=u"Fan", readonly=True, group='Details')
+    fandesc = schema.Text(title=u"Description", readonly=True, group='Details')

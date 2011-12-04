@@ -109,6 +109,7 @@ class PassportVlanPortInfo(ComponentInfo):
     implements(interfaces.IPassportVlanPortInfo)
 
     intname = ProxyProperty("intname")
+    description = ProxyProperty("description")
     vlanportindex = ProxyProperty("vlanportindex")
     vlanportids = ProxyProperty("vlanportids")
     vlanporttype = ProxyProperty("vlanporttype")
@@ -140,7 +141,15 @@ class NortelVlanPortInfo(ComponentInfo):
     implements(interfaces.INortelVlanPortInfo)
 
     intname = ProxyProperty("intname")
+    description = ProxyProperty("description")
     vlanportids = ProxyProperty("vlanportids")
     vlanporttype = ProxyProperty("vlanporttype")
     vlanpvid = ProxyProperty("vlanpvid")
     vlantag = ProxyProperty("vlantag")
+    
+class NortelFanInfo(ComponentInfo):
+    implements(interfaces.INortelFanInfo)
+    
+    fanindex = ProxyProperty("fanindex")
+    fanstatus = ProxyProperty("fanstatus")
+    fandesc = ProxyProperty("fandesc")

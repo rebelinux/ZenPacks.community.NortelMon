@@ -6,10 +6,16 @@
 &lt;a href='telnet://${here/manageIp}' target='_'&gt;Console:&lt;/a&gt; &lt;a href='http://${here/manageIp}' target='_'&gt;Web Console:&lt;/a&gt; &lt;a href='jdm://${here/manageIp}' target='_'&gt;Nortel Manager:&lt;/a&gt;
 </property>
 <property visible="True" type="lines" id="zCollectorPlugins" >
-['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'zenoss.snmp.InterfaceMap', 'community.snmp.NortelVlanTableMap', 'community.snmp.NortelVlanPortMap', 'community.snmp.NortelTopologyMap', 'community.snmp.NortelChassisMap', 'zenoss.snmp.RouteMap']
+['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'community.snmp.NortelVlanTableMap', 'community.snmp.NortelVlanPortMap', 'community.snmp.NortelTopologyMap', 'community.snmp.NortelChassisMap', 'zenoss.snmp.RouteMap']
 </property>
 <property visible="True" type="string" id="zPythonClass" >
 ZenPacks.community.NortelMon.NortelDevice
+</property>
+<property visible="True" type="string" id="zInterfaceMapIgnoreNames" >
+Cascade|Trunk|Vlan|VLAN|TRUNK
+</property>
+<property visible="True" type="string" id="zInterfaceMapIgnoreTypes" >
+propMultiplexor|IEEE 802.3ad Link Aggregate
 </property>
 <tomanycont id='rrdTemplates'>
 <object id='NortelChassis' module='Products.ZenModel.RRDTemplate' class='RRDTemplate'>
@@ -878,7 +884,7 @@ AVERAGE
 500
 </property>
 <property type="string" id="units" mode="w" >
-mbit
+packets/sec
 </property>
 <property type="boolean" id="log" mode="w" >
 False
@@ -1206,7 +1212,7 @@ Nortel Passport Serie Class
 ZenPacks.community.NortelMon.PassportDevice
 </property>
 <property visible="True" type="lines" id="zCollectorPlugins" >
-['zenoss.snmp.DeviceMap', 'community.snmp.PassportDeviceMap', 'zenoss.snmp.InterfaceMap', 'community.snmp.PassportInterfaceMap', 'community.snmp.PassportConPortMap', 'community.snmp.PassportFanMap', 'community.snmp.PassportPowerMap', 'community.snmp.PassportTopologyMap', 'community.snmp.PassportVlanTableMap', 'community.snmp.PassportVlanPortMap', 'community.snmp.PassportCardTableMap', 'zenoss.snmp.RouteMap']
+['zenoss.snmp.DeviceMap', 'community.snmp.PassportDeviceMap', 'community.snmp.PassportInterfaceMap', 'community.snmp.PassportConPortMap', 'community.snmp.PassportFanMap', 'community.snmp.PassportPowerMap', 'community.snmp.PassportTopologyMap', 'community.snmp.PassportVlanTableMap', 'community.snmp.PassportVlanPortMap', 'community.snmp.PassportCardTableMap', 'zenoss.snmp.RouteMap']
 </property>
 <tomanycont id='rrdTemplates'>
 <object id='Nortel Device ' module='Products.ZenModel.RRDTemplate' class='RRDTemplate'>
@@ -3178,7 +3184,7 @@ AVERAGE
 500
 </property>
 <property type="string" id="units" mode="w" >
-bits/sec
+packets/sec
 </property>
 <property type="boolean" id="log" mode="w" >
 False
@@ -3201,7 +3207,7 @@ True
 <tomanycont id='graphPoints'>
 <object id='Broadcast In' module='Products.ZenModel.DataPointGraphPoint' class='DataPointGraphPoint'>
 <property type="long" id="sequence" mode="w" >
-4
+2
 </property>
 <property select_variable="lineTypes" type="selection" id="lineType" mode="w" >
 AREA
@@ -3230,7 +3236,7 @@ AVERAGE
 </object>
 <object id='Broadcast Out' module='Products.ZenModel.DataPointGraphPoint' class='DataPointGraphPoint'>
 <property type="long" id="sequence" mode="w" >
-5
+3
 </property>
 <property select_variable="lineTypes" type="selection" id="lineType" mode="w" >
 AREA
@@ -3258,9 +3264,6 @@ AVERAGE
 </property>
 </object>
 <object id='Multicast In' module='Products.ZenModel.DataPointGraphPoint' class='DataPointGraphPoint'>
-<property type="long" id="sequence" mode="w" >
-2
-</property>
 <property type="string" id="color" mode="w" >
 56008C
 </property>
@@ -3291,7 +3294,7 @@ AVERAGE
 </object>
 <object id='Multicast Out' module='Products.ZenModel.DataPointGraphPoint' class='DataPointGraphPoint'>
 <property type="long" id="sequence" mode="w" >
-3
+1
 </property>
 <property select_variable="lineTypes" type="selection" id="lineType" mode="w" >
 AREA
@@ -3313,61 +3316,6 @@ ${graphPoint/id}
 </property>
 <property type="string" id="dpName" mode="w" >
 ifHCOutMulticastPkts_ifHCOutMulticastPkts
-</property>
-<property type="string" id="cFunc" mode="w" >
-AVERAGE
-</property>
-</object>
-<object id='Unicast In' module='Products.ZenModel.DataPointGraphPoint' class='DataPointGraphPoint'>
-<property select_variable="lineTypes" type="selection" id="lineType" mode="w" >
-AREA
-</property>
-<property type="long" id="lineWidth" mode="w" >
-1
-</property>
-<property type="boolean" id="stacked" mode="w" >
-False
-</property>
-<property type="string" id="format" mode="w" >
-%5.2lf%s
-</property>
-<property type="string" id="legend" mode="w" >
-${graphPoint/id}
-</property>
-<property type="long" id="limit" mode="w" >
--1
-</property>
-<property type="string" id="dpName" mode="w" >
-ifHCInUcastPkts_ifHCInUcastPkts
-</property>
-<property type="string" id="cFunc" mode="w" >
-AVERAGE
-</property>
-</object>
-<object id='Unicast Out' module='Products.ZenModel.DataPointGraphPoint' class='DataPointGraphPoint'>
-<property type="long" id="sequence" mode="w" >
-1
-</property>
-<property select_variable="lineTypes" type="selection" id="lineType" mode="w" >
-AREA
-</property>
-<property type="long" id="lineWidth" mode="w" >
-1
-</property>
-<property type="boolean" id="stacked" mode="w" >
-False
-</property>
-<property type="string" id="format" mode="w" >
-%5.2lf%s
-</property>
-<property type="string" id="legend" mode="w" >
-${graphPoint/id}
-</property>
-<property type="long" id="limit" mode="w" >
--1
-</property>
-<property type="string" id="dpName" mode="w" >
-ifHCOutUcastPkts_ifHCOutUcastPkts
 </property>
 <property type="string" id="cFunc" mode="w" >
 AVERAGE
@@ -3640,68 +3588,5 @@ True
 </object>
 </tomanycont>
 </object>
-</object>
-<!-- ('', 'zport', 'dmd', 'Events', 'Status', 'IpInterface') -->
-<object id='/zport/dmd/Events/Status/IpInterface' module='Products.ZenEvents.EventClass' class='EventClass'>
-<property type="text" id="transform" mode="w" >
-if evt.summary.startswith('threshold of operational status '):
-	devname = evt.device
-	intname = evt.component
-	descr = ''
-	for iface in device.os.interfaces.objectItems():
-    		if iface[1].name() == evt.component:
-        		descr = iface[1].description	
-	if evt.severity &gt; 0:	
-
-		evt.summary = 'Interface %s  with Description (%s): Operationally Down' % (evt.component, descr)
-
-	else:
-		evt.summary = 'Interface %s  with Description (%s): Operationally Up' % (evt.component, descr)
-</property>
-<property type="text" id="transform" mode="w" >
-if evt.summary.startswith('threshold of operational status '):
-	devname = evt.device
-	intname = evt.component
-	descr = ''
-	for iface in device.os.interfaces.objectItems():
-    		if iface[1].name() == evt.component:
-        		descr = iface[1].description	
-	if evt.severity &gt; 0:	
-
-		evt.summary = 'Interface %s  with Description (%s): Operationally Down' % (evt.component, descr)
-
-	else:
-		evt.summary = 'Interface %s  with Description (%s): Operationally Up' % (evt.component, descr)
-</property>
-<tomanycont id='instances'>
-<object id='snmp_linkDown' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
-<property type="string" id="eventClassKey" mode="w" >
-snmp_linkDown
-</property>
-<property type="int" id="sequence" mode="w" >
-9
-</property>
-<property type="string" id="example" mode="w" >
-snmp trap snmp_linkDown
-</property>
-<property visible="True" type="string" id="zEventAction" >
-history
-</property>
-</object>
-<object id='snmp_linkUp' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
-<property type="string" id="eventClassKey" mode="w" >
-snmp_linkUp
-</property>
-<property type="int" id="sequence" mode="w" >
-9
-</property>
-<property type="string" id="example" mode="w" >
-snmp trap snmp_linkUp
-</property>
-<property visible="True" type="string" id="zEventAction" >
-history
-</property>
-</object>
-</tomanycont>
 </object>
 </objects>
