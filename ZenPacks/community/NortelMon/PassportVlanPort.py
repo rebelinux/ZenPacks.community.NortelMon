@@ -38,6 +38,7 @@ class PassportVlanPort(DeviceComponent, ManagedEntity):
 
     portal_type = meta_type = 'PassportVlanPort'
     
+    description = ''
     intname = ''
     vlanportindex = ''
     vlanportids = ''
@@ -49,6 +50,7 @@ class PassportVlanPort(DeviceComponent, ManagedEntity):
 
     _properties = (
         {'id':'intname', 'type':'string', 'mode':''},
+        {'id':'description', 'type':'string', 'mode':''},
         {'id':'vlanportindex', 'type':'string', 'mode':''},
         {'id':'vlanportids', 'type':'string', 'mode':''},
         {'id':'vlanporttype', 'type':'string', 'mode':''},

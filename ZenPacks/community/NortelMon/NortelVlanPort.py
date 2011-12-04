@@ -38,6 +38,7 @@ class NortelVlanPort(DeviceComponent, ManagedEntity):
 
     portal_type = meta_type = 'NortelVlanPort'
     
+    description = ''
     intname = ''
     vlanportindex = ''
     vlanportids = ''
@@ -48,6 +49,7 @@ class NortelVlanPort(DeviceComponent, ManagedEntity):
     monitor = True
 
     _properties = (
+        {'id':'description', 'type':'string', 'mode':''},
         {'id':'intname', 'type':'string', 'mode':''},
         {'id':'vlanportindex', 'type':'string', 'mode':''},
         {'id':'vlanportids', 'type':'string', 'mode':''},

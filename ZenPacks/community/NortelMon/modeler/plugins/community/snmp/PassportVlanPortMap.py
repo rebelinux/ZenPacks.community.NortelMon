@@ -46,6 +46,7 @@ class PassportVlanPortMap(SnmpPlugin):
                         '.4.1.2272.1.3.3.1.7': 'vlanpvid',
                         '.4.1.2272.1.3.3.1.8': 'vlantag',
                         '.2.1.31.1.1.1.1' : 'intname',
+                        '.4.1.2272.1.4.10.1.1.35': 'description',
                         }
                     ),
 	)
