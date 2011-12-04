@@ -6,7 +6,7 @@
 &lt;a href='telnet://${here/manageIp}' target='_'&gt;Console:&lt;/a&gt; &lt;a href='http://${here/manageIp}' target='_'&gt;Web Console:&lt;/a&gt; &lt;a href='jdm://${here/manageIp}' target='_'&gt;Nortel Manager:&lt;/a&gt;
 </property>
 <property visible="True" type="lines" id="zCollectorPlugins" >
-['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'community.snmp.NortelVlanTableMap', 'community.snmp.NortelVlanPortMap', 'community.snmp.NortelTopologyMap', 'community.snmp.NortelChassisMap', 'zenoss.snmp.RouteMap']
+['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'community.snmp.NortelVlanTableMap', 'community.snmp.NortelVlanPortMap', 'community.snmp.NortelTopologyMap', 'community.snmp.NortelChassisMap', 'zenoss.snmp.InterfaceMap', 'zenoss.snmp.RouteMap']
 </property>
 <property visible="True" type="string" id="zPythonClass" >
 ZenPacks.community.NortelMon.NortelDevice
@@ -1212,7 +1212,7 @@ Nortel Passport Serie Class
 ZenPacks.community.NortelMon.PassportDevice
 </property>
 <property visible="True" type="lines" id="zCollectorPlugins" >
-['zenoss.snmp.DeviceMap', 'community.snmp.PassportDeviceMap', 'community.snmp.PassportInterfaceMap', 'community.snmp.PassportConPortMap', 'community.snmp.PassportFanMap', 'community.snmp.PassportPowerMap', 'community.snmp.PassportTopologyMap', 'community.snmp.PassportVlanTableMap', 'community.snmp.PassportVlanPortMap', 'community.snmp.PassportCardTableMap', 'zenoss.snmp.RouteMap']
+['zenoss.snmp.DeviceMap', 'community.snmp.PassportDeviceMap', 'zenoss.snmp.InterfaceMap', 'community.snmp.PassportInterfaceMap', 'community.snmp.PassportConPortMap', 'community.snmp.PassportFanMap', 'community.snmp.PassportPowerMap', 'community.snmp.PassportTopologyMap', 'community.snmp.PassportVlanTableMap', 'community.snmp.PassportVlanPortMap', 'community.snmp.PassportCardTableMap', 'zenoss.snmp.RouteMap']
 </property>
 <tomanycont id='rrdTemplates'>
 <object id='Nortel Device ' module='Products.ZenModel.RRDTemplate' class='RRDTemplate'>
