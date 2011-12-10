@@ -44,6 +44,8 @@ class NortelDevice(Device):
         ('NortelVlanTable', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelVlanTable', 'NortelDevVlanTable')),
         ('NortelVlanPort', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelVlanPort', 'NortelDevVlanPort')),
         ('NortelFan', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelFan', 'NortelDevFan')),
+        ('NortelPower', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelPower', 'NortelDevPower')),
+        ('NortelStatus', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelStatus', 'NortelDevStatus')),
         )
 
     factory_type_information = deepcopy(Device.factory_type_information)

@@ -153,3 +153,20 @@ class NortelFanInfo(ComponentInfo):
     fanindex = ProxyProperty("fanindex")
     fanstatus = ProxyProperty("fanstatus")
     fandesc = ProxyProperty("fandesc")
+    
+class NortelPowerInfo(ComponentInfo):
+    implements(interfaces.INortelPowerInfo)
+    
+    powerindex = ProxyProperty("powerindex")
+    powerstatus = ProxyProperty("powerstatus")
+    powerdesc = ProxyProperty("powerdesc")
+    
+class NortelStatusInfo(ComponentInfo):
+    implements(interfaces.INortelStatusInfo)
+    
+    index = ProxyProperty("index")
+    tmpvalue = ProxyProperty("tmpvalue")
+    cpuusage = ProxyProperty("cpuusage")
+    totalmem = ProxyProperty("totalmem")
+    availablemem = ProxyProperty("availablemem")
+    usedmem = ProxyProperty("usedmem")

@@ -117,6 +117,18 @@ class INortelVlanPortInfo(IComponentInfo):
     vlantag = schema.Text(title=u"Vlan Tag", readonly=True, group='Details')
 
 class INortelFanInfo(IComponentInfo):
-    fanstatus = schema.Text(title=u"Status", readonly=True, group='Details')
+    fanstatus = schema.Text(title=u"Fan Status", readonly=True, group='Details')
     fanindex = schema.Text(title=u"Fan", readonly=True, group='Details')
     fandesc = schema.Text(title=u"Description", readonly=True, group='Details')
+    
+class INortelPowerInfo(IComponentInfo):
+    powerstatus = schema.Text(title=u"Power Supply Status", readonly=True, group='Details')
+    powerindex = schema.Text(title=u"Power Supply", readonly=True, group='Details')
+    powerdesc = schema.Text(title=u"Description", readonly=True, group='Details')
+    
+class INortelStatusInfo(IComponentInfo):
+    cpuusage = schema.Text(title=u"Cpu Usage", readonly=True, group='Details')
+    totalmem = schema.Text(title=u"Total Mem", readonly=True, group='Details')
+    availablemem = schema.Text(title=u"Available Mem", readonly=True, group='Details')
+    usedmem = schema.Text(title=u"Used Mem", readonly=True, group='Details')
+    tmpvalue = schema.Text(title=u"Temperature", readonly=True, group='Details')

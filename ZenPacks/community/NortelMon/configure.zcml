@@ -59,11 +59,22 @@
                  for=".NortelVlanPort.NortelVlanPort"
                  provides=".interfaces.INortelVlanPortInfo"
                  />
+                 
         <adapter factory=".info.NortelFanInfo"
                  for=".NortelFan.NortelFan"
                  provides=".interfaces.INortelFanInfo"
                  />
+
+        <adapter factory=".info.NortelPowerInfo"
+                 for=".NortelPower.NortelPower"
+                 provides=".interfaces.INortelPowerInfo"
+                 />
                  
+        <adapter factory=".info.NortelStatusInfo"
+                 for=".NortelStatus.NortelStatus"
+                 provides=".interfaces.INortelStatusInfo"
+                 /> 
+                                 
         <browser:resourceDirectory
                  name="NortelMon"
                  directory="resources"

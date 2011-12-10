@@ -848,4 +848,141 @@ ZC.NortelFanPanel = Ext.extend(ZC.ComponentGridPanel, {
 Ext.reg('NortelFanPanel', ZC.NortelFanPanel);
 ZC.registerName('NortelFan', _t('Fan'), _t('Fans'));
 
+ZC.NortelPowerPanel = Ext.extend(ZC.ComponentGridPanel, {
+    subComponentGridPanel: false,
+    constructor: function(config) {
+        config = Ext.applyIf(config||{}, {
+            componentType: 'NortelPower',
+            fields: [
+                {name: 'uid'},
+                {name: 'severity'},
+				{name: 'name'},
+                {name: 'status'},
+                {name: 'usesMonitorAttribute'},
+                {name: 'monitored'},
+                {name: 'monitor'},
+                {name: 'powerstatus'},
+                {name: 'powerdesc'},
+                {name: 'locking'},
+            ],
+            columns: [{
+                id: 'severity',
+                dataIndex: 'severity',
+                header: _t('Events'),
+                renderer: Zenoss.render.severity,
+                width: 60,
+            },{
+                id: 'name',
+                dataIndex: 'name',
+                header: _t('Name'),
+            },{
+                id: 'powerdesc',
+                dataIndex: 'powerdesc',
+                header: _t('Description'),
+                sortable: true,
+                width: 180,
+            },{
+                id: 'powerstatus',
+                dataIndex: 'powerstatus',
+                header: _t('Status'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'monitored',
+                dataIndex: 'monitored',
+                header: _t('Monitored'),
+            },{ 
+                id: 'locking',
+                dataIndex: 'locking',
+                header: _t('Locking'),
+                width: 72,
+                renderer: Zenoss.render.locking_icons,
+            }]
+        });
+        ZC.NortelPowerPanel.superclass.constructor.call(this, config);
+    }
+});
+
+Ext.reg('NortelPowerPanel', ZC.NortelPowerPanel);
+ZC.registerName('NortelPower', _t('Power Supply'), _t('Power Supplies'));
+
+ZC.NortelStatusPanel = Ext.extend(ZC.ComponentGridPanel, {
+    subComponentGridPanel: false,
+    constructor: function(config) {
+        config = Ext.applyIf(config||{}, {
+            componentType: 'NortelStatus',
+            fields: [
+                {name: 'uid'},
+                {name: 'severity'},
+				{name: 'name'},
+                {name: 'status'},
+                {name: 'usesMonitorAttribute'},
+                {name: 'monitored'},
+                {name: 'monitor'},
+                {name: 'tmpvalue'},
+                {name: 'cpuusage'},
+                {name: 'availablemem'},
+                {name: 'totalmem'},
+                {name: 'usedmem'},
+                {name: 'locking'},
+            ],
+            columns: [{
+                id: 'severity',
+                dataIndex: 'severity',
+                header: _t('Events'),
+                renderer: Zenoss.render.severity,
+                width: 60,
+            },{
+                id: 'name',
+                dataIndex: 'name',
+                header: _t('Name'),
+            },{
+                id: 'cpuusage',
+                dataIndex: 'cpuusage',
+                header: _t('Cpu Usage'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'totalmem',
+                dataIndex: 'totalmem',
+                header: _t('Total Mem'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'availablemem',
+                dataIndex: 'availablemem',
+                header: _t('Available Mem'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'usedmem',
+                dataIndex: 'usedmem',
+                header: _t('Used Mem'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'tmpvalue',
+                dataIndex: 'tmpvalue',
+                header: _t('Temperature'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'monitored',
+                dataIndex: 'monitored',
+                header: _t('Monitored'),
+            },{ 
+                id: 'locking',
+                dataIndex: 'locking',
+                header: _t('Locking'),
+                width: 72,
+                renderer: Zenoss.render.locking_icons,
+            }]
+        });
+        ZC.NortelStatusPanel.superclass.constructor.call(this, config);
+    }
+});
+
+Ext.reg('NortelStatusPanel', ZC.NortelStatusPanel);
+ZC.registerName('NortelStatus', _t('Switch Status'), _t('Switches Status'));
+
 })();
