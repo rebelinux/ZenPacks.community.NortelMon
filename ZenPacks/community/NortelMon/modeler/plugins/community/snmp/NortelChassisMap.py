@@ -68,7 +68,7 @@ class NortelChassisMap(SnmpPlugin):
         for oid, data in chass.iteritems():
             try:
                 om = self.objectMap(data)
-                om.id = self.prepId("Switch_%s" % om.unitindex)
+                om.id = self.prepId("Stack_Member_%s" % om.unitindex)
                 om.unitnumber = om.id
                 om.snmpindex = oid.strip('.')
                 if om.operstatus not in self.opstatus.keys():

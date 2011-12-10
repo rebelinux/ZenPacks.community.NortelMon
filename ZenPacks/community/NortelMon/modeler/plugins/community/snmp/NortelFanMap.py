@@ -67,10 +67,12 @@ class NortelFanMap(SnmpPlugin):
                 om = self.objectMap(data)
                 index = om.fanindex + 1
                 sindex = textwrap.wrap(str(index),1)
-                om.id = self.prepId("Stack-%s Fan-%s" % tuple(sindex))
+                om.id = self.prepId("Switch-%s Fan-%s" % tuple(sindex))
                 if om.fanstatus not in self.opstatus.keys():
                     om.fanstatus = 1
                 om.fanstatus = self.opstatus[om.fanstatus]
+                om.snmpindex = om.fanindex
+                om.fanindex = om.id
             except AttributeError:
                 continue
             rm.append(om)
