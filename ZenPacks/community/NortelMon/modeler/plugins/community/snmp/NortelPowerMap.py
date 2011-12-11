@@ -67,7 +67,7 @@ class NortelPowerMap(SnmpPlugin):
                 om = self.objectMap(data)
                 index = om.powerindex + 1
                 sindex = textwrap.wrap(str(index),1)
-                om.id = self.prepId("Switch-%s PowerSypply-%s" % tuple(sindex))
+                om.id = self.prepId("Switch-%s PowerSupply-%s" % tuple(sindex))
                 if om.powerstatus not in self.opstatus.keys():
                     om.powerstatus = 1
                 om.powerstatus = self.opstatus[om.powerstatus]
