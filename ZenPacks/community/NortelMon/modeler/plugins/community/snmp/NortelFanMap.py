@@ -71,7 +71,7 @@ class NortelFanMap(SnmpPlugin):
                 if om.fanstatus not in self.opstatus.keys():
                     om.fanstatus = 1
                 om.fanstatus = self.opstatus[om.fanstatus]
-                om.snmpindex = om.fanindex
+                om.snmpindex = oid
                 om.fanindex = om.id
             except AttributeError:
                 continue

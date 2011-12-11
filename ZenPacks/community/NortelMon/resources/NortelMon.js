@@ -939,7 +939,7 @@ ZC.NortelStatusPanel = Ext.extend(ZC.ComponentGridPanel, {
             },{
                 id: 'cpuusage',
                 dataIndex: 'cpuusage',
-                header: _t('Cpu Usage'),
+                header: _t('Cpu% Usage'),
                 sortable: true,
                 width: 120,
             },{

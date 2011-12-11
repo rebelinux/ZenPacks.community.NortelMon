@@ -127,7 +127,7 @@ class INortelPowerInfo(IComponentInfo):
     powerdesc = schema.Text(title=u"Description", readonly=True, group='Details')
     
 class INortelStatusInfo(IComponentInfo):
-    cpuusage = schema.Text(title=u"Cpu Usage", readonly=True, group='Details')
+    cpuusage = schema.Text(title=u"Cpu% Usage", readonly=True, group='Details')
     totalmem = schema.Text(title=u"Total Mem", readonly=True, group='Details')
     availablemem = schema.Text(title=u"Available Mem", readonly=True, group='Details')
     usedmem = schema.Text(title=u"Used Mem", readonly=True, group='Details')

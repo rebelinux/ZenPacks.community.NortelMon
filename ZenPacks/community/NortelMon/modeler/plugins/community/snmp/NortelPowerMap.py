@@ -71,7 +71,7 @@ class NortelPowerMap(SnmpPlugin):
                 if om.powerstatus not in self.opstatus.keys():
                     om.powerstatus = 1
                 om.powerstatus = self.opstatus[om.powerstatus]
-                om.snmpindex = om.powerindex
+                om.snmpindex = oid
                 om.powerindex = om.id
             except AttributeError:
                 continue
