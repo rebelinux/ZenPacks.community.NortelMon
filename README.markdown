@@ -1,173 +1,51 @@
-# !! UPDATE THIS DOC !!
-This file should contain documentation that is specific to what your ZenPack does. 
-It should give example screenshots, explain how to install it, amongst other topics. 
-Please see http://community.zenoss.org/docs/DOC-8495#README for details.
+# ZenPacks.community.NortelMon
 
-This file was automatically pulled from https://raw.github.com/zenoss/ZenPackTemplate/master/README.markdown
-It contains general comments, not specific to this ZenPack
+## About
+This project is [Zenoss][] extension (ZenPack) that makes it possible to
+model and monitor Nortel Passport, Baystack, BPS2000 and Ers Serie Switches
+## Requirements
 
-# ZenPack Template
-This README describes the structure of the ZenPack template that gets
-automatically created by Zenoss when you add a ZenPack through the web
-interface.
+### Zenoss
+You must first have, or install, Zenoss 3.0 or later. This ZenPack was
+tested against Zenoss 3.0 and Zenoss 3.2.1. You can download
+the free Core version of Zenoss from
+<http://community.zenoss.org/community/download>.
 
-## Files
-At the top-level a ZenPack must have a setup.py. Almost always a MANIFEST.in
-file should exist, and in cases where external dependencies must be built for
-inclusion in the ZenPack, a GNUmakefile. Examples of these files with inline
-comments are included in this template.
+## Installation
 
-Also included in the ZenPackTemplate is a configure.zcml. As more of Zenoss'
-extensibility moves to using ZCA (Zope Component Architecture) this file
-becomes crucial to hooking into various aspects of Zenoss.
+### Normal Installation (packaged egg)
+Download the [NortelMon ZenPack][]. Copy this file to your Zenoss
+server and run the following commands as the zenoss user.
 
-## Files and Subdirectories
-The following sections describe the purpose and use for each of the default
-subdirectories. Note that if the described functionality is not of use in your
-ZenPack it is safe to remove any of the default directories.
+    zenpack --install ZenPacks.community.NortelMon-1.4.7.1.egg
+    zenoss restart
 
-### src/
-The src/ top-level directory in ZenPacks is the conventional place to add
-third-party dependencies to your ZenPack. It should only be used as a staging
-area to do any build work necessary for the dependency.
+## Usage
+ 1. You should now have Nortel device class.
 
-See GNUmakefile (or GNUmakefile.example) for examples of how to have
-your third-party dependencies automatically compiled and installed at the right
-time and into the right location.
+/Device/Network/Switch/Nortel
+	/Device/Network/Switch/Nortel/Baystack = This Class is for legacy Nortel Switches (Tested it with BPS2000, Baystack 450,460,470)
+	/Device/Network/Switch/Nortel/ERS = This Class is for new Avaya Switches (Tested it with ERS2000, ERS4000 & ERS5000)
+	/Device/Network/Switch/NortelPassport	= This Class is for Nortel Passport Switches (Tested it with ERS-1624 & ERS-8000)
 
-### ZenPacks/NAMESPACE/PACKNAME/
-The following sections describe the directories contained within the
-namespaced ZenPacks/NAMESPACE/PACKNAME/ subdirectories.
 
-#### bin/
-Any general tools delivered by your ZenPack that would be used by the Zenoss
-administrator at the command line should go into this directory by convention.
-When the ZenPack is installed all files in this directory will be made
-executable.
+The following elements are discovered:
 
-#### browser/
-The browser subdirectory should contain all code and configuration that's
-specific to the Zenoss web interface. The provided configure.zcml will
-automatically load the example browser/configure.zcml and register the
-browser/resources/ subdirectory to serve static web content.
+ * PowerSupply Component (Status) [ERS & Passport Model]
+ * Fan Component (Status) [ERS & Passport-8000 Model]
+ * CardTable Component (Status) [Passport Model]
+ * Console Port (Status) [Passport Model]
+ * Vlans Table (Status) [All Model] 
+ * Per Port Vlan Table (Status) [All Model]
+ * CPU, Memory & Temperature Performance Graph [ERS & Passport Model]
+ * Stack Member Status (Status) [ERS Model]
+ * Correct Network Interface Name [All Model]
+ * Correct Network Interface Description [Passport Model]
+ * Correct Network Interface Duplex Value [All Model]
+ * Topology Table (SONMP) [All Model]
 
-#### daemons/
-All files in the daemons/ subdirectory get special handling. Upon installing
-the ZenPack, the following actions will occur.
 
-    1. The file will be made executable (chmod 0755)
-    2. A symlink to the file will be created in $ZENHOME/bin/
-    3. An configuration file will be generated at $ZENHOME/etc/DAEMON_NAME.conf
-
-Assuming that you don't have a $ZENHOME/etc/DAEMONS_TXT_ONLY file this daemon
-will also become part of the normal zenoss start and stop processes.
-
-You can find an example daemon control script in daemons/zenexample. For most
-purposes this file can be renamed to the name of the daemon you want to create
-and modified to change the DAEMON_NAME. No other modifications are typically
-needed. Note that this example control script does expect to launch the real
-daemon code which should be located at ../DAEMON_NAME.py.
-
-#### datasources/
-Any new datasource types you want to add must be added as classes into the
-datasources/ subdirectory. When Zenoss is building the list of available
-datasources it will scan the datasources/ subdirectory for all installed
-ZenPacks.
-
-An example datasource at datasources/ExampleDataSource.py.example.
-
-#### lib/
-The lib/ directory should be the installation target for any third-party
-libraries that are built by the GNUmakefile. It can also be used as the
-conventional location to drop Python-only libraries that don't require
-any compilation or special installation.
-
-#### libexec/
-Any scripts executed by COMMAND datasources in your ZenPack go in this
-directory by convention. When the ZenPack is installed all files in this
-directory will be made executable.
-
-#### migrate/
-ZenPacks can include migrate scripts that allow you to run custom code to
-handle any tasks that are needed to upgrade your ZenPack from one version to
-another. All .py files in this migrate/ subdirectory will be evaluated when the
-ZenPack is installed.
-
-You can find an example migrate script at migrate/ExampleMigration.py.
-
-#### modeler/
-Any modeler plugins distributed with your ZenPack must be located under the
-plugins/ subdirectory. The directory structure and filenames under plugins/
-map directly to the plugins' name in the user interface. For example, if you
-wanted to create a modeler plugin called "community.snmp.ExampleMap" you would
-create the following directory structure.
-
-It is recommended that the first portion of the namespace be a short lowercase
-form of your name, or organization's name. Alternatively you can choose to use
-"community" if you plan to publish the ZenPack and are open to outside
-contributions. Zenoss, Inc. will always use "zenoss." The second portion of the
-namespace can be the protocol that is used to collect the data. If you are not
-using a common protocol it is acceptable to skip the second portion of the
-namespace and have something like "community.MongoDB" instead.
-
-    plugins/
-        __init__.py
-        community/
-            __init__.py
-            snmp/
-                __init__.py
-                ExampleMap.py
-
-Note that the ```__init__.py``` files must exist and should be empty files. Otherwise
-your modeler plugins won't be imported and usable within Zenoss.
-
-#### objects/
-All .xml files in this objects/ directory will be loaded into the object
-database when the ZenPack installs. All of the objects defined in the XML files
-will be automatically associated with the ZenPack.
-
-When you export the ZenPack from the user interface all objects associated with
-the ZenPack will be exported into a file called "objects.xml" specifically. For
-this reason it is recommended to let Zenoss manage the objects.xml file and to
-never manually create or modify any .xml files in this directory unless you
-know what you're doing.
-
-When a ZenPack is removed, any objects associated with the ZenPack will be
-recursively removed from Zenoss. For example, if you associated the /Server
-device class with your ZenPack and removed the ZenPack, the /Server device
-class, and all devices within it would also be deleted.
-
-When a ZenPack is upgraded, or re-installed on top of itself, all objects in
-the XML files are overlaid on the existing object database. This results in a
-merge of the existing objects and what are defined in the XML files with the
-XML file properties and relationships winning any conflicts.
-
-#### reports/
-Custom reports will be loaded from this directory when the ZenPack is
-installed. Subdirectories (with the exception of plugins/) will be mapped
-directly to the report folders in the web interface. So if you add a .rpt file
-into a subdirectory named "Performance Reports" you will find your report in
-the Performance Reports folder in the web interface after installing the
-ZenPack.
-
-The plugins/ subdirectory should include any Python plugins your custom reports
-call. So if your .rpt file contains a line such as the following..
-
-objects python:here.ReportServer.plugin('myplugin', tableState);
-
-There should be a corresponding myplugin.py file in the plugins/ subdirectory.
-
-You can find an example report at Example Reports/Example Report.rpt.example
-that uses a plugin which can be found at plugins/example_plugin.py.
-
-#### services/
-ZenHub services will be loaded from the services/ directory. These services
-run inside the zenhub daemon and are responsible from all interaction with
-collector daemons.
-
-You can find an example service at services/ExampleConfigService.py.
-
-#### tests/
-All unit tests for your ZenPack should live in this directory. You can find an
-example test suite at tests/testExample.py.
+[Zenoss]: <http://www.zenoss.com/>
+[NortelMon ZenPack]: <http://community.zenoss.org/docs/DOC-5867>
+[git repository]: <https://github.com/rebelinux/ZenPacks.community.NortelMon>
 
