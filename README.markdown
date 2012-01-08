@@ -30,7 +30,8 @@ developer mode using the following commands.
     zenoss restart
 
 ## Usage
- 1. You should now have Nortel device class.
+
+### You should now have Nortel device class.
 
 /Device/Network/Switch/Nortel = Root Device Class
 
