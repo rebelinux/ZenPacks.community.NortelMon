@@ -25,7 +25,9 @@ server and run the following commands as the zenoss user.
 
 /Device/Network/Switch/Nortel
 	/Device/Network/Switch/Nortel/Baystack = This Class is for legacy Nortel Switches (Tested it with BPS2000, Baystack 450,460,470)
+
 	/Device/Network/Switch/Nortel/ERS = This Class is for new Avaya Switches (Tested it with ERS2000, ERS4000 & ERS5000)
+
 	/Device/Network/Switch/NortelPassport	= This Class is for Nortel Passport Switches (Tested it with ERS-1624 & ERS-8000)
 
 
@@ -43,7 +45,6 @@ The following elements are discovered:
  * Correct Network Interface Description [Passport Model]
  * Correct Network Interface Duplex Value [All Model]
  * Topology Table (SONMP) [All Model]
-
 
 [Zenoss]: <http://www.zenoss.com/>
 [NortelMon ZenPack]: <http://community.zenoss.org/docs/DOC-5867>
