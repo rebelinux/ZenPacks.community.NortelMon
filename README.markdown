@@ -59,6 +59,6 @@ The following elements are discovered:
  * Topology Table (SONMP) (All Model).
 
 [Zenoss]: <http://www.zenoss.com/>
-[NortelMon ZenPack]: <http://community.zenoss.org/docs/DOC-5867>
+[NortelMon ZenPack]: <http://community.zenoss.org/docs/DOC-3522>
 [git repository]: <https://github.com/rebelinux/ZenPacks.community.NortelMon>
 
