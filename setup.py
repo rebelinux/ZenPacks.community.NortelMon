@@ -3,7 +3,7 @@
 # or saved.  Do not modify them directly here.
 # NB: PACKAGES is deprecated
 NAME = "ZenPacks.community.NortelMon"
-VERSION = "1.4.7.1"
+VERSION = "1.4.7.2"
 AUTHOR = "Jonathan Colon"
 LICENSE = ""
 NAMESPACE_PACKAGES = ['ZenPacks', 'ZenPacks.community']
