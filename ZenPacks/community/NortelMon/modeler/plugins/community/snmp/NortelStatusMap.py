@@ -70,7 +70,6 @@ class NortelStatusMap(SnmpPlugin):
                 index = om.index
                 sindex = textwrap.wrap(str(index),1)
                 om.id = self.prepId("Switch_%s" % sindex[0])
-                om.tmpvalue = int(om.tmpvalue / 2)
                 om.usedmem = om.totalmem - om.availablemem
                 om.snmpindex = oid
             except AttributeError:

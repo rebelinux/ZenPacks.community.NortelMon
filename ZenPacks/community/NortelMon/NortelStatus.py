@@ -39,7 +39,7 @@ class NortelStatus(DeviceComponent, ManagedEntity):
     portal_type = meta_type = 'NortelStatus'
     
     index = 0
-    tmpvalue = ''
+    tmpvalue
     cpuusage = ''
     totalmem = ''
     availablemem = ''
@@ -48,7 +48,7 @@ class NortelStatus(DeviceComponent, ManagedEntity):
 
     _properties = (
         {'id':'index', 'type':'int', 'mode':''},
-        {'id':'tmpvalue', 'type':'string', 'mode':''},
+        {'id':'tmpvalue', 'type':'int', 'mode':''},
         {'id':'cpuusage', 'type':'string', 'mode':''},
         {'id':'totalmem', 'type':'string', 'mode':''},
         {'id':'availablemem', 'type':'string', 'mode':''},
@@ -81,13 +81,22 @@ class NortelStatus(DeviceComponent, ManagedEntity):
 
     def viewName(self):
         """Pretty version human readable version of this object"""
+        self.tmpvalue = self.temperature()
         return self.id
+        return self.tmpvalue
 
     titleOrId = name = viewName
 
 
     def device(self):
         return self.NortelDevStatus()
+    
+    def temperature(self):
+        if self.tmpvalue != 0:
+            self.tmpvalue = self.tmpvalue / 2
+            return self.tmpvalue
+        else:
+            return self.tmpvalue
 
     def getRRDTemplates(self):
         """
