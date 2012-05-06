@@ -39,7 +39,7 @@ class NortelStatus(DeviceComponent, ManagedEntity):
     portal_type = meta_type = 'NortelStatus'
     
     index = 0
-    tmpvalue
+    tmpvalue = 0
     cpuusage = ''
     totalmem = ''
     availablemem = ''
