@@ -59,6 +59,7 @@ class PassportDevice(Device):
         ('PassportVlanTable', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.PassportVlanTable', 'PassportDevVlanTable')),
         ('PassportVlanPort', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.PassportVlanPort', 'PassportDevVlanPort')),
         ('PassportCardTable', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.PassportCardTable', 'PassportDevCardTable')),
+        ('PassportMltStatus', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.PassportMltStatus', 'PassportMltDevStatus')),
         )
 
     factory_type_information = deepcopy(Device.factory_type_information)

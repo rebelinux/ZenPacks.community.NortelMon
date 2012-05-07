@@ -132,3 +132,19 @@ class INortelStatusInfo(IComponentInfo):
     availablemem = schema.Text(title=u"Available Mem", readonly=True, group='Details')
     usedmem = schema.Text(title=u"Used Mem", readonly=True, group='Details')
     tmpvalue = schema.Text(title=u"Temperature", readonly=True, group='Details')
+
+class INortelMltStatusInfo(IComponentInfo):
+    mltname = schema.Text(title=u"Name", readonly=True, group='Details')
+    mlttype = schema.Text(title=u"Configured Type", readonly=True, group='Details')
+    mltruntype = schema.Text(title=u"Running Type", readonly=True, group='Details')
+    mltvlans = schema.Text(title=u"Vlans", readonly=True, group='Details')
+    mltenable = schema.Text(title=u"Enabled?", readonly=True, group='Details')
+    mltstatus = schema.Text(title=u"Status", readonly=True, group='Details')
+
+class IPassportMltStatusInfo(IComponentInfo):
+    mltname = schema.Text(title=u"Name", readonly=True, group='Details')
+    mlttype = schema.Text(title=u"Configured Type", readonly=True, group='Details')
+    mltruntype = schema.Text(title=u"Running Type", readonly=True, group='Details')
+    mltvlans = schema.Text(title=u"Vlans", readonly=True, group='Details')
+    mltenable = schema.Text(title=u"Enabled?", readonly=True, group='Details')
+    mltstatus = schema.Text(title=u"Status", readonly=True, group='Details')

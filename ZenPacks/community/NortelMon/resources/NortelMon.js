@@ -983,6 +983,163 @@ ZC.NortelStatusPanel = Ext.extend(ZC.ComponentGridPanel, {
 });
 
 Ext.reg('NortelStatusPanel', ZC.NortelStatusPanel);
-ZC.registerName('NortelStatus', _t('Switch Status'), _t('Switches Status'));
+ZC.registerName('NortelStatus', _t('Switch Status'), _t('Switch Status'));
+
+ZC.NortelMltStatusPanel = Ext.extend(ZC.ComponentGridPanel, {
+    subComponentGridPanel: false,
+    constructor: function(config) {
+        config = Ext.applyIf(config||{}, {
+            componentType: 'NortelMltStatus',
+            fields: [
+                {name: 'uid'},
+                {name: 'severity'},
+		{name: 'name'},
+                {name: 'mltvlans'},
+                {name: 'usesMonitorAttribute'},
+                {name: 'monitored'},
+                {name: 'monitor'},
+                {name: 'mlttype'},
+                {name: 'mltruntype'},
+                {name: 'mltenable'},
+                {name: 'mltstatus'},
+                {name: 'locking'},
+            ],
+            columns: [{
+                id: 'severity',
+                dataIndex: 'severity',
+                header: _t('Events'),
+                renderer: Zenoss.render.severity,
+                width: 60,
+            },{
+                id: 'name',
+                dataIndex: 'name',
+                header: _t('Name'),
+            },{
+                id: 'mltvlans',
+                dataIndex: 'mltvlans',
+                header: _t('Vlans'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'mlttype',
+                dataIndex: 'mlttype',
+                header: _t('Configured Type'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'mltruntype',
+                dataIndex: 'mltruntype',
+                header: _t('Running type'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'mltenable',
+                dataIndex: 'mltenable',
+                header: _t('Enabled?'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'mltstatus',
+                dataIndex: 'mltstatus',
+                header: _t('Status'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'monitored',
+                dataIndex: 'monitored',
+                header: _t('Monitored'),
+            },{ 
+                id: 'locking',
+                dataIndex: 'locking',
+                header: _t('Locking'),
+                width: 72,
+                renderer: Zenoss.render.locking_icons,
+            }]
+        });
+        ZC.NortelMltStatusPanel.superclass.constructor.call(this, config);
+    }
+});
+
+Ext.reg('NortelMltStatusPanel', ZC.NortelMltStatusPanel);
+ZC.registerName('NortelMltStatus', _t('Mlt Status'), _t('Mlt Status'));
+
+ZC.PassportMltStatusPanel = Ext.extend(ZC.ComponentGridPanel, {
+    subComponentGridPanel: false,
+    constructor: function(config) {
+        config = Ext.applyIf(config||{}, {
+            componentType: 'PassportMltStatus',
+            autoExpandColumn: 'mltvlans',
+            fields: [
+                {name: 'uid'},
+                {name: 'severity'},
+		{name: 'name'},
+                {name: 'mltvlans'},
+                {name: 'usesMonitorAttribute'},
+                {name: 'monitored'},
+                {name: 'monitor'},
+                {name: 'mlttype'},
+                {name: 'mltruntype'},
+                {name: 'mltenable'},
+                {name: 'mltstatus'},
+                {name: 'locking'},
+            ],
+            columns: [{
+                id: 'severity',
+                dataIndex: 'severity',
+                header: _t('Events'),
+                renderer: Zenoss.render.severity,
+                width: 60,
+            },{
+                id: 'name',
+                dataIndex: 'name',
+                header: _t('Name'),
+            },{
+                id: 'mltvlans',
+                dataIndex: 'mltvlans',
+                header: _t('Vlans'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'mlttype',
+                dataIndex: 'mlttype',
+                header: _t('Configured Type'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'mltruntype',
+                dataIndex: 'mltruntype',
+                header: _t('Running type'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'mltenable',
+                dataIndex: 'mltenable',
+                header: _t('Enabled?'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'mltstatus',
+                dataIndex: 'mltstatus',
+                header: _t('Status'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'monitored',
+                dataIndex: 'monitored',
+                header: _t('Monitored'),
+            },{ 
+                id: 'locking',
+                dataIndex: 'locking',
+                header: _t('Locking'),
+                width: 72,
+                renderer: Zenoss.render.locking_icons,
+            }]
+        });
+        ZC.PassportMltStatusPanel.superclass.constructor.call(this, config);
+    }
+});
+
+Ext.reg('PassportMltStatusPanel', ZC.PassportMltStatusPanel);
+ZC.registerName('PassportMltStatus', _t('Mlt Status'), _t('Mlt Status'));
 
 })();

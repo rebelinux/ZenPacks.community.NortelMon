@@ -74,7 +74,17 @@
                  for=".NortelStatus.NortelStatus"
                  provides=".interfaces.INortelStatusInfo"
                  /> 
-                                 
+
+        <adapter factory=".info.NortelMltStatusInfo"
+                 for=".NortelMltStatus.NortelMltStatus"
+                 provides=".interfaces.INortelMltStatusInfo"
+                 /> 
+
+        <adapter factory=".info.PassportMltStatusInfo"
+                 for=".PassportMltStatus.PassportMltStatus"
+                 provides=".interfaces.IPassportMltStatusInfo"
+                 /> 
+                                                                          
         <browser:resourceDirectory
                  name="NortelMon"
                  directory="resources"

@@ -170,3 +170,27 @@ class NortelStatusInfo(ComponentInfo):
     totalmem = ProxyProperty("totalmem")
     availablemem = ProxyProperty("availablemem")
     usedmem = ProxyProperty("usedmem")
+    
+class NortelMltStatusInfo(ComponentInfo):
+    implements(interfaces.INortelMltStatusInfo)
+    
+    index = ProxyProperty("index")
+    mltid = ProxyProperty("mltid")
+    mltname = ProxyProperty("mltname")
+    mltenable = ProxyProperty("mltenable")
+    mltvlans = ProxyProperty("mltvlans")
+    mltstatus = ProxyProperty("mltstatus")
+    mlttype = ProxyProperty("mlttype")
+    mltruntype = ProxyProperty("mltruntype")
+    
+class PassportMltStatusInfo(ComponentInfo):
+    implements(interfaces.IPassportMltStatusInfo)
+    
+    index = ProxyProperty("index")
+    mltid = ProxyProperty("mltid")
+    mltname = ProxyProperty("mltname")
+    mltenable = ProxyProperty("mltenable")
+    mltvlans = ProxyProperty("mltvlans")
+    mltstatus = ProxyProperty("mltstatus")
+    mlttype = ProxyProperty("mlttype")
+    mltruntype = ProxyProperty("mltruntype")

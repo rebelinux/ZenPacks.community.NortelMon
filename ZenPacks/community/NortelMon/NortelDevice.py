@@ -46,6 +46,7 @@ class NortelDevice(Device):
         ('NortelFan', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelFan', 'NortelDevFan')),
         ('NortelPower', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelPower', 'NortelDevPower')),
         ('NortelStatus', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelStatus', 'NortelDevStatus')),
+        ('NortelMltStatus', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelMltStatus', 'NortelMltDevStatus')),
         )
 
     factory_type_information = deepcopy(Device.factory_type_information)
