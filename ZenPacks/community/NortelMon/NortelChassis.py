@@ -44,7 +44,6 @@ class NortelChassis(DeviceComponent, ManagedEntity):
     chasstype = '' 
     desc = ''
     sernum = ''
-    admstatus = ''
     operstatus  = ''
 
     _properties = (
@@ -54,7 +53,6 @@ class NortelChassis(DeviceComponent, ManagedEntity):
         {'id':'chasstype', 'type':'string', 'mode':''},
         {'id':'desc', 'type':'string', 'mode':''},
         {'id':'sernum', 'type':'string', 'mode':''},
-        {'id':'admstatus', 'type':'string', 'mode':''},
         {'id':'operstatus', 'type':'string', 'mode':''},
         )
     

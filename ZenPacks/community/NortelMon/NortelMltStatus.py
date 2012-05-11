@@ -38,24 +38,18 @@ class NortelMltStatus(DeviceComponent, ManagedEntity):
 
     portal_type = meta_type = 'NortelMltStatus'
     
-    index = 0
-    mltid = 0
-    mltname = ''
-    mlttype = ''
-    mltruntype = ''
-    mltvlans = ''
-    mltenable = ''
-    mltstatus = ''
+    nmltid = 0
+    nmltname = ''
+    nmltvlans = ''
+    nmltenable = ''
+    nmltstatus = ''
 
     _properties = (
-        {'id':'index', 'type':'int', 'mode':''},
-        {'id':'mltid', 'type':'int', 'mode':''},
-        {'id':'mltname', 'type':'string', 'mode':''},
-        {'id':'mlttype', 'type':'string', 'mode':''},
-        {'id':'mltruntype', 'type':'string', 'mode':''},
-        {'id':'mltvlans', 'type':'string', 'mode':''},
-        {'id':'mltenable', 'type':'string', 'mode':''},
-        {'id':'mltstatus', 'type':'string', 'mode':''},
+        {'id':'nmltid', 'type':'int', 'mode':''},
+        {'id':'nmltname', 'type':'string', 'mode':''},
+        {'id':'nmltvlans', 'type':'string', 'mode':''},
+        {'id':'nmltenable', 'type':'string', 'mode':''},
+        {'id':'nmltstatus', 'type':'string', 'mode':''},
         )
     
     _relations = (

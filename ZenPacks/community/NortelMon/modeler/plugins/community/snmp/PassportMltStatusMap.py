@@ -76,11 +76,11 @@ class PassportMltStatusMap(SnmpPlugin):
                 if om.mlttype not in self.mltype.keys():
                     om.mlttype = 4
                 om.mlttype = self.mltype[om.mlttype]
-                if om.mltruntype not in self.mltyperun.keys():
+                if om.mlttype not in self.mltype.keys():
                     om.mltruntype = 4
-                om.mltruntype = self.mltyperun[om.mltruntype]
+                om.mltruntype = self.mltype[om.mltruntype]
                 if om.mltenable not in self.mltena.keys():
-                    om.mltenable = 4
+                    om.mltenable = 3
                 om.mltenable = self.mltena[om.mltenable]
                 om.mltvlans = binascii.hexlify(om.mltvlans)
                 vlanid = spt(om.mltvlans, 4)
@@ -94,11 +94,6 @@ class PassportMltStatusMap(SnmpPlugin):
         return rm
 
     mltype = { 1: 'Normal MLT',
-                       2: 'IST MLT',
-                       3: 'S-MLT',
-                       4: 'Other',
-                     }
-    mltyperun = { 1: 'Normal MLT',
                        2: 'IST MLT',
                        3: 'S-MLT',
                        4: 'Other',

@@ -74,7 +74,6 @@ class INortelChassisInfo(IComponentInfo):
     chasstype = schema.Text(title=u"Chassis Type", readonly=True, group='Details')
     desc = schema.Text(title=u"Description", readonly=True, group='Details')
     sernum = schema.Text(title=u"Serial Number", readonly=True, group='Details')
-    admstatus = schema.Text(title=u"Adm Status", readonly=True, group='Details')
     operstatus = schema.Text(title=u"Oper Status", readonly=True, group='Details')
 
 class IPassportVlanTableInfo(IComponentInfo):
@@ -134,12 +133,10 @@ class INortelStatusInfo(IComponentInfo):
     tmpvalue = schema.Text(title=u"Temperature", readonly=True, group='Details')
 
 class INortelMltStatusInfo(IComponentInfo):
-    mltname = schema.Text(title=u"Name", readonly=True, group='Details')
-    mlttype = schema.Text(title=u"Configured Type", readonly=True, group='Details')
-    mltruntype = schema.Text(title=u"Running Type", readonly=True, group='Details')
-    mltvlans = schema.Text(title=u"Vlans", readonly=True, group='Details')
-    mltenable = schema.Text(title=u"Enabled?", readonly=True, group='Details')
-    mltstatus = schema.Text(title=u"Status", readonly=True, group='Details')
+    nmltname = schema.Text(title=u"Name", readonly=True, group='Details')
+    nmltvlans = schema.Text(title=u"Vlans", readonly=True, group='Details')
+    nmltenable = schema.Text(title=u"Enabled?", readonly=True, group='Details')
+    nmltstatus = schema.Text(title=u"Status", readonly=True, group='Details')
 
 class IPassportMltStatusInfo(IComponentInfo):
     mltname = schema.Text(title=u"Name", readonly=True, group='Details')

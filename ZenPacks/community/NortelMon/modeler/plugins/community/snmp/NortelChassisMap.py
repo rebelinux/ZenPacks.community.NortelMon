@@ -43,7 +43,6 @@ class NortelChassisMap(SnmpPlugin):
                         '.5.8': 'desc',
                         '.6.8': 'chasstype',
                         '.7.8': 'sernum',
-                        '.9.8': 'admstatus',
                         '.10.8': 'operstatus',
                         '.17.8': 'totalport',
 		    }
@@ -74,9 +73,9 @@ class NortelChassisMap(SnmpPlugin):
                 if om.operstatus not in self.opstatus.keys():
                     om.operstatus = 1
                 om.operstatus = self.opstatus[om.operstatus]
-                if om.admstatus not in self.adstatus.keys():
-                    om.admstatus = 1
-                om.admstatus = self.adstatus[om.admstatus]
+#               if om.admstatus not in self.adstatus.keys():
+#                    om.admstatus = 1
+#                om.admstatus = self.adstatus[om.admstatus]
             except AttributeError:
                 continue
             rm.append(om)
@@ -96,10 +95,10 @@ class NortelChassisMap(SnmpPlugin):
                        12: 'Obsoleted',
                      }
     
-    adstatus = { 1: 'Other',
-                       2: 'NotAvail',
-                       3: 'Disabled',
-                       4: 'Enable',
-                       5: 'Reset',
-                       6: 'Test',
-                     }
+#    adstatus = { 1: 'Other',
+#                       2: 'NotAvail',
+#                       3: 'Disabled',
+#                       4: 'Enable',
+#                       5: 'Reset',
+#                       6: 'Test',
+#                     }

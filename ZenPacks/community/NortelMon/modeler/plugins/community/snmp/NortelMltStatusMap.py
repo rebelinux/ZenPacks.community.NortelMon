@@ -38,16 +38,14 @@ class NortelMltStatusMap(SnmpPlugin):
     
 
     snmpGetTableMaps = (
-        GetTableMap('mlt',
+        GetTableMap('nmlt',
         '.1.3.6.1.4.1.2272.1.17.10.1',
                     {
-                        '.1': 'mltid',
-                        '.2': 'mltname',
-                        '.6': 'mltvlans',
-                        #'.7': 'mltstatus',
-                        '.8': 'mltenable',
-                        '.12': 'mlttype',
-                        '.14': 'mltruntype',
+                        '.1': 'nmltid',
+                        '.2': 'nmltname',
+                        '.6': 'nmltvlans',
+                        '.7': 'nmltstatus',
+                        '.8': 'nmltenable',
                     }
                     ),
     )
@@ -55,56 +53,48 @@ class NortelMltStatusMap(SnmpPlugin):
         """collect snmp information from this device"""
         log.info('processing %s for device %s', self.name(), device.id)
         getdata, tabledata = results
-        mlts = tabledata.get("mlt")
+        nmlts = tabledata.get("nmlt")
         
         # Debug: print data retrieved from device.
         log.debug( "Get data = %s", getdata )
         log.debug( "Table data = %s", tabledata )
 
         # If no data retrieved return nothing.        
-        if not mlts:
+        if not nmlts:
             log.warn( 'No data collected from %s for the %s plugin', device.id, self.name() )
             return
         rm = self.relMap()
         def spt(string, size):
             return [string[i:i+size] for i in range(0, len(string), size)]
-        for oid, data in mlts.iteritems():
+        for oid, data in nmlts.iteritems():
             try:
                 om = self.objectMap(data)
-                om.id = self.prepid(om.mltname)
-                #if om.mlttype not in self.mltype.keys():
-                #    om.mlttype = 4
-                #om.mlttype = self.mltype[om.mlttype]
-                #if om.mltruntype not in self.mltyperun.keys():
-                #    om.mltruntype = 4
-                #om.mltruntype = self.mltyperun[om.mltruntype]
-                #if om.mltenable not in self.mltena.keys():
-                #    om.mltenable = 4
-                #om.mltenable = self.mltena[om.mltenable]
-                #if om.mltvlans != None:
-                #    om.mltvlans = binascii.hexlify(om.mltvlans)
-                 #   vlanid = spt(om.mltvlans, 4)
-                  #  list = []
-                   # for port in vlanid:
-                    #    list.append(int(port, 16))
-                     #   om.mltvlans = list
-                om.snmpindex = om.mltid
+                om.id = self.prepId("TRUNK_%s" % om.nmltid)
+                om.snmpindex = om.nmltid
+                if om.nmltenable == 2:
+                    om.clear()
+                if om.nmltenable not in self.nmltena.keys():
+                    om.nmltenable = 3
+                om.nmltenable = self.nmltena[om.nmltenable]
+                if om.nmltstatus not in self.nmltstat.keys():
+                    om.nmltstatus = 3
+                om.nmltstatus = self.nmltstat[om.nmltstatus]
+                om.nmltvlans = binascii.hexlify(om.nmltvlans)
+                vlanid = spt(om.nmltvlans, 4)
+                list = []
+                for port in vlanid:
+                    list.append(int(port, 16))
+                    om.mltvlans = list
             except AttributeError:
                 continue
             rm.append(om)
         return rm
-
-    mltype = { 1: 'Normal MLT',
-                       2: 'IST MLT',
-                       3: 'S-MLT',
-                       4: 'Other',
-                     }
-    mltyperun = { 1: 'Normal MLT',
-                       2: 'IST MLT',
-                       3: 'S-MLT',
-                       4: 'Other',
-                     }
-    mltena = { 1: 'True',
+    
+    nmltena = { 1: 'True',
                        2: 'False',
+                       3: 'Other',
+                     }
+    nmltstat = { 1: 'UP',
+                       2: 'DOWN',
                        3: 'Other',
                      }

@@ -93,7 +93,6 @@ class NortelChassisInfo(ComponentInfo):
     chasstype = ProxyProperty("chasstype")
     desc = ProxyProperty("desc")
     sernum = ProxyProperty("sernum")
-    admstatus = ProxyProperty("admstatus")
     operstatus = ProxyProperty("operstatus")
 
 class PassportVlanTableInfo(ComponentInfo):
@@ -174,14 +173,11 @@ class NortelStatusInfo(ComponentInfo):
 class NortelMltStatusInfo(ComponentInfo):
     implements(interfaces.INortelMltStatusInfo)
     
-    index = ProxyProperty("index")
-    mltid = ProxyProperty("mltid")
-    mltname = ProxyProperty("mltname")
-    mltenable = ProxyProperty("mltenable")
-    mltvlans = ProxyProperty("mltvlans")
-    mltstatus = ProxyProperty("mltstatus")
-    mlttype = ProxyProperty("mlttype")
-    mltruntype = ProxyProperty("mltruntype")
+    nmltid = ProxyProperty("nmltid")
+    nmltname = ProxyProperty("nmltname")
+    nmltenable = ProxyProperty("nmltenable")
+    nmltvlans = ProxyProperty("nmltvlans")
+    nmltstatus = ProxyProperty("nmltstatus")
     
 class PassportMltStatusInfo(ComponentInfo):
     implements(interfaces.IPassportMltStatusInfo)
