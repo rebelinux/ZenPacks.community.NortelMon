@@ -28,7 +28,7 @@ __license__ = "GPL"
 __version__ = "1.0.0"
 
 from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetMap, GetTableMap
-import binascii
+import binascii, re
 
 class NortelMltStatusMap(SnmpPlugin):
     """Map Mlt Status table to model."""
@@ -69,7 +69,11 @@ class NortelMltStatusMap(SnmpPlugin):
         for oid, data in nmlts.iteritems():
             try:
                 om = self.objectMap(data)
-                om.id = self.prepId("TRUNK_%s" % om.nmltid)
+                string = 'TRUNK'
+                if re.search(om.nmltname, string):
+                    om.id = self.prepId("TRUNK_%s" % om.nmltid)
+                else:
+                    om.id = self.prepId(om.nmltname)
                 om.snmpindex = om.nmltid
                 if om.nmltenable == 2:
                     om.clear()
@@ -84,7 +88,7 @@ class NortelMltStatusMap(SnmpPlugin):
                 list = []
                 for port in vlanid:
                     list.append(int(port, 16))
-                    om.mltvlans = list
+                    om.nmltvlans = list
             except AttributeError:
                 continue
             rm.append(om)

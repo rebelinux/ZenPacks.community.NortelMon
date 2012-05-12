@@ -91,5 +91,5 @@ class NortelVlanPort(DeviceComponent, ManagedEntity):
 
     def device(self):
         return self.NortelDevVlanPort()
-
+    
 InitializeClass(NortelVlanPort)

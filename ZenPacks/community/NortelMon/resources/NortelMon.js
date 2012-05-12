@@ -986,6 +986,7 @@ ZC.NortelMltStatusPanel = Ext.extend(ZC.ComponentGridPanel, {
     constructor: function(config) {
         config = Ext.applyIf(config||{}, {
             componentType: 'NortelMltStatus',
+	    autoExpandColumn: 'nmltvlans',
             fields: [
                 {name: 'uid'},
                 {name: 'severity'},
@@ -1008,12 +1009,12 @@ ZC.NortelMltStatusPanel = Ext.extend(ZC.ComponentGridPanel, {
                 id: 'name',
                 dataIndex: 'name',
                 header: _t('Name'),
+		width: 180,
             },{
                 id: 'nmltvlans',
                 dataIndex: 'nmltvlans',
                 header: _t('Vlans'),
                 sortable: true,
-                width: 120,
             },{
                 id: 'nmltenable',
                 dataIndex: 'nmltenable',
@@ -1043,7 +1044,7 @@ ZC.NortelMltStatusPanel = Ext.extend(ZC.ComponentGridPanel, {
 });
 
 Ext.reg('NortelMltStatusPanel', ZC.NortelMltStatusPanel);
-ZC.registerName('NortelMltStatus', _t('Mlt Status'), _t('Mlt Status'));
+ZC.registerName('NortelMltStatus', _t('MLT Status'), _t('MLT Status'));
 
 ZC.PassportMltStatusPanel = Ext.extend(ZC.ComponentGridPanel, {
     subComponentGridPanel: false,
@@ -1075,12 +1076,12 @@ ZC.PassportMltStatusPanel = Ext.extend(ZC.ComponentGridPanel, {
                 id: 'name',
                 dataIndex: 'name',
                 header: _t('Name'),
+		width: 120,
             },{
                 id: 'mltvlans',
                 dataIndex: 'mltvlans',
                 header: _t('Vlans'),
                 sortable: true,
-                width: 120,
             },{
                 id: 'mlttype',
                 dataIndex: 'mlttype',
@@ -1122,6 +1123,6 @@ ZC.PassportMltStatusPanel = Ext.extend(ZC.ComponentGridPanel, {
 });
 
 Ext.reg('PassportMltStatusPanel', ZC.PassportMltStatusPanel);
-ZC.registerName('PassportMltStatus', _t('Mlt Status'), _t('Mlt Status'));
+ZC.registerName('PassportMltStatus', _t('MLT Status'), _t('MLT Status'));
 
 })();
