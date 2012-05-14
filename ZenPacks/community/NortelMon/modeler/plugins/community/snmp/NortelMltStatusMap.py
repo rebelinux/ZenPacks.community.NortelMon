@@ -33,7 +33,7 @@ import binascii, re
 class NortelMltStatusMap(SnmpPlugin):
     """Map Mlt Status table to model."""
     maptype = "NortelMltStatusMap"
-    modname = "ZenPacks.community.NortelMon.NortelMltStatuss"
+    modname = "ZenPacks.community.NortelMon.NortelMltStatus"
     relname = "NortelMltStatus"
     
 

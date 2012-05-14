@@ -2536,7 +2536,7 @@ True
 500
 </property>
 <property type="string" id="units" mode="w" >
-Â°C
+ÃÂ°C
 </property>
 <property type="boolean" id="log" mode="w" >
 False
@@ -4191,7 +4191,7 @@ Nortel Baystack &amp; BPS Class
 Nortel Baystack &amp; BPS Class
 </property>
 <property visible="True" type="lines" id="zCollectorPlugins" >
-['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'community.snmp.NortelVlanTableMap', 'community.snmp.NortelVlanPortMap', 'community.snmp.NortelTopologyMap', 'community.snmp.NortelChassisMap', 'community.snmp.NortelInterfaceMap', 'zenoss.snmp.RouteMap']
+['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'community.snmp.NortelVlanTableMap', 'community.snmp.NortelVlanPortMap', 'community.snmp.NortelMltStatusMap', 'community.snmp.NortelTopologyMap', 'community.snmp.NortelChassisMap', 'community.snmp.NortelInterfaceMap', 'zenoss.snmp.RouteMap']
 </property>
 </object>
 <object id='ERS' module='Products.ZenModel.DeviceClass' class='DeviceClass'>
@@ -4202,7 +4202,7 @@ Nortel ERS Series
 Nortel ERS Series
 </property>
 <property visible="True" type="lines" id="zCollectorPlugins" >
-['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'community.snmp.NortelFanMap', 'community.snmp.NortelPowerMap', 'community.snmp.NortelVlanTableMap', 'community.snmp.NortelVlanPortMap', 'community.snmp.NortelTopologyMap', 'community.snmp.NortelChassisMap', 'community.snmp.NortelStatusMap', 'community.snmp.NortelInterfaceMap', 'zenoss.snmp.RouteMap']
+['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'community.snmp.NortelFanMap', 'community.snmp.NortelPowerMap', 'community.snmp.NortelVlanTableMap', 'community.snmp.NortelVlanPortMap', 'community.snmp.NortelMltStatusMap', 'community.snmp.NortelTopologyMap', 'community.snmp.NortelChassisMap', 'community.snmp.NortelStatusMap', 'community.snmp.NortelInterfaceMap', 'zenoss.snmp.RouteMap']
 </property>
 <tomanycont id='rrdTemplates'>
 <object id='NortelFan' module='Products.ZenModel.RRDTemplate' class='RRDTemplate'>
