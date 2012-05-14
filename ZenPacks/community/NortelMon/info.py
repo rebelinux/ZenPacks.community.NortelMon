@@ -182,7 +182,6 @@ class NortelMltStatusInfo(ComponentInfo):
 class PassportMltStatusInfo(ComponentInfo):
     implements(interfaces.IPassportMltStatusInfo)
     
-    index = ProxyProperty("index")
     mltid = ProxyProperty("mltid")
     mltname = ProxyProperty("mltname")
     mltenable = ProxyProperty("mltenable")

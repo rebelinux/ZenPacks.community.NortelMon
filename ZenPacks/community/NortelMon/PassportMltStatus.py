@@ -38,7 +38,6 @@ class PassportMltStatus(DeviceComponent, ManagedEntity):
 
     portal_type = meta_type = 'PassportMltStatus'
     
-    index = 0
     mltid = 0
     mltname = ''
     mlttype = ''
@@ -48,7 +47,6 @@ class PassportMltStatus(DeviceComponent, ManagedEntity):
     mltstatus = ''
 
     _properties = (
-        {'id':'index', 'type':'int', 'mode':''},
         {'id':'mltid', 'type':'int', 'mode':''},
         {'id':'mltname', 'type':'string', 'mode':''},
         {'id':'mlttype', 'type':'string', 'mode':''},
@@ -70,7 +68,7 @@ class PassportMltStatus(DeviceComponent, ManagedEntity):
             'meta_type'      : 'PassportMltStatus',
             'description'    : """PassportMltStatus info""",
             'product'        : 'NortelMon',
-            'immediate_view' : 'PassportMltStatus',
+            'immediate_view' : 'viewPassportMltStatus',
             'actions'        :
             ( 
                 { 'id'            : 'viewHistory'

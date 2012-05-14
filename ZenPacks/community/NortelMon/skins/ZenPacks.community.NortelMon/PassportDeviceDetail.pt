@@ -9,7 +9,7 @@
 <tal:block metal:use-macro="here/zenuimacros/macros/zentable">
 <tal:block metal:fill-slot="zentablecontents">
 
-<!-- BEGIN ApcUps TABLE CONTENTS -->
+<!-- BEGIN TABLE CONTENTS -->
     <tr>
       <td class="tableheader" align=left>Chassis Serial Number</td>
       <td class="tablevalues" tal:content=here/getHWSerialNumber> </td>
@@ -34,7 +34,7 @@
       <td class="tableheader" align=left>Installed Memory</td>
       <td class="tablevalues" tal:content=here/totalmem> </td>
     </tr>
-<!-- END ApcUps TABLE CONTENTS -->
+<!-- END TABLE CONTENTS -->
 
 </tal:block>
 </tal:block>

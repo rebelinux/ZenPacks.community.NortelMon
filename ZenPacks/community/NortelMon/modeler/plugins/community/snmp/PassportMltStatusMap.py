@@ -72,16 +72,19 @@ class PassportMltStatusMap(SnmpPlugin):
             try:
                 om = self.objectMap(data)
                 om.id = self.prepId(om.mltname)
-                om.snmpindex = om.mltid
+                om.snmpindex = oid
                 if om.mlttype not in self.mltype.keys():
                     om.mlttype = 4
                 om.mlttype = self.mltype[om.mlttype]
-                if om.mlttype not in self.mltype.keys():
+                if om.mltruntype not in self.mltype.keys():
                     om.mltruntype = 4
                 om.mltruntype = self.mltype[om.mltruntype]
                 if om.mltenable not in self.mltena.keys():
                     om.mltenable = 3
                 om.mltenable = self.mltena[om.mltenable]
+                if om.mltstatus not in self.mltstat.keys():
+                    om.mltstatus = 3
+                om.mltstatus = self.mltstat[om.mltstatus]
                 om.mltvlans = binascii.hexlify(om.mltvlans)
                 vlanid = spt(om.mltvlans, 4)
                 list = []
@@ -100,5 +103,9 @@ class PassportMltStatusMap(SnmpPlugin):
                      }
     mltena = { 1: 'True',
                        2: 'False',
+                       3: 'Other',
+                     }
+    mltstat = { 1: 'UP',
+                       2: 'DOWN',
                        3: 'Other',
                      }
