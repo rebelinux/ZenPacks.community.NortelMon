@@ -81,6 +81,7 @@ class NortelTopologyMap(SnmpPlugin):
                 om = self.objectMap(data)
                 om.id = self.prepId(om.ipaddr)
                 om.macaddr = self.asmac(om.macaddr)
+                om.localint = "Unit " + str(om.unit)+ " Port " + str(om.port)
                 om.localseg = self.local[om.localseg]
                 om.curstate = self.state[om.curstate]
                 if om.chassistype not in self.type.keys():

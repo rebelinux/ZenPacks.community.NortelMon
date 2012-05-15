@@ -48,25 +48,22 @@ class IPassportConPortInfo(IComponentInfo):
     cpuethernetportgateway = schema.Text(title=u"Gateway", readonly=True, group='Details')
 
 class IPassportTopologyInfo(IComponentInfo):
-    localint = schema.Text(title=u"Local Interface", readonly=True, group='Details')
-    slot = schema.Text(title=u"Slot", readonly=True, group='Details')
-    port = schema.Text(title=u"Port", readonly=True, group='Details')
+    sysname = schema.Text(title=u"System Name", readonly=True, group='Details')
     ipaddr = schema.Text(title=u"Ip Address", readonly=True, group='Details')
     macaddr = schema.Text(title=u"Mac Address", readonly=True, group='Details')
+    localint = schema.Text(title=u"Local Interface", readonly=True, group='Details')
     chassistype = schema.Text(title=u"Chassis Type", readonly=True, group='Details')
     localseg = schema.Text(title=u"Local Segment", readonly=True, group='Details')
     curstate = schema.Text(title=u"Current State", readonly=True, group='Details')
-    sysname = schema.Text(title=u"System Name", readonly=True, group='Details')
 
 class INortelTopologyInfo(IComponentInfo):
-    unit = schema.Text(title=u"Unit", readonly=True, group='Details')
-    port = schema.Text(title=u"Port", readonly=True, group='Details')
+    sysname = schema.Text(title=u"System Name", readonly=True, group='Details')
     ipaddr = schema.Text(title=u"Ip Address", readonly=True, group='Details')
     macaddr = schema.Text(title=u"Mac Address", readonly=True, group='Details')
+    localint = schema.Text(title=u"Local Interface", readonly=True, group='Details')
     chassistype = schema.Text(title=u"Chassis Type", readonly=True, group='Details')
     localseg = schema.Text(title=u"Local Segment", readonly=True, group='Details')
     curstate = schema.Text(title=u"Current State", readonly=True, group='Details')
-    sysname = schema.Text(title=u"System Name", readonly=True, group='Details')
     
 class INortelChassisInfo(IComponentInfo):
     unitnumber = schema.Text(title=u"Stack Members", readonly=True, group='Details')
@@ -84,7 +81,7 @@ class IPassportVlanTableInfo(IComponentInfo):
     vlanmac = schema.Text(title=u"Mac Address", readonly=True, group='Details')
 
 class IPassportVlanPortInfo(IComponentInfo):
-    vlanportindex = schema.Text(title=u"Port Id", readonly=True, group='Details')
+    intname = schema.Text(title=u"Port Id", readonly=True, group='Details')
     description = schema.Text(title=u"Description", readonly=True, group='Details')
     vlanportids = schema.Text(title=u"Vlan Members", readonly=True, group='Details')
     vlanporttype = schema.Text(title=u"Port Type", readonly=True, group='Details')

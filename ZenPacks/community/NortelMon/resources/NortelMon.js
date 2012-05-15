@@ -353,8 +353,9 @@ ZC.PassportVlanPortPanel = Ext.extend(ZC.ComponentGridPanel, {
             fields: [
                 {name: 'uid'},
                 {name: 'severity'},
-				{name: 'name'},
-				{name: 'description'},
+		{name: 'name'},
+		{name: 'intname'},
+		{name: 'description'},
                 {name: 'status'},
                 {name: 'hasMonitor'},
                 {name: 'monitor'},
@@ -371,7 +372,7 @@ ZC.PassportVlanPortPanel = Ext.extend(ZC.ComponentGridPanel, {
                 width: 60,
             },{
                 id: 'name',
-                dataIndex: 'name',
+                dataIndex: 'intname',
                 header: _t('Name'),
                 width: 160,
             },{
@@ -508,8 +509,7 @@ ZC.NortelTopologyPanel = Ext.extend(ZC.ComponentGridPanel, {
                 {name: 'status'},
                 {name: 'hasMonitor'},
                 {name: 'monitor'},
-                {name: 'unit'},
-                {name: 'port'},
+                {name: 'localint'},
                 {name: 'macaddr'},
                 {name: 'chassistype'},
                 {name: 'localseg'},
@@ -537,14 +537,9 @@ ZC.NortelTopologyPanel = Ext.extend(ZC.ComponentGridPanel, {
                 sortable: true,
                 width: 120,
             },{
-                id: 'unit',
-                dataIndex: 'unit',
-                header: _t('Unit'),
-                sortable: true,
-            },{
-                id: 'port',
-                dataIndex: 'port',
-                header: _t('Port'),
+                id: 'localint',
+                dataIndex: 'localint',
+                header: _t('Local Interface'),
                 sortable: true,
             },{
                 id: 'chassistype',

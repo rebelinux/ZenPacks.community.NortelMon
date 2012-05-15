@@ -87,7 +87,7 @@ class PassportTopologyMap(SnmpPlugin):
                 if om.chassistype not in self.type.keys():
                     om.chassistype = 1
                 om.chassistype = self.type[om.chassistype]
-                om.localint = "Slot " + str(om.slot), " Port " + str(om.port)
+                om.localint = "Slot " + str(om.slot)+ "," + " Port " + str(om.port)
                 if device.has_key(om.ipaddr):
                     om.clear()
             except AttributeError:

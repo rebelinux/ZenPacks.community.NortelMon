@@ -75,6 +75,7 @@ class PassportTopologyInfo(ComponentInfo):
 class NortelTopologyInfo(ComponentInfo):
     implements(interfaces.INortelTopologyInfo)
 
+    localint = ProxyProperty("localint")
     unit = ProxyProperty("unit")
     port = ProxyProperty("port")
     ipaddr = ProxyProperty("ipaddr")

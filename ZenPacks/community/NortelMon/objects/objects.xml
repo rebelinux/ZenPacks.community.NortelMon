@@ -17,6 +17,9 @@ Cascade|Trunk|Vlan|VLAN|TRUNK
 <property visible="True" type="string" id="zInterfaceMapIgnoreTypes" >
 propMultiplexor|IEEE 802.3ad Link Aggregate
 </property>
+<property visible="True" type="string" id="zSnmpVer" >
+v2c
+</property>
 <tomanycont id='rrdTemplates'>
 <object id='NortelChassis' module='Products.ZenModel.RRDTemplate' class='RRDTemplate'>
 <property type="string" id="targetPythonClass" mode="w" >
@@ -1554,7 +1557,7 @@ Nortel Passport Serie Class
 ZenPacks.community.NortelMon.PassportDevice
 </property>
 <property visible="True" type="lines" id="zCollectorPlugins" >
-['zenoss.snmp.DeviceMap', 'community.snmp.PassportDeviceMap', 'zenoss.snmp.InterfaceMap', 'community.snmp.PassportInterfaceMap', 'community.snmp.PassportConPortMap', 'community.snmp.PassportFanMap', 'community.snmp.PassportPowerMap', 'community.snmp.PassportTopologyMap', 'community.snmp.PassportVlanTableMap', 'community.snmp.PassportVlanPortMap', 'community.snmp.PassportCardTableMap', 'community.snmp.PassportMltStatusMap', 'zenoss.snmp.RouteMap']
+['zenoss.snmp.DeviceMap', 'community.snmp.PassportDeviceMap', 'community.snmp.PassportCardTableMap', 'community.snmp.PassportConPortMap', 'community.snmp.PassportFanMap', 'community.snmp.PassportMltStatusMap', 'community.snmp.PassportPowerMap', 'community.snmp.PassportVlanTableMap', 'zenoss.snmp.InterfaceMap', 'community.snmp.PassportInterfaceMap', 'community.snmp.PassportTopologyMap', 'community.snmp.PassportVlanPortMap', 'zenoss.snmp.RouteMap']
 </property>
 <tomanycont id='rrdTemplates'>
 <object id='Nortel Device ' module='Products.ZenModel.RRDTemplate' class='RRDTemplate'>
@@ -2766,7 +2769,7 @@ True
 <tomanycont id='graphPoints'>
 <object id='MltIfHCInUcastPkts' module='Products.ZenModel.DataPointGraphPoint' class='DataPointGraphPoint'>
 <property select_variable="lineTypes" type="selection" id="lineType" mode="w" >
-LINE
+AREA
 </property>
 <property type="long" id="lineWidth" mode="w" >
 1
@@ -2807,7 +2810,7 @@ False
 %5.2lf%s
 </property>
 <property type="string" id="legend" mode="w" >
-Inbound
+Outbound
 </property>
 <property type="long" id="limit" mode="w" >
 -1
@@ -4191,7 +4194,7 @@ Nortel Baystack &amp; BPS Class
 Nortel Baystack &amp; BPS Class
 </property>
 <property visible="True" type="lines" id="zCollectorPlugins" >
-['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'community.snmp.NortelVlanTableMap', 'community.snmp.NortelVlanPortMap', 'community.snmp.NortelMltStatusMap', 'community.snmp.NortelTopologyMap', 'community.snmp.NortelChassisMap', 'community.snmp.NortelInterfaceMap', 'zenoss.snmp.RouteMap']
+['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'community.snmp.NortelVlanTableMap', 'community.snmp.NortelChassisMap', 'community.snmp.NortelMltStatusMap', 'community.snmp.NortelInterfaceMap', 'community.snmp.NortelVlanPortMap', 'community.snmp.NortelTopologyMap', 'zenoss.snmp.RouteMap']
 </property>
 </object>
 <object id='ERS' module='Products.ZenModel.DeviceClass' class='DeviceClass'>
@@ -4202,7 +4205,7 @@ Nortel ERS Series
 Nortel ERS Series
 </property>
 <property visible="True" type="lines" id="zCollectorPlugins" >
-['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'community.snmp.NortelFanMap', 'community.snmp.NortelPowerMap', 'community.snmp.NortelVlanTableMap', 'community.snmp.NortelVlanPortMap', 'community.snmp.NortelMltStatusMap', 'community.snmp.NortelTopologyMap', 'community.snmp.NortelChassisMap', 'community.snmp.NortelStatusMap', 'community.snmp.NortelInterfaceMap', 'zenoss.snmp.RouteMap']
+['zenoss.snmp.DeviceMap', 'community.snmp.NortelDeviceMapLegacy', 'community.snmp.NortelFanMap', 'community.snmp.NortelPowerMap', 'community.snmp.NortelVlanTableMap', 'community.snmp.NortelMltStatusMap', 'community.snmp.NortelChassisMap', 'community.snmp.NortelStatusMap', 'community.snmp.NortelInterfaceMap', 'community.snmp.NortelVlanPortMap', 'community.snmp.NortelTopologyMap', 'zenoss.snmp.RouteMap']
 </property>
 <tomanycont id='rrdTemplates'>
 <object id='NortelFan' module='Products.ZenModel.RRDTemplate' class='RRDTemplate'>

@@ -33,12 +33,14 @@ from Products.ZenRelations.RelSchema import *
 from Products.ZenModel.ZenossSecurity import ZEN_VIEW, ZEN_CHANGE_SETTINGS
 from Products.ZenModel.DeviceComponent import DeviceComponent
 from Products.ZenModel.ManagedEntity import ManagedEntity
+from ZenPacks.community.NortelMon.utils import localinterface, remoteswitch
+import re
 
 class NortelTopology(DeviceComponent, ManagedEntity):
 
     portal_type = meta_type = 'NortelTopology'
     
-
+    localint = ''
     unit = 0
     port = 0
     ipaddr = '' 
@@ -50,6 +52,7 @@ class NortelTopology(DeviceComponent, ManagedEntity):
     monitor = True
 
     _properties = (
+        {'id':'localint', 'type':'string', 'mode':''},
         {'id':'unit', 'type':'int', 'mode':''},
         {'id':'port', 'type':'int', 'mode':''},
         {'id':'ipaddr', 'type':'string', 'mode':''},
@@ -86,9 +89,11 @@ class NortelTopology(DeviceComponent, ManagedEntity):
 
     def viewName(self):
         """Pretty version human readable version of this object"""
-        self.sysname = self.remoteswitch()
+        self.sysname = remoteswitch(self, self.ipaddr)
+        self.localint = localinterface(self, self.device(), self.localint)
         return self.id
         return self.sysname
+        return self.localint
 
     titleOrId = name = viewName
 
@@ -104,16 +109,5 @@ class NortelTopology(DeviceComponent, ManagedEntity):
             templ = self.getRRDTemplateByName(tname)
             if templ: templates.append(templ)
         return templates
-
-    def remoteswitch(self):
-        """try to get the remote device, using the management IP"""
-        device = self.dmd.Devices.findDeviceByIdOrIp(self.ipaddr)
-        if device:
-            if device.urlLink() is None:
-                return self.ipaddr
-            else:
-                return device.urlLink()
-        else:
-            return self.ipaddr
     
 InitializeClass(NortelTopology)

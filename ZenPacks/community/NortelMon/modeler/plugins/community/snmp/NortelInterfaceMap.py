@@ -118,8 +118,10 @@ class NortelInterfaceMap(SnmpPlugin):
                     if n < 0 or s < 0:
                         return int
                     else:
-                        fint = int[s+1:n] 
-                        return fint.replace('Slot', 'Unit')
+                        fint = int[s+1:n]
+                        fint1 = fint.replace('Slot', 'Unit')
+                        fint2 = fint1.replace(':', '')
+                        return fint2
                 iftable[key]['id'] = ifix(ifalias[key].get('ifName', ''))          
         duplex = tabledata.get("duplex", {})
         # Process Avaya (Nortel) Interface Duplex

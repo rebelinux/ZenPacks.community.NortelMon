@@ -76,7 +76,9 @@ class NortelVlanPortMap(SnmpPlugin):
                         return int 
                     else:
                         fint = int[s+1:n] 
-                        return fint.replace('Slot', 'Unit')
+                        fint1 = fint.replace('Slot', 'Unit')
+                        fint2 = fint1.replace(':', '')
+                        return fint2
                 om.intname = ifix(om.intname)
                 om.id = self.prepId(om.intname)
                 om.snmpindex = om.vlanportindex

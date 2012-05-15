@@ -33,6 +33,7 @@ from Products.ZenRelations.RelSchema import *
 from Products.ZenModel.ZenossSecurity import ZEN_VIEW, ZEN_CHANGE_SETTINGS
 from Products.ZenModel.DeviceComponent import DeviceComponent
 from Products.ZenModel.ManagedEntity import ManagedEntity
+from ZenPacks.community.NortelMon.utils import localinterface, remoteswitch
 
 class PassportTopology(DeviceComponent, ManagedEntity):
 
@@ -88,9 +89,11 @@ class PassportTopology(DeviceComponent, ManagedEntity):
 
     def viewName(self):
         """Pretty version human readable version of this object"""
-        self.sysname = self.remoteswitch()
+        self.sysname = remoteswitch(self, self.ipaddr)
+        self.localint = localinterface(self, self.device(), self.localint)
         return self.id
         return self.sysname
+        return self.localint
 
     titleOrId = name = viewName
 
@@ -106,17 +109,5 @@ class PassportTopology(DeviceComponent, ManagedEntity):
             templ = self.getRRDTemplateByName(tname)
             if templ: templates.append(templ)
         return templates
-
-    def remoteswitch(self):
-        """Change the device IP to the device url"""
-        if self.ipaddr:
-            device = self.dmd.Devices.findDeviceByIdOrIp(self.ipaddr)
-            if device:
-                if device.urlLink() is None:
-                    return self.ipaddr
-                else:
-                    return device.urlLink()
-            else:	
-                return self.ipaddr
     
 InitializeClass(PassportTopology)
