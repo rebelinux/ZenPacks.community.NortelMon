@@ -21,7 +21,7 @@
 
 __doc__="""Code Utils"""
 __author__ = "Jonathan Colon"
-__copyright__ = "(C) Copyright Jonathan Colon. 2011. All Rights Reserved."
+__copyright__ = "(C) Copyright Jonathan Colon. 2012. All Rights Reserved."
 __license__ = "GPL"
 __version__ = "1.0.0"
 
@@ -29,10 +29,11 @@ from Globals import DTMLFile
 from Globals import InitializeClass
 
 def findinterface(self, device, ints):
+    """try to get the local interface link, using the interface name"""
     try:
-        int = []
-        int.append(device.os.interfaces._getOb(ints))
-        for obj in int:
+        interfaces = []
+        interfaces.append(device.os.interfaces._getOb(ints))
+        for obj in interfaces:
             interface = obj.urlLink()
         return interface
     except:
@@ -41,7 +42,7 @@ def localinterface(self, device, ints):
     return findinterface(self, device, ints)
 
 def remoteswitch(self, ips):
-    """try to get the remote device, using the management IP"""
+    """try to get the remote device, using the device ip"""
     dev = self.dmd.Devices.findDeviceByIdOrIp(ips)
     if dev:
         if dev.urlLink() is None:
@@ -50,3 +51,18 @@ def remoteswitch(self, ips):
             return dev.urlLink()
     else:
         return ips
+
+def getremoteinterface(self, mac):
+    """try to find the interfaces from the remote device, using its mac address"""
+    interface = []
+    for objects in self.dmd.ZenLinkManager.layer2_catalog(macaddress=mac):
+        interfaces = objects.getObject()
+        interface.append(interfaces)
+    return interface
+
+def getremotedevice(self, mac):
+    """try to get the remote device, using the device mac address"""
+    dev = getremoteinterface(mac)
+    return dev[0].device().urlLink()
+        
+        
