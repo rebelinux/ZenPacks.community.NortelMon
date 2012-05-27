@@ -23,7 +23,7 @@
 
 __doc__="""NortelConDevice maps Bridge-Mibs monitoring entries"""
 __author__ = "Jonathan Colon"
-__copyright__ = "(C) Copyright Jonathan Colon. 2011. All Rights Reserved."
+__copyright__ = "(C) Copyright Jonathan Colon. 2012. All Rights Reserved."
 __license__ = "GPL"
 __version__ = "1.0.0"
 
@@ -85,23 +85,7 @@ class NortelConDeviceMap(SnmpPlugin):
                 om.id = self.prepId(om.ipaddr)
                 om.macaddr = self.asmac(om.macaddr)
                 om.localint = "Unit " + str(om.unit)+ " Port " + str(om.port)
-                om.localseg = self.local[om.localseg]
-                om.curstate = self.state[om.curstate]
-                if om.chassistype not in self.type.keys():
-                    om.chassistype = 1
-                om.chassistype = self.type[om.chassistype]
-                if device.has_key(om.ipaddr):
-                    om.clear()
             except AttributeError:
                 continue
             rm.append(om)
         return rm
-
-    local = { 1: 'Yes',
-                       2: 'No',
-                     }
-
-    state = { 1: 'Topology Change',
-                       2: 'Heartbeat',
-                       3: 'New',
-                     }
