@@ -40,6 +40,7 @@ class NortelDevice(Device):
 
     _relations = Device._relations + (
         ('NortelTopology', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelTopology', 'NortelDevTopology')),
+        ('NortelConDevice', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelTopology', 'NortelDevConDevice')),
         ('NortelChassis', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelChassis', 'NortelDevChassis')),
         ('NortelVlanTable', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelVlanTable', 'NortelDevVlanTable')),
         ('NortelVlanPort', ToManyCont(ToOne, 'ZenPacks.community.NortelMon.NortelVlanPort', 'NortelDevVlanPort')),

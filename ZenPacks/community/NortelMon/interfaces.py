@@ -142,3 +142,9 @@ class IPassportMltStatusInfo(IComponentInfo):
     mltvlans = schema.Text(title=u"Vlans", readonly=True, group='Details')
     mltenable = schema.Text(title=u"Enabled?", readonly=True, group='Details')
     mltstatus = schema.Text(title=u"Status", readonly=True, group='Details')
+    
+class INortelConDeviceInfo(IComponentInfo):
+    sysname = schema.Text(title=u"System Name", readonly=True, group='Details')
+    ipaddr = schema.Text(title=u"Ip Address", readonly=True, group='Details')
+    macaddr = schema.Text(title=u"Mac Address", readonly=True, group='Details')
+    localint = schema.Text(title=u"Local Interface", readonly=True, group='Details')

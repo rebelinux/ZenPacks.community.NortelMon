@@ -190,3 +190,11 @@ class PassportMltStatusInfo(ComponentInfo):
     mltstatus = ProxyProperty("mltstatus")
     mlttype = ProxyProperty("mlttype")
     mltruntype = ProxyProperty("mltruntype")
+    
+class NortelConDeviceInfo(ComponentInfo):
+    implements(interfaces.INortelConDeviceInfo)
+
+    localint = ProxyProperty("localint")
+    ipaddr = ProxyProperty("ipaddr")
+    macaddr = ProxyProperty("macaddr")
+    sysname = ProxyProperty("sysname")

@@ -1120,4 +1120,64 @@ ZC.PassportMltStatusPanel = Ext.extend(ZC.ComponentGridPanel, {
 Ext.reg('PassportMltStatusPanel', ZC.PassportMltStatusPanel);
 ZC.registerName('PassportMltStatus', _t('MLT Status'), _t('MLT Status'));
 
+ZC.NortelMon.jsPanel = Ext.extend(ZC.ComponentGridPanel, {
+    subComponentGridPanel: false,
+    constructor: function(config) {
+        config = Ext.applyIf(config||{}, {
+            componentType: 'NortelMon.js',
+            autoExpandColumn: 'sysname',
+            fields: [
+                {name: 'uid'},
+                {name: 'severity'},
+                {name: 'name'},
+                {name: 'status'},
+                {name: 'hasMonitor'},
+                {name: 'monitor'},
+                {name: 'localint'},
+                {name: 'macaddr'},
+                {name: 'sysname'},
+            ],
+            columns: [{
+                id: 'severity',
+                dataIndex: 'severity',
+                header: _t('Events'),
+                renderer: Zenoss.render.severity,
+                width: 60,
+            },{
+                id: 'sysname',
+                dataIndex: 'sysname',
+                header: _t('Remote Device'),
+            },{
+                id: 'name',
+                dataIndex: 'name',
+                header: _t('IP Address'),
+            },{
+                id: 'macaddr',
+                dataIndex: 'macaddr',
+                header: _t('Mac Address'),
+                sortable: true,
+                width: 120,
+            },{
+                id: 'localint',
+                dataIndex: 'localint',
+                header: _t('Local Interface'),
+                sortable: true,
+            },{
+                id: 'localseg',
+                dataIndex: 'localseg',
+                header: _t('Local Segment'),
+                sortable: true,
+            },{
+                id: 'monitor',
+                dataIndex: 'monitor',
+                header: _t('Monitored')
+            }]
+        });
+        ZC.NortelTopologyPanel.superclass.constructor.call(this, config);
+    }
+});
+
+Ext.reg('NortelTopologyPanel', ZC.NortelTopologyPanel);
+ZC.registerName('NortelTopology', _t('Topology Table'), _t('Topology Table'));
+
 })();
