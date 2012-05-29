@@ -28,6 +28,17 @@ __version__ = "1.0.0"
 from Globals import DTMLFile
 from Globals import InitializeClass
 
+def ifix(self, int):         
+    s = int.find('(') 
+    n = int.find(')')
+    if n < 0 or s < 0:
+        return int 
+    else:
+        fint = int[s+1:n] 
+        fint1 = fint.replace('Slot', 'Unit')
+        fint2 = fint1.replace(':', '')
+        return fint2
+
 def findinterface(self, device, ints):
     """try to get the local interface link, using the interface name"""
     try:
@@ -39,30 +50,49 @@ def findinterface(self, device, ints):
     except:
         return ints
 def localinterface(self, device, ints):
-    return findinterface(self, device, ints)
+    try:
+        return findinterface(self, device, ints)
+    except:
+        return ints
 
 def remoteswitch(self, ips):
     """try to get the remote device, using the device ip"""
-    dev = self.dmd.Devices.findDeviceByIdOrIp(ips)
-    if dev:
-        if dev.urlLink() is None:
-            return ips
-        else:
-            return dev.urlLink()
-    else:
+    try:
+        dev = self.dmd.Devices.findDeviceByIdOrIp(ips)
+        if dev:
+            if dev.urlLink() is None:
+                return ips
+            else:
+                return dev.urlLink()
+    except:
         return ips
-
+    
+def getremotedeviceIP(self, mac):
+    """try to get the remote device ip address, using the device mac address"""
+    interface = getremoteinterface(mac)
+    ipaddr = []
+    for ips in interface.getIpAddressObjs():
+        ipaddr = ips
+    return ipaddr
+        
 def getremoteinterface(self, mac):
     """try to find the interfaces from the remote device, using its mac address"""
-    interface = []
-    for objects in self.dmd.ZenLinkManager.layer2_catalog(macaddress=mac):
-        interfaces = objects.getObject()
-        interface.append(interfaces)
-    return interface
+    try:
+        interface = []
+        for objects in self.dmd.ZenLinkManager.layer2_catalog(macaddress=mac):
+            interfaces = objects.getObject()
+            interface.append(interfaces)
+        return interface
+    except:
+        return mac
 
 def getremotedevice(self, mac):
-    """try to get the remote device, using the device mac address"""
-    dev = getremoteinterface(mac)
-    return dev[0].device().urlLink()
+    """try to get the remote device name, using the device mac address"""
+    try:
+        dev = getremoteinterface(mac)
+        if dev:
+            return dev[0].device().urlLink()
+    except:
+        return mac
         
         

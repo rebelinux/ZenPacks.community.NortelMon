@@ -28,6 +28,7 @@ __license__ = "GPL"
 __version__ = "1.0.0"
 
 from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetMap, GetTableMap
+from ZenPacks.community.NortelMon.utils import ifix
 import binascii, re
 class NortelVlanPortMap(SnmpPlugin):
     """Map Nortel Vlan Port to model."""
@@ -69,17 +70,7 @@ class NortelVlanPortMap(SnmpPlugin):
         for oid, data in vports.iteritems():
             try:
                 om = self.objectMap(data)
-                def ifix(int):         
-                    s = int.find('(') 
-                    n = int.find(')')
-                    if n < 0 or s < 0:
-                        return int 
-                    else:
-                        fint = int[s+1:n] 
-                        fint1 = fint.replace('Slot', 'Unit')
-                        fint2 = fint1.replace(':', '')
-                        return fint2
-                om.intname = ifix(om.intname)
+                om.intname = ifix(self, om.intname)
                 om.id = self.prepId(om.intname)
                 om.snmpindex = om.vlanportindex
                 if om.vlanporttype not in self.porttype.keys():

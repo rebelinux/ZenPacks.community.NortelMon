@@ -1120,11 +1120,11 @@ ZC.PassportMltStatusPanel = Ext.extend(ZC.ComponentGridPanel, {
 Ext.reg('PassportMltStatusPanel', ZC.PassportMltStatusPanel);
 ZC.registerName('PassportMltStatus', _t('MLT Status'), _t('MLT Status'));
 
-ZC.NortelMon.jsPanel = Ext.extend(ZC.ComponentGridPanel, {
+ZC.NortelConDevicePanel = Ext.extend(ZC.ComponentGridPanel, {
     subComponentGridPanel: false,
     constructor: function(config) {
         config = Ext.applyIf(config||{}, {
-            componentType: 'NortelMon.js',
+            componentType: 'NortelConDevice',
             autoExpandColumn: 'sysname',
             fields: [
                 {name: 'uid'},
@@ -1163,21 +1163,16 @@ ZC.NortelMon.jsPanel = Ext.extend(ZC.ComponentGridPanel, {
                 header: _t('Local Interface'),
                 sortable: true,
             },{
-                id: 'localseg',
-                dataIndex: 'localseg',
-                header: _t('Local Segment'),
-                sortable: true,
-            },{
                 id: 'monitor',
                 dataIndex: 'monitor',
                 header: _t('Monitored')
             }]
         });
-        ZC.NortelTopologyPanel.superclass.constructor.call(this, config);
+        ZC.NortelConDevicePanel.superclass.constructor.call(this, config);
     }
 });
 
-Ext.reg('NortelTopologyPanel', ZC.NortelTopologyPanel);
-ZC.registerName('NortelTopology', _t('Topology Table'), _t('Topology Table'));
+Ext.reg('NortelConDevicePanel', ZC.NortelConDevicePanel);
+ZC.registerName('NortelConDevice', _t('Connected Devices'), _t('Connected Device'));
 
 })();

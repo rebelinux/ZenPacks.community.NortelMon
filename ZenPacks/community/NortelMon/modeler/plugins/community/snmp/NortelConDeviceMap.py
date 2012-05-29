@@ -28,35 +28,27 @@ __license__ = "GPL"
 __version__ = "1.0.0"
 
 from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetMap, GetTableMap
+from ZenPacks.community.NortelMon.utils import ifix
 
 class NortelConDeviceMap(SnmpPlugin):
     """Map Nortel Topology Table to model."""
     maptype = "NortelConDeviceMap"
-    modname = "ZenPacks.community.NortelMon.NortelTopology"
-    relname = "NortelConDeviceMap"
+    modname = "ZenPacks.community.NortelMon.NortelConDevice"
+    relname = "NortelConDevice"
     
 
     snmpGetTableMaps = (
         GetTableMap('bridge',
-		'.1.3.6.1.2.1.17.1.4.1',
+		'.1.3.6.1.2.1',
                     {
-                        '.1': 'baseport',
-                        '.2': 'baseportindex',
-		    }
-		),
-        GetTableMap('intname',
-        '.1.3.6.1.2.1',
-                    {
+                        '.17.1.4.1.1': 'baseport',
+                        '.17.1.4.1.2': 'baseportindex',
                         '.2.2.1.1': 'ifindex',
                         '.31.1.1.1.1': 'ifname',
-            }
-        ),
-        GetTableMap('fdb',
-                '.1.3.6.1.2.1.17.4.3.1',
-                    {
-                        '.1': 'macaddr',
-                        '.2': 'fdbport',
-                    }
+                        '.17.4.3.1.1': 'macaddr',
+                        '.17.4.3.1.2': 'fdbport',
+                        '.17.2.7': 'rootport',               
+		    }
 		),
 	)
 
@@ -64,8 +56,7 @@ class NortelConDeviceMap(SnmpPlugin):
         """collect snmp information from this device"""
         log.info('processing %s for device %s', self.name(), device.id)
         getdata, tabledata = results
-        bridge = tabledata.get("bridges")
-        device = tabledata.get("deviceip")
+        bridges = tabledata.get("bridge")
         
         # Debug: print data retrieved from device.
         log.debug( "Get data = %s", getdata )
@@ -75,16 +66,21 @@ class NortelConDeviceMap(SnmpPlugin):
         if not bridges:
             log.warn( 'No data collected for the %s plugin', self.name() )
             return
-        if not device:
-            log.warn( 'No data collected for the %s plugin', self.name() )
-            return
+        
         rm = self.relMap()
-        for oid, data in topos.iteritems():
+        for oid, data in bridges.iteritems():
             try:
                 om = self.objectMap(data)
-                om.id = self.prepId(om.ipaddr)
-                om.macaddr = self.asmac(om.macaddr)
-                om.localint = "Unit " + str(om.unit)+ " Port " + str(om.port)
+                if om.fdbport == om.rootport:
+                    om.clear()
+                else:
+                    if om.baseportindex == om.ifindex:
+                        om.ifname = ifix(self, om.ifname)
+                        om.id = self.prepId(om.ifname)
+                        om.macaddr = self.asmac(om.macaddr)
+                        om.localint = om.ifname
+                    else:
+                        continue
             except AttributeError:
                 continue
             rm.append(om)

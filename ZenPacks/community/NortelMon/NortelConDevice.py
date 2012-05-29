@@ -33,7 +33,7 @@ from Products.ZenRelations.RelSchema import *
 from Products.ZenModel.ZenossSecurity import ZEN_VIEW, ZEN_CHANGE_SETTINGS
 from Products.ZenModel.DeviceComponent import DeviceComponent
 from Products.ZenModel.ManagedEntity import ManagedEntity
-from ZenPacks.community.NortelMon.utils import localinterface, remoteswitch
+from ZenPacks.community.NortelMon.utils import localinterface, getremotedevice, getremotedeviceIP
 import re
 
 class NortelConDevice(DeviceComponent, ManagedEntity):
@@ -84,11 +84,12 @@ class NortelConDevice(DeviceComponent, ManagedEntity):
 
     def viewName(self):
         """Pretty version human readable version of this object"""
-        #self.sysname = remoteswitch(self, self.ipaddr)
-        #self.localint = localinterface(self, self.device(), self.localint)
+        self.sysname = getremotedevice(self, self.macaddr)
+        self.localint = localinterface(self, self.device(), self.localint)
+        self.id = getremotedeviceIP(self, self.macaddr)
         return self.id
-        #return self.sysname
-        #return self.localint
+        return self.sysname
+        return self.localint
 
     titleOrId = name = viewName
 
