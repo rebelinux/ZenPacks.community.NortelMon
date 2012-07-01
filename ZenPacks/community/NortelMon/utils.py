@@ -49,24 +49,7 @@ def findinterface(self, device, ints):
         return interface
     except:
         return ints
-def localinterface(self, device, ints):
-    try:
-        return findinterface(self, device, ints)
-    except:
-        return ints
 
-def remoteswitch(self, ips):
-    """try to get the remote device, using the device ip"""
-    try:
-        dev = self.dmd.Devices.findDeviceByIdOrIp(ips)
-        if dev:
-            if dev.urlLink() is None:
-                return ips
-            else:
-                return dev.urlLink()
-    except:
-        return ips
-    
 def getremotedeviceIP(self, mac):
     """try to get the remote device ip address, using the device mac address"""
     interface = getremoteinterface(mac)
@@ -83,15 +66,6 @@ def getremoteinterface(self, mac):
             interfaces = objects.getObject()
             interface.append(interfaces)
         return interface
-    except:
-        return mac
-
-def getremotedevice(self, mac):
-    """try to get the remote device name, using the device mac address"""
-    try:
-        dev = getremoteinterface(mac)
-        if dev:
-            return dev[0].device().urlLink()
     except:
         return mac
         

@@ -1,5 +1,5 @@
 # ==============================================================================
-# NortelTopology object class
+# NortelConDevice object class
 #
 # Zenoss community Zenpack for Avaya (Nortel) Passport Devices
 # version: 1.0
@@ -33,8 +33,7 @@ from Products.ZenRelations.RelSchema import *
 from Products.ZenModel.ZenossSecurity import ZEN_VIEW, ZEN_CHANGE_SETTINGS
 from Products.ZenModel.DeviceComponent import DeviceComponent
 from Products.ZenModel.ManagedEntity import ManagedEntity
-from ZenPacks.community.NortelMon.utils import localinterface, getremotedevice, getremotedeviceIP
-import re
+from ZenPacks.community.NortelMon import utils
 
 class NortelConDevice(DeviceComponent, ManagedEntity):
 
@@ -84,14 +83,24 @@ class NortelConDevice(DeviceComponent, ManagedEntity):
 
     def viewName(self):
         """Pretty version human readable version of this object"""
-        self.sysname = getremotedevice(self, self.macaddr)
-        self.localint = localinterface(self, self.device(), self.localint)
-        self.id = getremotedeviceIP(self, self.macaddr)
         return self.id
-        return self.sysname
-        return self.localint
 
     titleOrId = name = viewName
+    
+    def getremotedevice(self):
+        """try to get the remote device name, using the device mac address"""
+        try:
+            dev = utils.getremoteinterface(self.macaddr)
+            if dev:
+                return dev[0].device().urlLink()
+        except:
+            return self.macaddr
+    
+    def localinterface(self):
+        try:
+            return utils.findinterface(self, self.device(), self.intname)
+        except:
+            return self.intname
 
     def device(self):
         return self.NortelDevConDevice()

@@ -28,6 +28,7 @@ __license__ = "GPL"
 __version__ = "1.0.0"
 
 from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetMap, GetTableMap
+from Products.DataCollector.plugins.DataMaps import ObjectMap
 from ZenPacks.community.NortelMon.utils import ifix
 
 class NortelConDeviceMap(SnmpPlugin):
@@ -41,13 +42,13 @@ class NortelConDeviceMap(SnmpPlugin):
         GetTableMap('bridge',
 		'.1.3.6.1.2.1',
                     {
+                        '.2.2.1.1': 'ifindex',
                         '.17.1.4.1.1': 'baseport',
                         '.17.1.4.1.2': 'baseportindex',
-                        '.2.2.1.1': 'ifindex',
-                        '.31.1.1.1.1': 'ifname',
+                        '.17.2.7': 'rootport',
                         '.17.4.3.1.1': 'macaddr',
                         '.17.4.3.1.2': 'fdbport',
-                        '.17.2.7': 'rootport',               
+                        '.31.1.1.1.1': 'ifname',
 		    }
 		),
 	)
@@ -59,8 +60,8 @@ class NortelConDeviceMap(SnmpPlugin):
         bridges = tabledata.get("bridge")
         
         # Debug: print data retrieved from device.
-        log.debug( "Get data = %s", getdata )
-        log.debug( "Table data = %s", tabledata )
+        #log.debug( "Get data = %s", getdata )
+        #log.debug( "Table data = %s", tabledata )
 
         # If no data retrieved return nothing.        
         if not bridges:
@@ -69,19 +70,11 @@ class NortelConDeviceMap(SnmpPlugin):
         
         rm = self.relMap()
         for oid, data in bridges.iteritems():
-            try:
-                om = self.objectMap(data)
-                if om.fdbport == om.rootport:
-                    om.clear()
-                else:
-                    if om.baseportindex == om.ifindex:
-                        om.ifname = ifix(self, om.ifname)
-                        om.id = self.prepId(om.ifname)
-                        om.macaddr = self.asmac(om.macaddr)
-                        om.localint = om.ifname
-                    else:
-                        continue
-            except AttributeError:
-                continue
+            om = self.objectMap(data)
+            om.macaddr = self.asmac(om.macaddr)
+            for key,value in om.__dict__.items():
+                log.warn("om key =  %s, om value = %s", key,value)
+#except AttributeError:
+#   continue
             rm.append(om)
         return rm

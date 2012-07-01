@@ -71,6 +71,16 @@ class PassportTopologyInfo(ComponentInfo):
     localseg = ProxyProperty("localseg")
     curstate = ProxyProperty("curstate")
     sysname = ProxyProperty("sysname")
+    
+    @property
+    @info
+    def sysname(self):
+        return self._object.remoteswitch()
+    
+    @property
+    @info
+    def localint(self):
+        return self._object.localinterface()
 
 class NortelTopologyInfo(ComponentInfo):
     implements(interfaces.INortelTopologyInfo)
@@ -84,7 +94,18 @@ class NortelTopologyInfo(ComponentInfo):
     localseg = ProxyProperty("localseg")
     curstate = ProxyProperty("curstate")
     sysname = ProxyProperty("sysname")
-
+    
+    @property
+    @info
+    def sysname(self):
+        return self._object.remoteswitch()
+    
+    @property
+    @info
+    def localint(self):
+        return self._object.localinterface()
+        
+            
 class NortelChassisInfo(ComponentInfo):
     implements(interfaces.INortelChassisInfo)
 
@@ -116,6 +137,11 @@ class PassportVlanPortInfo(ComponentInfo):
     vlanpvid = ProxyProperty("vlanpvid")
     vlantag = ProxyProperty("vlantag")
     
+    @property
+    @info
+    def intname(self):
+        return self._object.localinterface()
+    
 class PassportCardTableInfo(ComponentInfo):
     implements(interfaces.IPassportCardTableInfo)
     
@@ -146,6 +172,11 @@ class NortelVlanPortInfo(ComponentInfo):
     vlanporttype = ProxyProperty("vlanporttype")
     vlanpvid = ProxyProperty("vlanpvid")
     vlantag = ProxyProperty("vlantag")
+    
+    @property
+    @info
+    def intname(self):
+        return self._object.localinterface()
     
 class NortelFanInfo(ComponentInfo):
     implements(interfaces.INortelFanInfo)

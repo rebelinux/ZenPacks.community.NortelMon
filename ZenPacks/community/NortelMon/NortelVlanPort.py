@@ -33,7 +33,7 @@ from Products.ZenRelations.RelSchema import *
 from Products.ZenModel.ZenossSecurity import ZEN_VIEW, ZEN_CHANGE_SETTINGS
 from Products.ZenModel.DeviceComponent import DeviceComponent
 from Products.ZenModel.ManagedEntity import ManagedEntity
-from ZenPacks.community.NortelMon.utils import localinterface
+from ZenPacks.community.NortelMon import utils
 
 
 class NortelVlanPort(DeviceComponent, ManagedEntity):
@@ -86,12 +86,15 @@ class NortelVlanPort(DeviceComponent, ManagedEntity):
 
     def viewName(self):
         """Pretty version human readable version of this object"""
-        self.intname = localinterface(self, self.device(), self.intname)
         return self.id
-        return self.intname
     
-
     titleOrId = name = viewName
+    
+    def localinterface(self):
+        try:
+            return utils.findinterface(self, self.device(), self.intname)
+        except:
+            return self.intname
 
 
     def device(self):

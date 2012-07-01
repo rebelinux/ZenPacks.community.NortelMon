@@ -33,8 +33,7 @@ from Products.ZenRelations.RelSchema import *
 from Products.ZenModel.ZenossSecurity import ZEN_VIEW, ZEN_CHANGE_SETTINGS
 from Products.ZenModel.DeviceComponent import DeviceComponent
 from Products.ZenModel.ManagedEntity import ManagedEntity
-from ZenPacks.community.NortelMon.utils import localinterface, remoteswitch
-import re
+from ZenPacks.community.NortelMon import utils
 
 class NortelTopology(DeviceComponent, ManagedEntity):
 
@@ -89,13 +88,28 @@ class NortelTopology(DeviceComponent, ManagedEntity):
 
     def viewName(self):
         """Pretty version human readable version of this object"""
-        self.sysname = remoteswitch(self, self.ipaddr)
-        self.localint = localinterface(self, self.device(), self.localint)
         return self.id
-        return self.sysname
-        return self.localint
 
     titleOrId = name = viewName
+    
+    def remoteswitch(self):
+        """try to get the remote device, using the device ip"""
+        notfound = "Device Not In Zenoss"
+        try:
+            dev = self.dmd.Devices.findDeviceByIdOrIp(self.ipaddr)
+            if dev:
+                if dev.urlLink():
+                    return dev.urlLink()
+                elif dev.getDeviceIp() == None:
+                    return self.ipaddr
+        except:
+            return notfound
+
+    def localinterface(self):
+        try:
+            return utils.findinterface(self, self.device(), self.localint)
+        except:
+            return self.localint
 
     def device(self):
         return self.NortelDevTopology()
