@@ -2539,7 +2539,7 @@ True
 500
 </property>
 <property type="string" id="units" mode="w" >
-ÃÂ°C
+ÃÂÃÂ°C
 </property>
 <property type="boolean" id="log" mode="w" >
 False
