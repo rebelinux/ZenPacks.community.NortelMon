@@ -82,6 +82,16 @@ class NortelFan(DeviceComponent, ManagedEntity):
 
     def device(self):
         return self.NortelDevFan()
+    
+    def manage_deleteComponent(self, REQUEST=None):
+        """Delete NortelFan component takes from Jane Curry"""
+        url = None
+        if REQUEST is not None:
+            url = self.device().NortelFan.absolute_url()
+        self.getPrimaryParent()._delObject(self.id)
+
+        if REQUEST is not None:
+            REQUEST['RESPONSE'].redirect(url)
 
     def getRRDTemplates(self):
         """

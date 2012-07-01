@@ -84,6 +84,16 @@ class PassportFan(DeviceComponent, ManagedEntity):
 
     def device(self):
         return self.PassportDevFan()
+    
+    def manage_deleteComponent(self, REQUEST=None):
+        """Delete PassportFan component takes from Jane Curry"""
+        url = None
+        if REQUEST is not None:
+            url = self.device().PassportFan.absolute_url()
+        self.getPrimaryParent()._delObject(self.id)
+
+        if REQUEST is not None:
+            REQUEST['RESPONSE'].redirect(url)
 
     def getRRDTemplates(self):
         """

@@ -81,5 +81,15 @@ class PassportPower(DeviceComponent, ManagedEntity):
 
     def device(self):
         return self.PassportDevPower()
+
+    def manage_deleteComponent(self, REQUEST=None):
+        """Delete PassportPower component takes from Jane Curry"""
+        url = None
+        if REQUEST is not None:
+            url = self.device().PassportPower.absolute_url()
+        self.getPrimaryParent()._delObject(self.id)
+
+        if REQUEST is not None:
+            REQUEST['RESPONSE'].redirect(url)
     
 InitializeClass(PassportPower)

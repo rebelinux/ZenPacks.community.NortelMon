@@ -88,5 +88,15 @@ class PassportVlanTable(DeviceComponent, ManagedEntity):
 
     def device(self):
         return self.PassportDevVlanTable()
+    
+    def manage_deleteComponent(self, REQUEST=None):
+        """Delete PassportVlanTable component takes from Jane Curry"""
+        url = None
+        if REQUEST is not None:
+            url = self.device().PassportVlanTable.absolute_url()
+        self.getPrimaryParent()._delObject(self.id)
+
+        if REQUEST is not None:
+            REQUEST['RESPONSE'].redirect(url)
 
 InitializeClass(PassportVlanTable)

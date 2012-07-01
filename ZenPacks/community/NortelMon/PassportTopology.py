@@ -114,6 +114,16 @@ class PassportTopology(DeviceComponent, ManagedEntity):
 
     def device(self):
         return self.PassportDevTopology()
+    
+    def manage_deleteComponent(self, REQUEST=None):
+        """Delete PassportTopology component takes from Jane Curry"""
+        url = None
+        if REQUEST is not None:
+            url = self.device().PassportTopology.absolute_url()
+        self.getPrimaryParent()._delObject(self.id)
+
+        if REQUEST is not None:
+            REQUEST['RESPONSE'].redirect(url)
 
     def getRRDTemplates(self):
         """

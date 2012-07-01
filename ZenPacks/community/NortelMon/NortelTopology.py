@@ -35,6 +35,9 @@ from Products.ZenModel.DeviceComponent import DeviceComponent
 from Products.ZenModel.ManagedEntity import ManagedEntity
 from ZenPacks.community.NortelMon import utils
 
+import logging
+log = logging.getLogger('NortelTopology')
+
 class NortelTopology(DeviceComponent, ManagedEntity):
 
     portal_type = meta_type = 'NortelTopology'
@@ -113,6 +116,16 @@ class NortelTopology(DeviceComponent, ManagedEntity):
 
     def device(self):
         return self.NortelDevTopology()
+    
+    def manage_deleteComponent(self, REQUEST=None):
+        """Delete NortelTopology component takes from Jane Curry"""
+        url = None
+        if REQUEST is not None:
+            url = self.device().NortelTopology.absolute_url()
+        self.getPrimaryParent()._delObject(self.id)
+
+        if REQUEST is not None:
+            REQUEST['RESPONSE'].redirect(url)
 
     def getRRDTemplates(self):
         """

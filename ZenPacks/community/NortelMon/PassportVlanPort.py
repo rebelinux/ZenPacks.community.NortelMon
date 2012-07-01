@@ -97,5 +97,15 @@ class PassportVlanPort(DeviceComponent, ManagedEntity):
 
     def device(self):
         return self.PassportDevVlanPort()
+    
+    def manage_deleteComponent(self, REQUEST=None):
+        """Delete PassportVlanPort component takes from Jane Curry"""
+        url = None
+        if REQUEST is not None:
+            url = self.device().PassportVlanPort.absolute_url()
+        self.getPrimaryParent()._delObject(self.id)
+
+        if REQUEST is not None:
+            REQUEST['RESPONSE'].redirect(url)
 
 InitializeClass(PassportVlanPort)

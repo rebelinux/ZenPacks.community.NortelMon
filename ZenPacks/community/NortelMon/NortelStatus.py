@@ -90,6 +90,16 @@ class NortelStatus(DeviceComponent, ManagedEntity):
 
     def device(self):
         return self.NortelDevStatus()
+
+    def manage_deleteComponent(self, REQUEST=None):
+        """Delete NortelStatus component takes from Jane Curry"""
+        url = None
+        if REQUEST is not None:
+            url = self.device().NortelStatus.absolute_url()
+        self.getPrimaryParent()._delObject(self.id)
+
+        if REQUEST is not None:
+            REQUEST['RESPONSE'].redirect(url)
     
     def temperature(self):
         if self.tmpvalue != 0:

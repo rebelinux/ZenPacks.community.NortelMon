@@ -93,6 +93,16 @@ class PassportCardTable(DeviceComponent, ManagedEntity):
     def device(self):
         return self.PassportDevCardTable()
 
+    def manage_deleteComponent(self, REQUEST=None):
+        """Delete PassportCardTable component takes from Jane Curry"""
+        url = None
+        if REQUEST is not None:
+            url = self.device().PassportCardTable.absolute_url()
+        self.getPrimaryParent()._delObject(self.id)
+
+        if REQUEST is not None:
+            REQUEST['RESPONSE'].redirect(url)
+            
     def getRRDTemplates(self):
         """
         Return the RRD Templates list
