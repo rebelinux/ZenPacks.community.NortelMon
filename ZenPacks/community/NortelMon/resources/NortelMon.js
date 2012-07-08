@@ -218,13 +218,16 @@ ZC.PassportTopologyPanel = Ext.extend(ZC.ComponentGridPanel, {
 				{name: 'name'},
                 {name: 'status'},
                 {name: 'hasMonitor'},
+                {name: 'usesMonitorAttribute'},
+                {name: 'monitored'},
                 {name: 'monitor'},
                 {name: 'localint'},
                 {name: 'macaddr'},
                 {name: 'chassistype'},
-                {name: 'localseg'},
+                {name: 'pingstatus'},
                 {name: 'sysname'},
-                {name: 'curstate'},
+                {name: 'connection'},
+                {name: 'locking'},
             ],
             columns: [{
                 id: 'severity',
@@ -261,16 +264,36 @@ ZC.PassportTopologyPanel = Ext.extend(ZC.ComponentGridPanel, {
                 sortable: true,
                 width: 160,
 			},{
-                id: 'localseg',
-                dataIndex: 'localseg',
-                header: _t('Local Segment'),
-                sortable: true,
-			},{
-                id: 'curstate',
-                dataIndex: 'curstate',
-                header: _t('State'),
+                id: 'connection',
+                dataIndex: 'connection',
+                header: _t('Connection'),
                 sortable: true,
                 width: 120,
+			},{
+                id: 'pingstatus',
+                dataIndex: 'pingstatus',
+                header: _t('Status'),
+                sortable: true,
+                width: 120,
+                renderer: function(pS) {
+        			if (pS=='Up') {
+        			  return Zenoss.render.pingStatus('up');
+        			} if (pS=='Down') {
+          			  return Zenoss.render.pingStatus('down');
+        			} else {
+        			  return 'Unknown';
+        			}
+                },
+            },{
+                id: 'monitored',
+                dataIndex: 'monitored',
+                header: _t('Monitored'),
+            },{ 
+                id: 'locking',
+                dataIndex: 'locking',
+                header: _t('Locking'),
+                width: 72,
+                renderer: Zenoss.render.locking_icons,
             }]
         });
         ZC.PassportTopologyPanel.superclass.constructor.call(this, config);
@@ -511,13 +534,16 @@ ZC.NortelTopologyPanel = Ext.extend(ZC.ComponentGridPanel, {
                 {name: 'name'},
                 {name: 'status'},
                 {name: 'hasMonitor'},
+                {name: 'usesMonitorAttribute'},
+                {name: 'monitored'},
                 {name: 'monitor'},
                 {name: 'localint'},
                 {name: 'macaddr'},
                 {name: 'chassistype'},
-                {name: 'localseg'},
+                {name: 'pingstatus'},
                 {name: 'sysname'},
-                {name: 'curstate'},
+                {name: 'connection'},
+                {name: 'locking'},
             ],
             columns: [{
                 id: 'severity',
@@ -552,20 +578,35 @@ ZC.NortelTopologyPanel = Ext.extend(ZC.ComponentGridPanel, {
                 sortable: true,
                 width: 160,
             },{
-                id: 'localseg',
-                dataIndex: 'localseg',
-                header: _t('Local Segment'),
+                id: 'connection',
+                dataIndex: 'connection',
+                header: _t('Connection'),
                 sortable: true,
             },{
-                id: 'curstate',
-                dataIndex: 'curstate',
-                header: _t('State'),
+                id: 'pingstatus',
+                dataIndex: 'pingstatus',
+                header: _t('Status'),
                 sortable: true,
                 width: 120,
+                renderer: function(pS) {
+        			if (pS=='Up') {
+        			  return Zenoss.render.pingStatus('up');
+        			} if (pS=='Down') {
+          			  return Zenoss.render.pingStatus('down');
+        			} else {
+        			  return 'Unknown';
+        			}
+                },
             },{
-                id: 'monitor',
-                dataIndex: 'monitor',
-                header: _t('Monitored')
+                id: 'monitored',
+                dataIndex: 'monitored',
+                header: _t('Monitored'),
+            },{ 
+                id: 'locking',
+                dataIndex: 'locking',
+                header: _t('Locking'),
+                width: 72,
+                renderer: Zenoss.render.locking_icons,
             }]
         });
         ZC.NortelTopologyPanel.superclass.constructor.call(this, config);

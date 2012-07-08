@@ -68,8 +68,8 @@ class PassportTopologyInfo(ComponentInfo):
     ipaddr = ProxyProperty("ipaddr")
     macaddr = ProxyProperty("macaddr")
     chassistype = ProxyProperty("chassistype")
-    localseg = ProxyProperty("localseg")
-    curstate = ProxyProperty("curstate")
+    connection = ProxyProperty("connection")
+    pingstatus = ProxyProperty("pingstatus")
     sysname = ProxyProperty("sysname")
     
     @property
@@ -81,6 +81,11 @@ class PassportTopologyInfo(ComponentInfo):
     @info
     def localint(self):
         return self._object.localinterface()
+    
+    @property
+    @info
+    def pingstatus(self):
+        return self._object.status()
 
 class NortelTopologyInfo(ComponentInfo):
     implements(interfaces.INortelTopologyInfo)
@@ -91,8 +96,8 @@ class NortelTopologyInfo(ComponentInfo):
     ipaddr = ProxyProperty("ipaddr")
     macaddr = ProxyProperty("macaddr")
     chassistype = ProxyProperty("chassistype")
-    localseg = ProxyProperty("localseg")
-    curstate = ProxyProperty("curstate")
+    connection = ProxyProperty("connection")
+    pingstatus = ProxyProperty("pingstatus")
     sysname = ProxyProperty("sysname")
     
     @property
@@ -104,8 +109,12 @@ class NortelTopologyInfo(ComponentInfo):
     @info
     def localint(self):
         return self._object.localinterface()
-        
-            
+
+    @property
+    @info
+    def pingstatus(self):
+        return self._object.status()
+
 class NortelChassisInfo(ComponentInfo):
     implements(interfaces.INortelChassisInfo)
 

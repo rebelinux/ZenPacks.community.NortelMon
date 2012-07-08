@@ -1,4 +1,4 @@
-# ==============================================================================
+# =======================================================================
 # NortelTopology object class
 #
 # Zenoss community Zenpack for Avaya (Nortel) Passport Devices
@@ -19,9 +19,9 @@
 #  You should have received a copy of the GNU General Public License along
 #  with this program; if not, write to the Free Software Foundation, Inc.,
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-# ==============================================================================
+# =========================================================================
 
-__doc__="""NortelTopology object class"""
+__doc__ = """NortelTopology object class"""
 __author__ = "Jonathan Colon"
 __copyright__ = "(C) Copyright Jonathan Colon. 2011. All Rights Reserved."
 __license__ = "GPL"
@@ -41,16 +41,16 @@ log = logging.getLogger('NortelTopology')
 class NortelTopology(DeviceComponent, ManagedEntity):
 
     portal_type = meta_type = 'NortelTopology'
-    
+
     localint = ''
     unit = 0
     port = 0
-    ipaddr = '' 
+    ipaddr = ''
     macaddr = ''
     chassistype = ''
-    localseg = ''
-    curstate = ''
-    sysname  = ''
+    connection = ''
+    pingstatus = ''
+    sysname = ''
     monitor = True
 
     _properties = (
@@ -60,26 +60,26 @@ class NortelTopology(DeviceComponent, ManagedEntity):
         {'id':'ipaddr', 'type':'string', 'mode':''},
         {'id':'macaddr', 'type':'string', 'mode':''},
         {'id':'chassistype', 'type':'string', 'mode':''},
-        {'id':'localseg', 'type':'string', 'mode':''},
-        {'id':'curstate', 'type':'string', 'mode':''},
+        {'id':'connection', 'type':'string', 'mode':''},
+        {'id':'pingstatus', 'type':'string', 'mode':''},
         {'id':'sysname', 'type':'string', 'mode':''},
         )
-    
+
     _relations = (
         ("NortelDevTopology", ToOne(ToManyCont,
             "ZenPacks.community.NortelMon.NortelDevice", "NortelTopology")),
         )
 
 
-    factory_type_information = ( 
-        { 
+    factory_type_information = (
+        {
             'id'             : 'NortelTopology',
             'meta_type'      : 'NortelTopology',
             'description'    : """NortelTopology info""",
             'product'        : 'NortelMon',
             'immediate_view' : 'viewNortelTopology',
             'actions'        :
-            ( 
+            (
                 { 'id'            : 'viewHistory'
                 , 'name'          : 'Modifications'
                 , 'action'        : 'viewHistory'
@@ -87,26 +87,26 @@ class NortelTopology(DeviceComponent, ManagedEntity):
                 },
             )
           },
-        ) 
+        )
 
     def viewName(self):
         """Pretty version human readable version of this object"""
         return self.id
 
     titleOrId = name = viewName
-    
+
     def remoteswitch(self):
         """try to get the remote device, using the device ip"""
-        notfound = "Device Not In Zenoss"
         try:
-            dev = self.dmd.Devices.findDeviceByIdOrIp(self.ipaddr)
-            if dev:
-                if dev.urlLink():
-                    return dev.urlLink()
-                elif dev.getDeviceIp() == None:
-                    return self.ipaddr
+            remotedev = self.dmd.Devices.findDeviceByIdOrIp(self.ipaddr)
+            if remotedev.urlLink():
+                self.sysname = remotedev.urlLink()
+                return self.sysname
+            else:
+                self.sysname = self.ipaddr
+                return self.sysname
         except:
-            return notfound
+            return 'Device Not In Zenoss'
 
     def localinterface(self):
         try:
@@ -114,9 +114,20 @@ class NortelTopology(DeviceComponent, ManagedEntity):
         except:
             return self.localint
 
+    def status(self):
+        try:
+            dev = self.dmd.Devices.findDeviceByIdOrIp(self.ipaddr)
+            if dev:
+                if dev.getPingStatus() > 0:
+                    self.pingstatus = 'Down'
+                else:
+                    self.pingstatus = 'Up'
+                return self.pingstatus
+        except:
+            return self.pingstatus
     def device(self):
         return self.NortelDevTopology()
-    
+
     def manage_deleteComponent(self, REQUEST=None):
         """Delete NortelTopology component takes from Jane Curry"""
         url = None

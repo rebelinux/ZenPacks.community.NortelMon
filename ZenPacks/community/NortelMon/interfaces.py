@@ -53,8 +53,8 @@ class IPassportTopologyInfo(IComponentInfo):
     macaddr = schema.Text(title=u"Mac Address", readonly=True, group='Details')
     localint = schema.Text(title=u"Local Interface", readonly=True, group='Details')
     chassistype = schema.Text(title=u"Chassis Type", readonly=True, group='Details')
-    localseg = schema.Text(title=u"Local Segment", readonly=True, group='Details')
-    curstate = schema.Text(title=u"Current State", readonly=True, group='Details')
+    connection = schema.Text(title=u"Connection", readonly=True, group='Details')
+    pingstatus = schema.Text(title=u"Device Status", readonly=True, group='Details')
 
 class INortelTopologyInfo(IComponentInfo):
     sysname = schema.Text(title=u"System Name", readonly=True, group='Details')
@@ -62,8 +62,8 @@ class INortelTopologyInfo(IComponentInfo):
     macaddr = schema.Text(title=u"Mac Address", readonly=True, group='Details')
     localint = schema.Text(title=u"Local Interface", readonly=True, group='Details')
     chassistype = schema.Text(title=u"Chassis Type", readonly=True, group='Details')
-    localseg = schema.Text(title=u"Local Segment", readonly=True, group='Details')
-    curstate = schema.Text(title=u"Current State", readonly=True, group='Details')
+    connection = schema.Text(title=u"Connection", readonly=True, group='Details')
+    pingstatus = schema.Text(title=u"Device Status", readonly=True, group='Details')
     
 class INortelChassisInfo(IComponentInfo):
     unitnumber = schema.Text(title=u"Stack Members", readonly=True, group='Details')

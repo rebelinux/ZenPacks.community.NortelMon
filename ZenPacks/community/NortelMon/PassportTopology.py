@@ -46,8 +46,8 @@ class PassportTopology(DeviceComponent, ManagedEntity):
     ipaddr = '' 
     macaddr = ''
     chassistype = ''
-    localseg = ''
-    curstate = ''
+    connection = ''
+    pingstatus = ''
     sysname  = ''
     monitor = True
 
@@ -58,8 +58,8 @@ class PassportTopology(DeviceComponent, ManagedEntity):
         {'id':'ipaddr', 'type':'string', 'mode':''},
         {'id':'macaddr', 'type':'string', 'mode':''},
         {'id':'chassistype', 'type':'string', 'mode':''},
-        {'id':'localseg', 'type':'string', 'mode':''},
-        {'id':'curstate', 'type':'string', 'mode':''},
+        {'id':'pingstatus', 'type':'string', 'mode':''},
+        {'id':'connection', 'type':'string', 'mode':''},
         {'id':'sysname', 'type':'string', 'mode':''},
         )
     
@@ -95,22 +95,35 @@ class PassportTopology(DeviceComponent, ManagedEntity):
     
     def remoteswitch(self):
         """try to get the remote device, using the device ip"""
-        notfound = "Device Not In Zenoss"
         try:
-            dev = self.dmd.Devices.findDeviceByIdOrIp(self.ipaddr)
-            if dev:
-                if dev.urlLink():
-                    return dev.urlLink()
-                elif dev.getDeviceIp() == None:
-                    return self.ipaddr
+            remotedev = self.dmd.Devices.findDeviceByIdOrIp(self.ipaddr)
+            if remotedev.urlLink():
+                self.sysname = remotedev.urlLink()
+                return self.sysname
+            else:
+                self.sysname = self.ipaddr
+                return self.sysname
         except:
-            return notfound
+            return 'Device Not In Zenoss'
 
     def localinterface(self):
         try:
             return utils.findinterface(self, self.device(), self.localint)
-        except:
+        except AttributeError:
             return self.localint
+    
+    def status(self):
+        try:
+            dev = self.dmd.Devices.findDeviceByIdOrIp(self.ipaddr)
+            if dev:
+                if dev.getPingStatus() > 0:
+                    self.pingstatus = 'Down'
+                else:
+                    self.pingstatus = 'Up'
+                return self.pingstatus
+        except AttributeError:
+            self.pingstatus = 'Unknown'
+            return self.pingstatus
 
     def device(self):
         return self.PassportDevTopology()

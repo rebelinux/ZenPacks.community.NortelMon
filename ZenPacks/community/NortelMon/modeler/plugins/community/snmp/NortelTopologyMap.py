@@ -1,4 +1,4 @@
-# ==============================================================================
+# =========================================================================
 # NortelTopologyMap modeler plugin
 #
 # Zenoss community Zenpack for Avaya (Nortel) Devices
@@ -19,9 +19,9 @@
 #  You should have received a copy of the GNU General Public License along
 #  with this program; if not, write to the Free Software Foundation, Inc.,
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-# ==============================================================================
+# ==========================================================================
 
-__doc__="""NortelTopologyMap maps SONMP monitoring entries"""
+__doc__ = """NortelTopologyMap maps SONMP monitoring entries"""
 __author__ = "Jonathan Colon"
 __copyright__ = "(C) Copyright Jonathan Colon. 2011. All Rights Reserved."
 __license__ = "GPL"
@@ -34,28 +34,32 @@ class NortelTopologyMap(SnmpPlugin):
     maptype = "NortelTopologyMap"
     modname = "ZenPacks.community.NortelMon.NortelTopology"
     relname = "NortelTopology"
-    
+
 
     snmpGetTableMaps = (
         GetTableMap('topo',
-		'.1.3.6.1',
+                    '.1.3.6.1',
                     {
                         '.4.1.45.1.6.13.2.1.1.1': 'unit',
                         '.4.1.45.1.6.13.2.1.1.2': 'port',
                         '.4.1.45.1.6.13.2.1.1.3': 'ipaddr',
                         '.4.1.45.1.6.13.2.1.1.5': 'macaddr',
                         '.4.1.45.1.6.13.2.1.1.6': 'chassistype',
-                        '.4.1.45.1.6.13.2.1.1.8': 'localseg',
-                        '.4.1.45.1.6.13.2.1.1.9': 'curstate',
-		    }
-		),
+                        }
+                    ),
         GetTableMap('deviceip',
                 '.1.3.6.1',
                     {
                         '.2.1.4.20.1.1': 'ip',
                     }
-		),
-	)
+                    ),
+        GetTableMap('rootport',
+                '.1.3.6.1',
+                    {
+                        '.2.1.17.2.7': 'connection',
+                    }
+                    ),
+                        )
 
     def process(self, device, results, log):
         """collect snmp information from this device"""
@@ -63,17 +67,21 @@ class NortelTopologyMap(SnmpPlugin):
         getdata, tabledata = results
         topos = tabledata.get("topo")
         device = tabledata.get("deviceip")
-        
-        # Debug: print data retrieved from device.
-        log.debug( "Get data = %s", getdata )
-        log.debug( "Table data = %s", tabledata )
+        root = tabledata.get("rootport")
 
-        # If no data retrieved return nothing.        
+        # Debug: print data retrieved from device.
+        log.debug("Get data = %s", getdata)
+        log.debug("Table data = %s", tabledata)
+
+        # If no data retrieved return nothing.
         if not topos:
-            log.warn( 'No data collected for the %s plugin', self.name() )
+            log.warn('No data collected for the %s plugin', self.name())
             return
         if not device:
-            log.warn( 'No data collected for the %s plugin', self.name() )
+            log.warn('No data collected for the %s plugin', self.name())
+            return
+        if not root:
+            log.warn('No data collected for the %s plugin', self.name())
             return
         rm = self.relMap()
         for oid, data in topos.iteritems():
@@ -82,8 +90,19 @@ class NortelTopologyMap(SnmpPlugin):
                 om.id = self.prepId(om.ipaddr)
                 om.macaddr = self.asmac(om.macaddr)
                 om.localint = "Unit " + str(om.unit)+ " Port " + str(om.port)
-                om.localseg = self.local[om.localseg]
-                om.curstate = self.state[om.curstate]
+                for d in root.values():
+                    try:
+                        values = d.values()
+                        if values[0] == om.port:
+                            om.connection = 1
+                        elif values[0] == 0:
+                            om.connection = 3
+                        else:
+                            om.connection = 2
+                    except AttributeError:
+                        om.connection = 3
+                        continue
+                om.connection = self.flow[om.connection]
                 if om.chassistype not in self.type.keys():
                     om.chassistype = 1
                 om.chassistype = self.type[om.chassistype]
@@ -94,15 +113,11 @@ class NortelTopologyMap(SnmpPlugin):
             rm.append(om)
         return rm
 
-    local = { 1: 'Yes',
-                       2: 'No',
+    flow = {1: 'Uplink',
+                       2: 'Downlink',
+                       3: 'Unknown',
                      }
-
-    state = { 1: 'Topology Change',
-                       2: 'Heartbeat',
-                       3: 'New',
-                     }
-    type = { 1: 'Unknown',
+    type = {1: 'Unknown',
                        2: '3000',
                        3: '3030',
                        4: '2310',
