@@ -87,6 +87,11 @@ class PassportTopologyInfo(ComponentInfo):
     def pingstatus(self):
         return self._object.status()
 
+    @property
+    @info
+    def connection(self):
+        return self._object.zlink()
+
 class NortelTopologyInfo(ComponentInfo):
     implements(interfaces.INortelTopologyInfo)
 
@@ -114,6 +119,11 @@ class NortelTopologyInfo(ComponentInfo):
     @info
     def pingstatus(self):
         return self._object.status()
+
+    @property
+    @info
+    def connection(self):
+        return self._object.zlink()
 
 class NortelChassisInfo(ComponentInfo):
     implements(interfaces.INortelChassisInfo)

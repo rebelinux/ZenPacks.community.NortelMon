@@ -1,4 +1,4 @@
-# ==============================================================================
+# =============================================================================
 # NortelConDevice modeler plugin
 #
 # Zenoss community Zenpack for Avaya (Nortel) Devices
@@ -19,9 +19,9 @@
 #  You should have received a copy of the GNU General Public License along
 #  with this program; if not, write to the Free Software Foundation, Inc.,
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-# ==============================================================================
+# =============================================================================
 
-__doc__="""NortelConDevice maps Bridge-Mibs monitoring entries"""
+__doc__ = """NortelConDevice maps Bridge-Mibs monitoring entries"""
 __author__ = "Jonathan Colon"
 __copyright__ = "(C) Copyright Jonathan Colon. 2012. All Rights Reserved."
 __license__ = "GPL"
@@ -45,12 +45,17 @@ class NortelConDeviceMap(SnmpPlugin):
                         '.2.2.1.1': 'ifindex',
                         '.17.1.4.1.1': 'baseport',
                         '.17.1.4.1.2': 'baseportindex',
-                        '.17.2.7': 'rootport',
                         '.17.4.3.1.1': 'macaddr',
                         '.17.4.3.1.2': 'fdbport',
                         '.31.1.1.1.1': 'ifname',
 		    }
 		),
+        GetTableMap('root',
+                '.1.3.6.1',
+                    {
+                        '.2.1.17.2.7': 'rootport',
+                    }
+        ),
 	)
 
     def process(self, device, results, log):

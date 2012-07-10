@@ -53,13 +53,7 @@ class NortelTopologyMap(SnmpPlugin):
                         '.2.1.4.20.1.1': 'ip',
                     }
                     ),
-        GetTableMap('rootport',
-                '.1.3.6.1',
-                    {
-                        '.2.1.17.2.7': 'connection',
-                    }
-                    ),
-                        )
+        )
 
     def process(self, device, results, log):
         """collect snmp information from this device"""
@@ -67,7 +61,6 @@ class NortelTopologyMap(SnmpPlugin):
         getdata, tabledata = results
         topos = tabledata.get("topo")
         device = tabledata.get("deviceip")
-        root = tabledata.get("rootport")
 
         # Debug: print data retrieved from device.
         log.debug("Get data = %s", getdata)
@@ -80,9 +73,6 @@ class NortelTopologyMap(SnmpPlugin):
         if not device:
             log.warn('No data collected for the %s plugin', self.name())
             return
-        if not root:
-            log.warn('No data collected for the %s plugin', self.name())
-            return
         rm = self.relMap()
         for oid, data in topos.iteritems():
             try:
@@ -90,19 +80,6 @@ class NortelTopologyMap(SnmpPlugin):
                 om.id = self.prepId(om.ipaddr)
                 om.macaddr = self.asmac(om.macaddr)
                 om.localint = "Unit " + str(om.unit)+ " Port " + str(om.port)
-                for d in root.values():
-                    try:
-                        values = d.values()
-                        if values[0] == om.port:
-                            om.connection = 1
-                        elif values[0] == 0:
-                            om.connection = 3
-                        else:
-                            om.connection = 2
-                    except AttributeError:
-                        om.connection = 3
-                        continue
-                om.connection = self.flow[om.connection]
                 if om.chassistype not in self.type.keys():
                     om.chassistype = 1
                 om.chassistype = self.type[om.chassistype]
@@ -113,10 +90,6 @@ class NortelTopologyMap(SnmpPlugin):
             rm.append(om)
         return rm
 
-    flow = {1: 'Uplink',
-                       2: 'Downlink',
-                       3: 'Unknown',
-                     }
     type = {1: 'Unknown',
                        2: '3000',
                        3: '3030',

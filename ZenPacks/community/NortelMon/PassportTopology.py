@@ -124,6 +124,17 @@ class PassportTopology(DeviceComponent, ManagedEntity):
         except AttributeError:
             self.pingstatus = 'Unknown'
             return self.pingstatus
+        
+    def zlink(self):
+        try:
+            if self.ipaddr:
+                telnet = '<a href=telnet://%s target="_">Telnet:</a>' % self.ipaddr
+                web = '<a href=http://%s target="_">Web Manage:</a>' % self.ipaddr
+                jdm = '<a href=jdm://%s target="_">Nortel Manager:</a>' % self.ipaddr
+                self.connection = telnet + '  ' + web + '  ' + jdm
+                return self.connection
+        except:
+            return self.connection
 
     def device(self):
         return self.PassportDevTopology()

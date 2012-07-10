@@ -234,7 +234,7 @@ ZC.PassportTopologyPanel = Ext.extend(ZC.ComponentGridPanel, {
                 dataIndex: 'severity',
                 header: _t('Events'),
                 renderer: Zenoss.render.severity,
-                width: 60
+                width: 60,
             },{
                 id: 'sysname',
                 dataIndex: 'sysname',
@@ -244,32 +244,24 @@ ZC.PassportTopologyPanel = Ext.extend(ZC.ComponentGridPanel, {
                 id: 'name',
                 dataIndex: 'name',
                 header: _t('IP Address'),
-			},{
+            },{
                 id: 'macaddr',
                 dataIndex: 'macaddr',
                 header: _t('Mac Address'),
                 sortable: true,
                 width: 120,
-			},{
+            },{
                 id: 'localint',
                 dataIndex: 'localint',
                 header: _t('Local Interface'),
-                sortable: true,
-                width: 120,
                 renderer: render_link,
-			},{
+            },{
                 id: 'chassistype',
                 dataIndex: 'chassistype',
                 header: _t('Chassis Type'),
                 sortable: true,
                 width: 160,
-			},{
-                id: 'connection',
-                dataIndex: 'connection',
-                header: _t('Connection'),
-                sortable: true,
-                width: 120,
-			},{
+            },{
                 id: 'pingstatus',
                 dataIndex: 'pingstatus',
                 header: _t('Status'),
@@ -284,16 +276,12 @@ ZC.PassportTopologyPanel = Ext.extend(ZC.ComponentGridPanel, {
         			  return 'Unknown';
         			}
                 },
-            },{
-                id: 'monitored',
-                dataIndex: 'monitored',
-                header: _t('Monitored'),
             },{ 
-                id: 'locking',
-                dataIndex: 'locking',
-                header: _t('Locking'),
-                width: 72,
-                renderer: Zenoss.render.locking_icons,
+                id: 'connection',
+                dataIndex: 'connection',
+                header: _t('Manage'),
+                sortable: true,
+                width: 220,
             }]
         });
         ZC.PassportTopologyPanel.superclass.constructor.call(this, config);
@@ -578,11 +566,6 @@ ZC.NortelTopologyPanel = Ext.extend(ZC.ComponentGridPanel, {
                 sortable: true,
                 width: 160,
             },{
-                id: 'connection',
-                dataIndex: 'connection',
-                header: _t('Connection'),
-                sortable: true,
-            },{
                 id: 'pingstatus',
                 dataIndex: 'pingstatus',
                 header: _t('Status'),
@@ -597,16 +580,12 @@ ZC.NortelTopologyPanel = Ext.extend(ZC.ComponentGridPanel, {
         			  return 'Unknown';
         			}
                 },
-            },{
-                id: 'monitored',
-                dataIndex: 'monitored',
-                header: _t('Monitored'),
             },{ 
-                id: 'locking',
-                dataIndex: 'locking',
-                header: _t('Locking'),
-                width: 72,
-                renderer: Zenoss.render.locking_icons,
+                id: 'connection',
+                dataIndex: 'connection',
+                header: _t('Manage'),
+                sortable: true,
+                width: 220,
             }]
         });
         ZC.NortelTopologyPanel.superclass.constructor.call(this, config);

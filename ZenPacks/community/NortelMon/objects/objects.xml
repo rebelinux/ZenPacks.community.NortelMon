@@ -4256,7 +4256,7 @@ True
 ['FanOperState_PowerOperState']
 </property>
 <property label="Enabled" type="boolean" id="enabled" mode="w" >
-True
+False
 </property>
 <property type="string" id="maxval" mode="w" >
 7
