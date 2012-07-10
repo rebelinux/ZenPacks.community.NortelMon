@@ -264,7 +264,7 @@ ZC.PassportTopologyPanel = Ext.extend(ZC.ComponentGridPanel, {
             },{
                 id: 'pingstatus',
                 dataIndex: 'pingstatus',
-                header: _t('Status'),
+                header: _t('Switch Status'),
                 sortable: true,
                 width: 120,
                 renderer: function(pS) {
@@ -568,7 +568,7 @@ ZC.NortelTopologyPanel = Ext.extend(ZC.ComponentGridPanel, {
             },{
                 id: 'pingstatus',
                 dataIndex: 'pingstatus',
-                header: _t('Status'),
+                header: _t('Switch Status'),
                 sortable: true,
                 width: 120,
                 renderer: function(pS) {
