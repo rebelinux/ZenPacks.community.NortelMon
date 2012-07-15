@@ -21,6 +21,7 @@ import re
 
 from Products.ZenUtils.Utils import cleanstring, unsigned
 from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetTableMap
+from ZenPacks.community.NortelMon.utils import ifix
 
 class NortelInterfaceMap(SnmpPlugin):
     """
@@ -107,22 +108,12 @@ class NortelInterfaceMap(SnmpPlugin):
         ifalias = tabledata.get("ifalias", {})
 
         self.prepIfTable(log, iftable, ifalias)
-        
+
         omtable = {}
         # Process Avaya (Nortel) Interface Alias
         for key, iface in iftable.items():
             if key in ifalias:
-                def ifix(int):     
-                    s = int.find('(') 
-                    n = int.find(')')
-                    if n < 0 or s < 0:
-                        return int
-                    else:
-                        fint = int[s+1:n]
-                        fint1 = fint.replace('Slot', 'Unit')
-                        fint2 = fint1.replace(':', '')
-                        return fint2
-                iftable[key]['id'] = ifix(ifalias[key].get('ifName', ''))          
+                iftable[key]['id'] = ifix(self, ifalias[key].get('ifName', ''))
         duplex = tabledata.get("duplex", {})
         # Process Avaya (Nortel) Interface Duplex
         for key, iface in iftable.items():

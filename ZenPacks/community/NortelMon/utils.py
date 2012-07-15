@@ -1,4 +1,4 @@
-# ==============================================================================
+# ===========================================================================
 # Zenoss community Zenpack for Avaya (Nortel) Passport Devices
 # version: 1.0
 #
@@ -17,9 +17,9 @@
 #  You should have received a copy of the GNU General Public License along
 #  with this program; if not, write to the Free Software Foundation, Inc.,
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-# ==============================================================================
+# ===========================================================================
 
-__doc__="""Code Utils"""
+__doc__= """Code Utils"""
 __author__ = "Jonathan Colon"
 __copyright__ = "(C) Copyright Jonathan Colon. 2012. All Rights Reserved."
 __license__ = "GPL"
@@ -28,16 +28,12 @@ __version__ = "1.0.0"
 from Globals import DTMLFile
 from Globals import InitializeClass
 
-def ifix(self, int):         
-    s = int.find('(') 
-    n = int.find(')')
-    if n < 0 or s < 0:
-        return int 
-    else:
-        fint = int[s+1:n] 
-        fint1 = fint.replace('Slot', 'Unit')
-        fint2 = fint1.replace(':', '')
-        return fint2
+def ifix(self, int):
+    """Process the Interface name of Avaya Nortel Switches"""
+    name = int.strip('()')
+    newname = name.replace('Slot', 'Unit')
+    newname = newname.replace(':', '')
+    return newname
 
 def findinterface(self, device, ints):
     """try to get the local interface link, using the interface name"""
@@ -57,7 +53,7 @@ def getremotedeviceIP(self, mac):
     for ips in interface.getIpAddressObjs():
         ipaddr = ips
     return ipaddr
-        
+
 def getremoteinterface(self, mac):
     """try to find the interfaces from the remote device, using its mac address"""
     try:
@@ -68,5 +64,3 @@ def getremoteinterface(self, mac):
         return interface
     except:
         return mac
-        
-        
