@@ -33,7 +33,7 @@ from Products.ZenRelations.RelSchema import *
 from Products.ZenModel.ZenossSecurity import ZEN_VIEW, ZEN_CHANGE_SETTINGS
 from Products.ZenModel.DeviceComponent import DeviceComponent
 from Products.ZenModel.ManagedEntity import ManagedEntity
-from ZenPacks.community.NortelMon import utils
+from ZenPacks.community.NortelMon.utils import fixip, devicename, findinterface
 
 import logging
 log = logging.getLogger('NortelTopology')
@@ -98,19 +98,30 @@ class NortelTopology(DeviceComponent, ManagedEntity):
     def remoteswitch(self):
         """try to get the remote device, using the device ip"""
         try:
-            remotedev = self.dmd.Devices.findDeviceByIdOrIp(self.ipaddr)
-            if remotedev.urlLink():
-                self.sysname = remotedev.urlLink()
-                return self.sysname
+            topologyid = fixip(self, self.ipaddr)
+            localdev = self.device()
+            remotedev = self.dmd.Devices.findDeviceByIdOrIp(topologyid)
+            if remotedev.getDeviceClassPath() == '/Network/Switch/Nortel/Passport':
+                topolink = remotedev.PassportTopology.findObjectsById(localdev.getManageIp())
             else:
-                self.sysname = self.ipaddr
-                return self.sysname
+                topolink = remotedev.NortelTopology.findObjectsById(localdev.getManageIp())
+            for link in topolink:
+                if link.urlLink():
+                    oldtext = '>%s<' % link.id
+                    newtext = '>%s<' % devicename(self, topologyid)
+                    oldlink = link.urlLink()
+                    newlink = oldlink.replace(oldtext, newtext)
+                    self.sysname = newlink
+                    return self.sysname
+                else:
+                    self.sysname = topologyid
+                    return self.sysname
         except:
             return 'Device Not In Zenoss'
 
     def localinterface(self):
         try:
-            return utils.findinterface(self, self.device(), self.localint)
+            return findinterface(self, self.device(), self.localint)
         except:
             return self.localint
 
