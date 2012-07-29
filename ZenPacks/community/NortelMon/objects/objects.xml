@@ -1096,7 +1096,7 @@ True
 ['ifHCInOctets_ifHCInOctets', 'ifHCOutOctets_ifHCOutOctets']
 </property>
 <property label="Enabled" type="boolean" id="enabled" mode="w" >
-True
+False
 </property>
 <property type="string" id="maxval" mode="w" >
 (here.speed or 1e9) / 8 * .85

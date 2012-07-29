@@ -113,7 +113,10 @@ class NortelInterfaceMap(SnmpPlugin):
         # Process Avaya (Nortel) Interface Alias
         for key, iface in iftable.items():
             if key in ifalias:
-                iftable[key]['id'] = ifix(self, ifalias[key].get('ifName', ''))
+                try:
+                    iftable[key]['id'] = ifix(self, ifalias[key].get('ifName', ''), iftable[key].get('ifindex', ''))
+                except AttributeError:
+                    iftable[key]['id'] = ifalias[key].get('ifName', '')
         duplex = tabledata.get("duplex", {})
         # Process Avaya (Nortel) Interface Duplex
         for key, iface in iftable.items():

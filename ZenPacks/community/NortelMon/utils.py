@@ -27,6 +27,7 @@ __version__ = "1.0.0"
 
 from Globals import DTMLFile
 from Globals import InitializeClass
+import re
 
 def devicename(self, ip):
     """try to get the remote device name, using the device ip"""
@@ -42,7 +43,7 @@ def devicename(self, ip):
             return ip
     except:
         return 'Device Not In Zenoss'
-    
+
 def fixip(self, ip):
     """Process Topology Table Malformed IP IDs"""
     find = ip.find('_')
@@ -52,13 +53,20 @@ def fixip(self, ip):
         return newip
     else:
         return ip
-            
-def ifix(self, int):
+
+def ifix(self, int, ifindex):
     """Process the Interface name of Avaya Nortel Switches"""
-    name = int.strip('()')
-    newname = name.replace('Slot', 'Unit')
-    newname = newname.replace(':', '')
-    return newname
+    try:
+        intname = int
+        patern = 'ifc%s ' % ifindex
+        if re.match(patern, intname):
+            int = intname.strip(patern)
+        name = int.strip('()')
+        newname = name.replace('Slot', 'Unit')
+        newname = newname.replace(':', '')
+        return newname
+    except AttributeError:
+        return int
 
 def findinterface(self, device, ints):
     """try to get the local interface link, using the interface name"""

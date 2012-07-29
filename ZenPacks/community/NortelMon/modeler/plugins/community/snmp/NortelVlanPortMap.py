@@ -70,7 +70,7 @@ class NortelVlanPortMap(SnmpPlugin):
         for oid, data in vports.iteritems():
             try:
                 om = self.objectMap(data)
-                om.intname = ifix(self, om.intname)
+                om.intname = ifix(self, om.intname, om.vlanportindex)
                 om.id = self.prepId(om.intname)
                 om.snmpindex = om.vlanportindex
                 if om.vlanporttype not in self.porttype.keys():
