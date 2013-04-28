@@ -61,7 +61,7 @@ def ifix(self, int, ifindex):
         patern = 'ifc%s ' % ifindex
         if re.match(patern, intname):
             int = intname.strip(patern)
-        name = int.strip('()')
+        name = int.strip('()').rstrip(' [GBIC]').rstrip(' [MDA]')
         newname = name.replace('Slot', 'Unit')
         newname = newname.replace(':', '')
         return newname
@@ -97,3 +97,5 @@ def getremoteinterface(self, mac):
         return interface
     except:
         return mac
+
+
