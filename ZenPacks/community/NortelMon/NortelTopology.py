@@ -105,17 +105,24 @@ class NortelTopology(DeviceComponent, ManagedEntity):
                 topolink = remotedev.PassportTopology.findObjectsById(localdev.getManageIp())
             else:
                 topolink = remotedev.NortelTopology.findObjectsById(localdev.getManageIp())
-            for link in topolink:
-                if link.urlLink():
-                    oldtext = '>%s<' % link.id
-                    newtext = '>%s<' % devicename(self, topologyid)
-                    oldlink = link.urlLink()
-                    newlink = oldlink.replace(oldtext, newtext)
-                    self.sysname = newlink
+            if topolink == []:
+                remotedev = self.dmd.Devices.findDeviceByIdOrIp(self.ipaddr)
+                if remotedev.urlLink():
+                    self.sysname = remotedev.urlLink()
                     return self.sysname
                 else:
-                    self.sysname = topologyid
+                    self.sysname = self.ipaddr
                     return self.sysname
+            else:
+                for link in topolink:
+                    if link.urlLink():
+                        oldtext = '>%s<' % link.id
+                        newtext = '>%s<' % devicename(self, topologyid)
+                        oldlink = link.urlLink()
+                        newlink = oldlink.replace(oldtext, newtext)
+                        self.sysname = newlink
+                        return self.sysname
+
         except:
             return 'Device Not In Zenoss'
 
