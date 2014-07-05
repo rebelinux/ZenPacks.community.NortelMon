@@ -28,6 +28,7 @@ __license__ = "GPL"
 __version__ = "1.0.0"
 
 from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetMap, GetTableMap
+from ZenPacks.community.NortelMon.utils import getPortSet
 import binascii, re
 
 class NortelMltStatusMap(SnmpPlugin):
@@ -35,17 +36,19 @@ class NortelMltStatusMap(SnmpPlugin):
     maptype = "NortelMltStatusMap"
     modname = "ZenPacks.community.NortelMon.NortelMltStatus"
     relname = "NortelMltStatus"
-    
 
     snmpGetTableMaps = (
         GetTableMap('nmlt',
-        '.1.3.6.1.4.1.2272.1.17.10.1',
+        '.1.3.6.1',
                     {
-                        '.1': 'nmltid',
-                        '.2': 'nmltname',
-                        '.6': 'nmltvlans',
-                        '.7': 'nmltstatus',
-                        '.8': 'nmltenable',
+                        '.4.1.2272.1.17.10.1.1': 'nmltid',
+                        '.4.1.2272.1.17.10.1.2': 'nmltname',
+                        '.4.1.2272.1.17.10.1.3': 'nmltportmembers',
+                        '.4.1.2272.1.17.10.1.6': 'nmltvlans',
+                        '.4.1.2272.1.17.10.1.7': 'nmltstatus',
+                        '.4.1.2272.1.17.10.1.8': 'nmltenable',
+                        '.2.1.2.2.1.1': 'ifIndex',
+                        '.2.1.31.1.1.1.1': 'ifName',
                     }
                     ),
     )
@@ -75,6 +78,7 @@ class NortelMltStatusMap(SnmpPlugin):
                 else:
                     om.id = self.prepId(om.nmltname)
                 om.snmpindex = om.nmltid
+                om.nmltportmembers = getPortSet(om.nmltportmembers)
                 if om.nmltenable == 2:
                     om.clear()
                 if om.nmltenable not in self.nmltena.keys():

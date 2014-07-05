@@ -97,5 +97,36 @@ def getremoteinterface(self, mac):
         return interface
     except:
         return mac
+    
+def hextobin(self, hexval):
+    '''
+    Takes a string representation of hex data with
+    arbitrary length and converts to string representation
+    of binary.  Includes padding 0s
+    '''
+    hexval = hexval.replace(' ','')
+    thelen = len(hexval)*4
+    binval = bin(int(hexval, 16))[2:]
+    while ((len(binval)) < thelen):
+        binval = '0' + binval
+    return binval
 
-
+def bintoifindex(self, binary):
+    '''
+    Takes a string representation of binary data with
+    arbitrary length and converts to string representation
+    of decimal.  Then extract the Ifindex of the interface.
+    '''
+    for position, item in enumerate(binary):
+        if item == '1':
+            print position
+    
+def getPortSet(self, data):
+    '''
+    Try to get the interface Ifindex from the 
+    decinal value of the oid
+    '''
+    binary = hextobin(data)
+    Ifindex = bintoifindex(binary)
+    return Ifindex
+    

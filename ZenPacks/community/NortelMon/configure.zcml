@@ -84,6 +84,10 @@
                  for=".PassportMltStatus.PassportMltStatus"
                  provides=".interfaces.IPassportMltStatusInfo"
                  /> 
+        <adapter factory=".info.NortelConDevicesInfo"
+                 for=".NortelConDevices.NortelConDevices"
+                 provides=".interfaces.INortelConDevicesInfo"
+                 />
                                                                                            
         <browser:resourceDirectory
                  name="NortelMon"

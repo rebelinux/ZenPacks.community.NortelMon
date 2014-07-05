@@ -142,3 +142,7 @@ class IPassportMltStatusInfo(IComponentInfo):
     mltvlans = schema.Text(title=u"Vlans", readonly=True, group='Details')
     mltenable = schema.Text(title=u"Enabled?", readonly=True, group='Details')
     mltstatus = schema.Text(title=u"Status", readonly=True, group='Details')
+class INortelConDevicesInfo(IComponentInfo):
+    RemoteDevice = schema.Text(title=u"Remote Device", readonly=True, group='Details')
+    RemoteInterface = schema.Text(title=u"Remote Interface", readonly=True, group='Details')
+    Connected = schema.Text(title=u"Connected To", readonly=True, group='Details')

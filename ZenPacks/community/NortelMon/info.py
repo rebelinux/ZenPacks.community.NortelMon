@@ -240,3 +240,9 @@ class PassportMltStatusInfo(ComponentInfo):
     mltstatus = ProxyProperty("mltstatus")
     mlttype = ProxyProperty("mlttype")
     mltruntype = ProxyProperty("mltruntype")
+class NortelConDevicesInfo(ComponentInfo):
+    implements(interfaces.INortelConDevicesInfo)
+    
+    RemoteDevice = ProxyProperty("RemoteDevice")
+    RemoteInterface = ProxyProperty("RemoteInterface")
+    Connected = ProxyProperty("Connected")
